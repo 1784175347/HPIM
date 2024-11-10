@@ -1,0 +1,4614 @@
+Hardware description file location: /share/linqiushi-local/linqiushi/MNSIM-3.0/SimConfig.ini
+Software model file location: cifar10_alexnet_99bit_params.pth
+Whether perform hardware simulation: True
+Whether perform accuracy simulation: True
+Whether consider SAFs: True
+Whether consider variations: False
+Quantization range: dynamic range (depends on the data distribution)
+RRAM_SRAM mix mode: mix among tile
+run on device cuda:0
+load weights from cifar10_alexnet_99bit_params.pth
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+tile_number is not enough, starts to rewrite
+single cycle tile_count 2
+single cycle tile_count 3
+single cycle tile_count 9
+single cycle tile_count 10
+single cycle tile_count 38
+single cycle tile_count 66
+single cycle tile_count 86
+single cycle tile_count 87
+single cycle tile_count 16
+single cycle tile_count 20
+[0, 8]
+[7, 9]
+[87, 20]
+[0, 0, 0, 0, 0, 0, 0, 0, 1, 1]
+Total crossbar number: 416
+start to mix among tiles
+[['0', '0', '1', '1', '1', '1', '2', '2', '2', '2'], ['2', '3', '3', '3', '6', '4', '4', '4', '4', '4'], ['5', '5', '5', '6', '3', '6', '7', '7', '7', '7'], ['8', 'no', '9', '9', '10', '10', '10', '10', '10', '10'], ['11', '11', '11', '11', '12', '12', '12', '12', '12', '12'], ['13', '13', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no'], ['no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no'], ['no', 'no', '8', 'no', 'no', 'no', 'no', 'no', 'no', 'no'], ['no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no'], ['no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no']]
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+[10, 10]
+hh 0
+hi
+hh 0
+hi
+hh 1
+hh 1
+hh 1
+hh 1
+hh 2
+hh 2
+hh 2
+hh 2
+hh 2
+hh 3
+hh 3
+hh 3
+hh 6
+hh 4
+hh 4
+hh 4
+hh 4
+hh 4
+hh 5
+hh 5
+hh 5
+hh 6
+hh 3
+hh 6
+hh 7
+hh 7
+hh 7
+hh 7
+hh 8
+hh no
+hh 9
+hh 9
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 11
+hh 11
+hh 11
+hh 11
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 13
+hh 13
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh 8
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+['SRAM', 'NVM']
+xbar_size的修改
+xbar_row: [64, 64] 256
+xiuhai
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+0.5
+64 1
+xbar_size的修改
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+817.86994756
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+这个层需要rewrite-latency
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+========================Latency Results=================================
+ 
+Layer 0  type: conv
+Occupancy: 1.0
+total latency: 744829.9065753614
+layer latency: 560509.9065753624
+Buffer latency of layer 0 : 374380 ( 50.26 %)
+     read buffer latency of layer 0 : 200000 ( 26.85 %)
+     write buffer latency of layer 0 : 174380 ( 23.41 %)
+Computing latency of layer 0 : 32624.66958335991 ( 4.38 %)
+     DAC latency of layer 0 : 6912.0 ( 0.93 %)
+     ADC latency of layer 0 : 18432.0 ( 2.47 %)
+     xbar latency of layer 0 : 7280.669583359979 ( 0.98 %)
+Digital part latency of layer 0 : 12702.03699199996 ( 1.71 %)
+     iReg latency of layer 0 : 5120.0 ( 0.69 %)
+     oReg latency of layer 0 : 512.0 ( 0.07 %)
+     input demux latency of layer 0 : 1287.1526399999914 ( 0.17 %)
+     output mux latency of layer 0 : 150.88435200000035 ( 0.02 %)
+     shiftreg latency of layer 0 : 4608.0 ( 0.62 %)
+     adder latency of layer 0 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 0 : 1024.0 ( 0.14 %)
+Pooling module latency of layer 0 : 0 ( 0.00 %)
+Intra tile communication latency of layer 0 : 208.0 ( 0.03 %)
+Inter tile communication latency of layer 0 : 324915.2000000015 ( 43.62 %)
+     One layer merge latency of layer 0 : 214323.20000000086 ( 28.77 %)
+     Inter tile transfer latency of layer 0 : 110592.0 ( 14.85 %)
+----------------------------------------------
+Layer 1  type: pooling
+Occupancy: 0.303705519179255
+total latency: 152524.8
+layer latency: 2483.1999999999534
+Buffer latency of layer 1 : 115200 ( 75.53 %)
+     read buffer latency of layer 1 : 57600 ( 37.76 %)
+     write buffer latency of layer 1 : 57600 ( 37.76 %)
+Computing latency of layer 1 : 0 ( 0.00 %)
+     DAC latency of layer 1 : 0 ( 0.00 %)
+     ADC latency of layer 1 : 0 ( 0.00 %)
+     xbar latency of layer 1 : 0 ( 0.00 %)
+Digital part latency of layer 1 : 0 ( 0.00 %)
+     iReg latency of layer 1 : 0 ( 0.00 %)
+     oReg latency of layer 1 : 0 ( 0.00 %)
+     input demux latency of layer 1 : 0 ( 0.00 %)
+     output mux latency of layer 1 : 0 ( 0.00 %)
+     shiftreg latency of layer 1 : 0 ( 0.00 %)
+     adder latency of layer 1 : 0 ( 0.00 %)
+     Jointmodule latency of layer 1 : 0 ( 0.00 %)
+Pooling module latency of layer 1 : 6400 ( 4.20 %)
+Intra tile communication latency of layer 1 : 0 ( 0.00 %)
+Inter tile communication latency of layer 1 : 37324.8 ( 24.47 %)
+     One layer merge latency of layer 1 : 11520 ( 7.55 %)
+     Inter tile transfer latency of layer 1 : 25804.80000000003 ( 16.92 %)
+----------------------------------------------
+Layer 2  type: conv
+Occupancy: 0.8672688830357025
+total latency: 603153.1065753602
+layer latency: 89663.43727312097
+Buffer latency of layer 2 : 287360 ( 47.64 %)
+     read buffer latency of layer 2 : 157440 ( 26.10 %)
+     write buffer latency of layer 2 : 129920 ( 21.54 %)
+Computing latency of layer 2 : 32624.669583359977 ( 5.41 %)
+     DAC latency of layer 2 : 6912.0 ( 1.15 %)
+     ADC latency of layer 2 : 18432.0 ( 3.06 %)
+     xbar latency of layer 2 : 7280.669583360009 ( 1.21 %)
+Digital part latency of layer 2 : 11678.03699199999 ( 1.94 %)
+     iReg latency of layer 2 : 5120.0 ( 0.85 %)
+     oReg latency of layer 2 : 256.0 ( 0.04 %)
+     input demux latency of layer 2 : 1287.15264 ( 0.21 %)
+     output mux latency of layer 2 : 150.8843519999999 ( 0.03 %)
+     shiftreg latency of layer 2 : 4608.0 ( 0.76 %)
+     adder latency of layer 2 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 2 : 256.0 ( 0.04 %)
+Pooling module latency of layer 2 : 0 ( 0.00 %)
+Intra tile communication latency of layer 2 : 156.0 ( 0.03 %)
+Inter tile communication latency of layer 2 : 271334.4000000002 ( 44.99 %)
+     One layer merge latency of layer 2 : 204979.1999999998 ( 33.98 %)
+     Inter tile transfer latency of layer 2 : 66355.20000000007 ( 11.00 %)
+----------------------------------------------
+Layer 3  type: pooling
+Occupancy: 0.2569524697213089
+total latency: 113011.20000000001
+layer latency: 7363.199999999953
+Buffer latency of layer 3 : 86400 ( 76.45 %)
+     read buffer latency of layer 3 : 43200 ( 38.23 %)
+     write buffer latency of layer 3 : 43200 ( 38.23 %)
+Computing latency of layer 3 : 0 ( 0.00 %)
+     DAC latency of layer 3 : 0 ( 0.00 %)
+     ADC latency of layer 3 : 0 ( 0.00 %)
+     xbar latency of layer 3 : 0 ( 0.00 %)
+Digital part latency of layer 3 : 0 ( 0.00 %)
+     iReg latency of layer 3 : 0 ( 0.00 %)
+     oReg latency of layer 3 : 0 ( 0.00 %)
+     input demux latency of layer 3 : 0 ( 0.00 %)
+     output mux latency of layer 3 : 0 ( 0.00 %)
+     shiftreg latency of layer 3 : 0 ( 0.00 %)
+     adder latency of layer 3 : 0 ( 0.00 %)
+     Jointmodule latency of layer 3 : 0 ( 0.00 %)
+Pooling module latency of layer 3 : 4800 ( 4.25 %)
+Intra tile communication latency of layer 3 : 0 ( 0.00 %)
+Inter tile communication latency of layer 3 : 26611.200000000008 ( 23.55 %)
+     One layer merge latency of layer 3 : 8640 ( 7.65 %)
+     Inter tile transfer latency of layer 3 : 17971.200000000004 ( 15.90 %)
+----------------------------------------------
+Layer 4  type: conv
+Occupancy: 0.4847306686549002
+total latency: 221559.67664384
+layer latency: 65284.878741439665
+Buffer latency of layer 4 : 95040 ( 42.90 %)
+     read buffer latency of layer 4 : 51840 ( 23.40 %)
+     write buffer latency of layer 4 : 43200 ( 19.50 %)
+Computing latency of layer 4 : 8156.167395840002 ( 3.68 %)
+     DAC latency of layer 4 : 1728.0 ( 0.78 %)
+     ADC latency of layer 4 : 4608.0 ( 2.08 %)
+     xbar latency of layer 4 : 1820.1673958399997 ( 0.82 %)
+Digital part latency of layer 4 : 2919.509248000001 ( 1.32 %)
+     iReg latency of layer 4 : 1280.0 ( 0.58 %)
+     oReg latency of layer 4 : 64.0 ( 0.03 %)
+     input demux latency of layer 4 : 321.78816 ( 0.15 %)
+     output mux latency of layer 4 : 37.721088 ( 0.02 %)
+     shiftreg latency of layer 4 : 1152.0 ( 0.52 %)
+     adder latency of layer 4 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 4 : 64.0 ( 0.03 %)
+Pooling module latency of layer 4 : 0 ( 0.00 %)
+Intra tile communication latency of layer 4 : 52.0 ( 0.02 %)
+Inter tile communication latency of layer 4 : 115392.0 ( 52.08 %)
+     One layer merge latency of layer 4 : 90508.80000000003 ( 40.85 %)
+     Inter tile transfer latency of layer 4 : 24883.200000000008 ( 11.23 %)
+----------------------------------------------
+Layer 5  type: conv
+Occupancy: 0.6899449039647275
+total latency: 231761.27664384004
+layer latency: 72298.47874144069
+Buffer latency of layer 5 : 95040 ( 41.01 %)
+     read buffer latency of layer 5 : 51840 ( 22.37 %)
+     write buffer latency of layer 5 : 43200 ( 18.64 %)
+Computing latency of layer 5 : 8156.167395840002 ( 3.52 %)
+     DAC latency of layer 5 : 1728.0 ( 0.75 %)
+     ADC latency of layer 5 : 4608.0 ( 1.99 %)
+     xbar latency of layer 5 : 1820.1673958399997 ( 0.79 %)
+Digital part latency of layer 5 : 2919.509248000001 ( 1.26 %)
+     iReg latency of layer 5 : 1280.0 ( 0.55 %)
+     oReg latency of layer 5 : 64.0 ( 0.03 %)
+     input demux latency of layer 5 : 321.78816 ( 0.14 %)
+     output mux latency of layer 5 : 37.721088 ( 0.02 %)
+     shiftreg latency of layer 5 : 1152.0 ( 0.50 %)
+     adder latency of layer 5 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 5 : 64.0 ( 0.03 %)
+Pooling module latency of layer 5 : 0 ( 0.00 %)
+Intra tile communication latency of layer 5 : 52.0 ( 0.02 %)
+Inter tile communication latency of layer 5 : 125593.60000000003 ( 54.19 %)
+     One layer merge latency of layer 5 : 105318.39999999997 ( 45.44 %)
+     Inter tile transfer latency of layer 5 : 20275.200000000004 ( 8.75 %)
+----------------------------------------------
+Layer 6  type: conv
+Occupancy: 1.0
+total latency: 248414.07664383997
+layer latency: 86963.2787414391
+Buffer latency of layer 6 : 95040 ( 38.26 %)
+     read buffer latency of layer 6 : 51840 ( 20.87 %)
+     write buffer latency of layer 6 : 43200 ( 17.39 %)
+Computing latency of layer 6 : 8156.167395840002 ( 3.28 %)
+     DAC latency of layer 6 : 1728.0 ( 0.70 %)
+     ADC latency of layer 6 : 4608.0 ( 1.85 %)
+     xbar latency of layer 6 : 1820.1673958399997 ( 0.73 %)
+Digital part latency of layer 6 : 2919.509248000001 ( 1.18 %)
+     iReg latency of layer 6 : 1280.0 ( 0.52 %)
+     oReg latency of layer 6 : 64.0 ( 0.03 %)
+     input demux latency of layer 6 : 321.78816 ( 0.13 %)
+     output mux latency of layer 6 : 37.721088 ( 0.02 %)
+     shiftreg latency of layer 6 : 1152.0 ( 0.46 %)
+     adder latency of layer 6 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 6 : 64.0 ( 0.03 %)
+Pooling module latency of layer 6 : 0 ( 0.00 %)
+Intra tile communication latency of layer 6 : 52.0 ( 0.02 %)
+Inter tile communication latency of layer 6 : 142246.39999999997 ( 57.26 %)
+     One layer merge latency of layer 6 : 120128.0 ( 48.36 %)
+     Inter tile transfer latency of layer 6 : 22118.400000000005 ( 8.90 %)
+----------------------------------------------
+Layer 7  type: pooling
+Occupancy: 0.29276200865731344
+total latency: 38131.2
+layer latency: 9932.800000000047
+Buffer latency of layer 7 : 28800 ( 75.53 %)
+     read buffer latency of layer 7 : 14400 ( 37.76 %)
+     write buffer latency of layer 7 : 14400 ( 37.76 %)
+Computing latency of layer 7 : 0 ( 0.00 %)
+     DAC latency of layer 7 : 0 ( 0.00 %)
+     ADC latency of layer 7 : 0 ( 0.00 %)
+     xbar latency of layer 7 : 0 ( 0.00 %)
+Digital part latency of layer 7 : 0 ( 0.00 %)
+     iReg latency of layer 7 : 0 ( 0.00 %)
+     oReg latency of layer 7 : 0 ( 0.00 %)
+     input demux latency of layer 7 : 0 ( 0.00 %)
+     output mux latency of layer 7 : 0 ( 0.00 %)
+     shiftreg latency of layer 7 : 0 ( 0.00 %)
+     adder latency of layer 7 : 0 ( 0.00 %)
+     Jointmodule latency of layer 7 : 0 ( 0.00 %)
+Pooling module latency of layer 7 : 1600 ( 4.20 %)
+Intra tile communication latency of layer 7 : 0 ( 0.00 %)
+Inter tile communication latency of layer 7 : 9331.2 ( 24.47 %)
+     One layer merge latency of layer 7 : 2880 ( 7.55 %)
+     Inter tile transfer latency of layer 7 : 6451.2 ( 16.92 %)
+----------------------------------------------
+Layer 8  type: fc
+Occupancy: 1.0
+total latency: 13228.279790240002
+layer latency: 10348.27979023999
+Buffer latency of layer 8 : 6880 ( 52.01 %)
+     read buffer latency of layer 8 : 3600 ( 27.21 %)
+     write buffer latency of layer 8 : 3280 ( 24.80 %)
+Computing latency of layer 8 : 509.76046224000004 ( 3.85 %)
+     DAC latency of layer 8 : 108.0 ( 0.82 %)
+     ADC latency of layer 8 : 288.0 ( 2.18 %)
+     xbar latency of layer 8 : 113.76046224000001 ( 0.86 %)
+Digital part latency of layer 8 : 182.46932800000002 ( 1.38 %)
+     iReg latency of layer 8 : 80.0 ( 0.60 %)
+     oReg latency of layer 8 : 4.0 ( 0.03 %)
+     input demux latency of layer 8 : 20.11176 ( 0.15 %)
+     output mux latency of layer 8 : 2.357568 ( 0.02 %)
+     shiftreg latency of layer 8 : 72.0 ( 0.54 %)
+     adder latency of layer 8 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 8 : 4.0 ( 0.03 %)
+Pooling module latency of layer 8 : 0 ( 0.00 %)
+Intra tile communication latency of layer 8 : 3.25 ( 0.02 %)
+Inter tile communication latency of layer 8 : 5652.8 ( 42.73 %)
+     One layer merge latency of layer 8 : 4731.2 ( 35.77 %)
+     Inter tile transfer latency of layer 8 : 921.6 ( 6.97 %)
+----------------------------------------------
+Layer 9  type: fc
+Occupancy: 1.0
+total latency: 2168.2418482450003
+layer latency: 2048.2418482450303
+Buffer latency of layer 9 : 1660 ( 76.56 %)
+     read buffer latency of layer 9 : 840 ( 38.74 %)
+     write buffer latency of layer 9 : 820 ( 37.82 %)
+Computing latency of layer 9 : 254.88023112000002 ( 11.76 %)
+     DAC latency of layer 9 : 54.0 ( 2.49 %)
+     ADC latency of layer 9 : 144.0 ( 6.64 %)
+     xbar latency of layer 9 : 56.880231120000005 ( 2.62 %)
+Digital part latency of layer 9 : 93.23466400000001 ( 4.30 %)
+     iReg latency of layer 9 : 40.0 ( 1.84 %)
+     oReg latency of layer 9 : 2.0 ( 0.09 %)
+     input demux latency of layer 9 : 10.05588 ( 0.46 %)
+     output mux latency of layer 9 : 1.178784 ( 0.05 %)
+     shiftreg latency of layer 9 : 36.0 ( 1.66 %)
+     adder latency of layer 9 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 9 : 4.0 ( 0.18 %)
+Pooling module latency of layer 9 : 0 ( 0.00 %)
+Intra tile communication latency of layer 9 : 0.126953125 ( 0.01 %)
+Inter tile communication latency of layer 9 : 160.0 ( 7.38 %)
+     One layer merge latency of layer 9 : 160.0 ( 7.38 %)
+     Inter tile transfer latency of layer 9 : 0.0 ( 0.00 %)
+----------------------------------------------
+Entire latency: 906895.7017112878 ns
+========================Area Results=================================
+Hardware area: 462004398.47544026 um^2
+		crossbar area: 332788695.03999996 um^2
+		DAC area: 9094.144000000002 um^2
+		ADC area: 90393600.0 um^2
+		Buffer area: 21710460.5 um^2
+		Pooling area: 9835135.7134 um^2
+		Other digital part area: 7267413.0780402385 um^2
+			|---adder area: 0.0 um^2
+			|---output-shift-reg area: 77793.28 um^2
+			|---input-reg area: 37432.57812071006 um^2
+			|---output-reg area: 37432.57812071006 um^2
+			|---input_demux area: 74067.968 um^2
+			|---output_mux area: 74067.968 um^2
+			|---joint_module area: 6966618.705798815 um^2
+Layer 0 :
+     Hardware area: 8635596.2331858 um^2
+Layer 1 :
+     Hardware area: 4317798.1165929 um^2
+Layer 2 :
+     Hardware area: 25906788.6995574 um^2
+Layer 3 :
+     Hardware area: 4317798.1165929 um^2
+Layer 4 :
+     Hardware area: 120898347.2646012 um^2
+Layer 5 :
+     Hardware area: 120898347.2646012 um^2
+Layer 6 :
+     Hardware area: 86355962.331858 um^2
+Layer 7 :
+     Hardware area: 4317798.1165929 um^2
+Layer 8 :
+     Hardware area: 69084769.8654864 um^2
+Layer 9 :
+     Hardware area: 17271192.4663716 um^2
+我看下多少read 2.43e-06
+PEread 1.215e-06
+infer中的 27
+tile中的 27
+Traceback (most recent call last):
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/main.py", line 175, in <module>
+    main()
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/main.py", line 128, in main
+    __power = Model_inference_power(NetStruct=structure_file, SimConfig_path=args.hardware_description,
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Power_Model/Model_inference_power.py", line 58, in __init__
+    self.calculate_model_power()
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Power_Model/Model_inference_power.py", line 93, in calculate_model_power
+    self.graph.tile.calculate_tile_write_power_fast(max_column=max_column,max_row=max_row,max_group=max_group,max_PE=max_PE)
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Hardware_Model/Tile.py", line 433, in calculate_tile_write_power_fast
+    self.calculate_PE_write_power_fast(max_column=max_column,max_row=max_row,max_group=max_group)
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Hardware_Model/PE.py", line 556, in calculate_PE_write_power_fast
+    self.calculate_xbar_write_power()
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Hardware_Model/Crossbar.py", line 252, in calculate_xbar_write_power
+    self.calculate_device_write_power()
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Hardware_Model/Device.py", line 80, in calculate_device_write_power
+    assert self.device_type == "NVM", "only the NVM device write power needs to be calculated"
+AssertionError: only the NVM device write power needs to be calculated
+Hardware description file location: /share/linqiushi-local/linqiushi/MNSIM-3.0/SimConfig.ini
+Software model file location: cifar10_alexnet_99bit_params.pth
+Whether perform hardware simulation: True
+Whether perform accuracy simulation: True
+Whether consider SAFs: True
+Whether consider variations: False
+Quantization range: dynamic range (depends on the data distribution)
+RRAM_SRAM mix mode: no mix
+run on device cuda:0
+load weights from cifar10_alexnet_99bit_params.pth
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+tile_number is not enough, starts to rewrite
+single cycle tile_count 2
+single cycle tile_count 3
+single cycle tile_count 9
+single cycle tile_count 10
+single cycle tile_count 38
+single cycle tile_count 66
+single cycle tile_count 86
+single cycle tile_count 87
+single cycle tile_count 16
+single cycle tile_count 20
+[0, 8]
+[7, 9]
+[87, 20]
+[0, 0, 0, 0, 0, 0, 0, 0, 1, 1]
+Total crossbar number: 416
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+Traceback (most recent call last):
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/main.py", line 175, in <module>
+    main()
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/main.py", line 115, in main
+    __latency.calculate_model_latency(mode=1)
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Latency_Model/Model_latency.py", line 899, in calculate_model_latency
+    print(self.graph.layer_tileinfo[0]['tile_num_mix'])
+KeyError: 'tile_num_mix'
+Hardware description file location: /share/linqiushi-local/linqiushi/MNSIM-3.0/SimConfig.ini
+Software model file location: cifar10_alexnet_99bit_params.pth
+Whether perform hardware simulation: True
+Whether perform accuracy simulation: True
+Whether consider SAFs: True
+Whether consider variations: False
+Quantization range: dynamic range (depends on the data distribution)
+RRAM_SRAM mix mode: no mix
+run on device cuda:0
+load weights from cifar10_alexnet_99bit_params.pth
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+tile_number is not enough, starts to rewrite
+single cycle tile_count 2
+single cycle tile_count 3
+single cycle tile_count 9
+single cycle tile_count 10
+single cycle tile_count 38
+single cycle tile_count 66
+single cycle tile_count 86
+single cycle tile_count 87
+single cycle tile_count 16
+single cycle tile_count 20
+[0, 8]
+[7, 9]
+[87, 20]
+[0, 0, 0, 0, 0, 0, 0, 0, 1, 1]
+Total crossbar number: 416
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+这个层需要rewrite-latency
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+========================Latency Results=================================
+ 
+Layer 0  type: conv
+Occupancy: 1.0
+total latency: 744829.9065753614
+layer latency: 560509.9065753624
+Buffer latency of layer 0 : 374380 ( 50.26 %)
+     read buffer latency of layer 0 : 200000 ( 26.85 %)
+     write buffer latency of layer 0 : 174380 ( 23.41 %)
+Computing latency of layer 0 : 32624.66958335991 ( 4.38 %)
+     DAC latency of layer 0 : 6912.0 ( 0.93 %)
+     ADC latency of layer 0 : 18432.0 ( 2.47 %)
+     xbar latency of layer 0 : 7280.669583359979 ( 0.98 %)
+Digital part latency of layer 0 : 12702.03699199996 ( 1.71 %)
+     iReg latency of layer 0 : 5120.0 ( 0.69 %)
+     oReg latency of layer 0 : 512.0 ( 0.07 %)
+     input demux latency of layer 0 : 1287.1526399999914 ( 0.17 %)
+     output mux latency of layer 0 : 150.88435200000035 ( 0.02 %)
+     shiftreg latency of layer 0 : 4608.0 ( 0.62 %)
+     adder latency of layer 0 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 0 : 1024.0 ( 0.14 %)
+Pooling module latency of layer 0 : 0 ( 0.00 %)
+Intra tile communication latency of layer 0 : 208.0 ( 0.03 %)
+Inter tile communication latency of layer 0 : 324915.2000000015 ( 43.62 %)
+     One layer merge latency of layer 0 : 214323.20000000086 ( 28.77 %)
+     Inter tile transfer latency of layer 0 : 110592.0 ( 14.85 %)
+----------------------------------------------
+Layer 1  type: pooling
+Occupancy: 0.303705519179255
+total latency: 152524.8
+layer latency: 2483.1999999999534
+Buffer latency of layer 1 : 115200 ( 75.53 %)
+     read buffer latency of layer 1 : 57600 ( 37.76 %)
+     write buffer latency of layer 1 : 57600 ( 37.76 %)
+Computing latency of layer 1 : 0 ( 0.00 %)
+     DAC latency of layer 1 : 0 ( 0.00 %)
+     ADC latency of layer 1 : 0 ( 0.00 %)
+     xbar latency of layer 1 : 0 ( 0.00 %)
+Digital part latency of layer 1 : 0 ( 0.00 %)
+     iReg latency of layer 1 : 0 ( 0.00 %)
+     oReg latency of layer 1 : 0 ( 0.00 %)
+     input demux latency of layer 1 : 0 ( 0.00 %)
+     output mux latency of layer 1 : 0 ( 0.00 %)
+     shiftreg latency of layer 1 : 0 ( 0.00 %)
+     adder latency of layer 1 : 0 ( 0.00 %)
+     Jointmodule latency of layer 1 : 0 ( 0.00 %)
+Pooling module latency of layer 1 : 6400 ( 4.20 %)
+Intra tile communication latency of layer 1 : 0 ( 0.00 %)
+Inter tile communication latency of layer 1 : 37324.8 ( 24.47 %)
+     One layer merge latency of layer 1 : 11520 ( 7.55 %)
+     Inter tile transfer latency of layer 1 : 25804.80000000003 ( 16.92 %)
+----------------------------------------------
+Layer 2  type: conv
+Occupancy: 0.8672688830357025
+total latency: 603153.1065753602
+layer latency: 89663.43727312097
+Buffer latency of layer 2 : 287360 ( 47.64 %)
+     read buffer latency of layer 2 : 157440 ( 26.10 %)
+     write buffer latency of layer 2 : 129920 ( 21.54 %)
+Computing latency of layer 2 : 32624.669583359977 ( 5.41 %)
+     DAC latency of layer 2 : 6912.0 ( 1.15 %)
+     ADC latency of layer 2 : 18432.0 ( 3.06 %)
+     xbar latency of layer 2 : 7280.669583360009 ( 1.21 %)
+Digital part latency of layer 2 : 11678.03699199999 ( 1.94 %)
+     iReg latency of layer 2 : 5120.0 ( 0.85 %)
+     oReg latency of layer 2 : 256.0 ( 0.04 %)
+     input demux latency of layer 2 : 1287.15264 ( 0.21 %)
+     output mux latency of layer 2 : 150.8843519999999 ( 0.03 %)
+     shiftreg latency of layer 2 : 4608.0 ( 0.76 %)
+     adder latency of layer 2 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 2 : 256.0 ( 0.04 %)
+Pooling module latency of layer 2 : 0 ( 0.00 %)
+Intra tile communication latency of layer 2 : 156.0 ( 0.03 %)
+Inter tile communication latency of layer 2 : 271334.4000000002 ( 44.99 %)
+     One layer merge latency of layer 2 : 204979.1999999998 ( 33.98 %)
+     Inter tile transfer latency of layer 2 : 66355.20000000007 ( 11.00 %)
+----------------------------------------------
+Layer 3  type: pooling
+Occupancy: 0.2569524697213089
+total latency: 113011.20000000001
+layer latency: 7363.199999999953
+Buffer latency of layer 3 : 86400 ( 76.45 %)
+     read buffer latency of layer 3 : 43200 ( 38.23 %)
+     write buffer latency of layer 3 : 43200 ( 38.23 %)
+Computing latency of layer 3 : 0 ( 0.00 %)
+     DAC latency of layer 3 : 0 ( 0.00 %)
+     ADC latency of layer 3 : 0 ( 0.00 %)
+     xbar latency of layer 3 : 0 ( 0.00 %)
+Digital part latency of layer 3 : 0 ( 0.00 %)
+     iReg latency of layer 3 : 0 ( 0.00 %)
+     oReg latency of layer 3 : 0 ( 0.00 %)
+     input demux latency of layer 3 : 0 ( 0.00 %)
+     output mux latency of layer 3 : 0 ( 0.00 %)
+     shiftreg latency of layer 3 : 0 ( 0.00 %)
+     adder latency of layer 3 : 0 ( 0.00 %)
+     Jointmodule latency of layer 3 : 0 ( 0.00 %)
+Pooling module latency of layer 3 : 4800 ( 4.25 %)
+Intra tile communication latency of layer 3 : 0 ( 0.00 %)
+Inter tile communication latency of layer 3 : 26611.200000000008 ( 23.55 %)
+     One layer merge latency of layer 3 : 8640 ( 7.65 %)
+     Inter tile transfer latency of layer 3 : 17971.200000000004 ( 15.90 %)
+----------------------------------------------
+Layer 4  type: conv
+Occupancy: 0.4847306686549002
+total latency: 221559.67664384
+layer latency: 65284.878741439665
+Buffer latency of layer 4 : 95040 ( 42.90 %)
+     read buffer latency of layer 4 : 51840 ( 23.40 %)
+     write buffer latency of layer 4 : 43200 ( 19.50 %)
+Computing latency of layer 4 : 8156.167395840002 ( 3.68 %)
+     DAC latency of layer 4 : 1728.0 ( 0.78 %)
+     ADC latency of layer 4 : 4608.0 ( 2.08 %)
+     xbar latency of layer 4 : 1820.1673958399997 ( 0.82 %)
+Digital part latency of layer 4 : 2919.509248000001 ( 1.32 %)
+     iReg latency of layer 4 : 1280.0 ( 0.58 %)
+     oReg latency of layer 4 : 64.0 ( 0.03 %)
+     input demux latency of layer 4 : 321.78816 ( 0.15 %)
+     output mux latency of layer 4 : 37.721088 ( 0.02 %)
+     shiftreg latency of layer 4 : 1152.0 ( 0.52 %)
+     adder latency of layer 4 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 4 : 64.0 ( 0.03 %)
+Pooling module latency of layer 4 : 0 ( 0.00 %)
+Intra tile communication latency of layer 4 : 52.0 ( 0.02 %)
+Inter tile communication latency of layer 4 : 115392.0 ( 52.08 %)
+     One layer merge latency of layer 4 : 90508.80000000003 ( 40.85 %)
+     Inter tile transfer latency of layer 4 : 24883.200000000008 ( 11.23 %)
+----------------------------------------------
+Layer 5  type: conv
+Occupancy: 0.6899449039647275
+total latency: 231761.27664384004
+layer latency: 72298.47874144069
+Buffer latency of layer 5 : 95040 ( 41.01 %)
+     read buffer latency of layer 5 : 51840 ( 22.37 %)
+     write buffer latency of layer 5 : 43200 ( 18.64 %)
+Computing latency of layer 5 : 8156.167395840002 ( 3.52 %)
+     DAC latency of layer 5 : 1728.0 ( 0.75 %)
+     ADC latency of layer 5 : 4608.0 ( 1.99 %)
+     xbar latency of layer 5 : 1820.1673958399997 ( 0.79 %)
+Digital part latency of layer 5 : 2919.509248000001 ( 1.26 %)
+     iReg latency of layer 5 : 1280.0 ( 0.55 %)
+     oReg latency of layer 5 : 64.0 ( 0.03 %)
+     input demux latency of layer 5 : 321.78816 ( 0.14 %)
+     output mux latency of layer 5 : 37.721088 ( 0.02 %)
+     shiftreg latency of layer 5 : 1152.0 ( 0.50 %)
+     adder latency of layer 5 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 5 : 64.0 ( 0.03 %)
+Pooling module latency of layer 5 : 0 ( 0.00 %)
+Intra tile communication latency of layer 5 : 52.0 ( 0.02 %)
+Inter tile communication latency of layer 5 : 125593.60000000003 ( 54.19 %)
+     One layer merge latency of layer 5 : 105318.39999999997 ( 45.44 %)
+     Inter tile transfer latency of layer 5 : 20275.200000000004 ( 8.75 %)
+----------------------------------------------
+Layer 6  type: conv
+Occupancy: 1.0
+total latency: 248414.07664383997
+layer latency: 86963.2787414391
+Buffer latency of layer 6 : 95040 ( 38.26 %)
+     read buffer latency of layer 6 : 51840 ( 20.87 %)
+     write buffer latency of layer 6 : 43200 ( 17.39 %)
+Computing latency of layer 6 : 8156.167395840002 ( 3.28 %)
+     DAC latency of layer 6 : 1728.0 ( 0.70 %)
+     ADC latency of layer 6 : 4608.0 ( 1.85 %)
+     xbar latency of layer 6 : 1820.1673958399997 ( 0.73 %)
+Digital part latency of layer 6 : 2919.509248000001 ( 1.18 %)
+     iReg latency of layer 6 : 1280.0 ( 0.52 %)
+     oReg latency of layer 6 : 64.0 ( 0.03 %)
+     input demux latency of layer 6 : 321.78816 ( 0.13 %)
+     output mux latency of layer 6 : 37.721088 ( 0.02 %)
+     shiftreg latency of layer 6 : 1152.0 ( 0.46 %)
+     adder latency of layer 6 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 6 : 64.0 ( 0.03 %)
+Pooling module latency of layer 6 : 0 ( 0.00 %)
+Intra tile communication latency of layer 6 : 52.0 ( 0.02 %)
+Inter tile communication latency of layer 6 : 142246.39999999997 ( 57.26 %)
+     One layer merge latency of layer 6 : 120128.0 ( 48.36 %)
+     Inter tile transfer latency of layer 6 : 22118.400000000005 ( 8.90 %)
+----------------------------------------------
+Layer 7  type: pooling
+Occupancy: 0.29276200865731344
+total latency: 38131.2
+layer latency: 9932.800000000047
+Buffer latency of layer 7 : 28800 ( 75.53 %)
+     read buffer latency of layer 7 : 14400 ( 37.76 %)
+     write buffer latency of layer 7 : 14400 ( 37.76 %)
+Computing latency of layer 7 : 0 ( 0.00 %)
+     DAC latency of layer 7 : 0 ( 0.00 %)
+     ADC latency of layer 7 : 0 ( 0.00 %)
+     xbar latency of layer 7 : 0 ( 0.00 %)
+Digital part latency of layer 7 : 0 ( 0.00 %)
+     iReg latency of layer 7 : 0 ( 0.00 %)
+     oReg latency of layer 7 : 0 ( 0.00 %)
+     input demux latency of layer 7 : 0 ( 0.00 %)
+     output mux latency of layer 7 : 0 ( 0.00 %)
+     shiftreg latency of layer 7 : 0 ( 0.00 %)
+     adder latency of layer 7 : 0 ( 0.00 %)
+     Jointmodule latency of layer 7 : 0 ( 0.00 %)
+Pooling module latency of layer 7 : 1600 ( 4.20 %)
+Intra tile communication latency of layer 7 : 0 ( 0.00 %)
+Inter tile communication latency of layer 7 : 9331.2 ( 24.47 %)
+     One layer merge latency of layer 7 : 2880 ( 7.55 %)
+     Inter tile transfer latency of layer 7 : 6451.2 ( 16.92 %)
+----------------------------------------------
+Layer 8  type: fc
+Occupancy: 1.0
+total latency: 13228.279790240002
+layer latency: 10348.27979023999
+Buffer latency of layer 8 : 6880 ( 52.01 %)
+     read buffer latency of layer 8 : 3600 ( 27.21 %)
+     write buffer latency of layer 8 : 3280 ( 24.80 %)
+Computing latency of layer 8 : 509.76046224000004 ( 3.85 %)
+     DAC latency of layer 8 : 108.0 ( 0.82 %)
+     ADC latency of layer 8 : 288.0 ( 2.18 %)
+     xbar latency of layer 8 : 113.76046224000001 ( 0.86 %)
+Digital part latency of layer 8 : 182.46932800000002 ( 1.38 %)
+     iReg latency of layer 8 : 80.0 ( 0.60 %)
+     oReg latency of layer 8 : 4.0 ( 0.03 %)
+     input demux latency of layer 8 : 20.11176 ( 0.15 %)
+     output mux latency of layer 8 : 2.357568 ( 0.02 %)
+     shiftreg latency of layer 8 : 72.0 ( 0.54 %)
+     adder latency of layer 8 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 8 : 4.0 ( 0.03 %)
+Pooling module latency of layer 8 : 0 ( 0.00 %)
+Intra tile communication latency of layer 8 : 3.25 ( 0.02 %)
+Inter tile communication latency of layer 8 : 5652.8 ( 42.73 %)
+     One layer merge latency of layer 8 : 4731.2 ( 35.77 %)
+     Inter tile transfer latency of layer 8 : 921.6 ( 6.97 %)
+----------------------------------------------
+Layer 9  type: fc
+Occupancy: 1.0
+total latency: 2168.2418482450003
+layer latency: 2048.2418482450303
+Buffer latency of layer 9 : 1660 ( 76.56 %)
+     read buffer latency of layer 9 : 840 ( 38.74 %)
+     write buffer latency of layer 9 : 820 ( 37.82 %)
+Computing latency of layer 9 : 254.88023112000002 ( 11.76 %)
+     DAC latency of layer 9 : 54.0 ( 2.49 %)
+     ADC latency of layer 9 : 144.0 ( 6.64 %)
+     xbar latency of layer 9 : 56.880231120000005 ( 2.62 %)
+Digital part latency of layer 9 : 93.23466400000001 ( 4.30 %)
+     iReg latency of layer 9 : 40.0 ( 1.84 %)
+     oReg latency of layer 9 : 2.0 ( 0.09 %)
+     input demux latency of layer 9 : 10.05588 ( 0.46 %)
+     output mux latency of layer 9 : 1.178784 ( 0.05 %)
+     shiftreg latency of layer 9 : 36.0 ( 1.66 %)
+     adder latency of layer 9 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 9 : 4.0 ( 0.18 %)
+Pooling module latency of layer 9 : 0 ( 0.00 %)
+Intra tile communication latency of layer 9 : 0.126953125 ( 0.01 %)
+Inter tile communication latency of layer 9 : 160.0 ( 7.38 %)
+     One layer merge latency of layer 9 : 160.0 ( 7.38 %)
+     Inter tile transfer latency of layer 9 : 0.0 ( 0.00 %)
+----------------------------------------------
+Entire latency: 906895.7017112878 ns
+========================Area Results=================================
+Hardware area: 462004398.47544026 um^2
+		crossbar area: 332788695.03999996 um^2
+		DAC area: 9094.144000000002 um^2
+		ADC area: 90393600.0 um^2
+		Buffer area: 21710460.5 um^2
+		Pooling area: 9835135.7134 um^2
+		Other digital part area: 7267413.0780402385 um^2
+			|---adder area: 0.0 um^2
+			|---output-shift-reg area: 77793.28 um^2
+			|---input-reg area: 37432.57812071006 um^2
+			|---output-reg area: 37432.57812071006 um^2
+			|---input_demux area: 74067.968 um^2
+			|---output_mux area: 74067.968 um^2
+			|---joint_module area: 6966618.705798815 um^2
+Layer 0 :
+     Hardware area: 8635596.2331858 um^2
+Layer 1 :
+     Hardware area: 4317798.1165929 um^2
+Layer 2 :
+     Hardware area: 25906788.6995574 um^2
+Layer 3 :
+     Hardware area: 4317798.1165929 um^2
+Layer 4 :
+     Hardware area: 120898347.2646012 um^2
+Layer 5 :
+     Hardware area: 120898347.2646012 um^2
+Layer 6 :
+     Hardware area: 86355962.331858 um^2
+Layer 7 :
+     Hardware area: 4317798.1165929 um^2
+Layer 8 :
+     Hardware area: 69084769.8654864 um^2
+Layer 9 :
+     Hardware area: 17271192.4663716 um^2
+我看下多少read 2.43e-06
+PEread 1.215e-06
+infer中的 27
+tile中的 27
+Traceback (most recent call last):
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/main.py", line 175, in <module>
+    main()
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/main.py", line 128, in main
+    __power = Model_inference_power(NetStruct=structure_file, SimConfig_path=args.hardware_description,
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Power_Model/Model_inference_power.py", line 58, in __init__
+    self.calculate_model_power()
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Power_Model/Model_inference_power.py", line 93, in calculate_model_power
+    self.graph.tile.calculate_tile_write_power_fast(max_column=max_column,max_row=max_row,max_group=max_group,max_PE=max_PE)
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Hardware_Model/Tile.py", line 433, in calculate_tile_write_power_fast
+    self.calculate_PE_write_power_fast(max_column=max_column,max_row=max_row,max_group=max_group)
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Hardware_Model/PE.py", line 556, in calculate_PE_write_power_fast
+    self.calculate_xbar_write_power()
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Hardware_Model/Crossbar.py", line 252, in calculate_xbar_write_power
+    self.calculate_device_write_power()
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Hardware_Model/Device.py", line 80, in calculate_device_write_power
+    assert self.device_type == "NVM", "only the NVM device write power needs to be calculated"
+AssertionError: only the NVM device write power needs to be calculated
+Hardware description file location: /share/linqiushi-local/linqiushi/MNSIM-3.0/SimConfig.ini
+Software model file location: cifar10_alexnet_99bit_params.pth
+Whether perform hardware simulation: True
+Whether perform accuracy simulation: True
+Whether consider SAFs: True
+Whether consider variations: False
+Quantization range: dynamic range (depends on the data distribution)
+RRAM_SRAM mix mode: mix among tile
+run on device cuda:0
+load weights from cifar10_alexnet_99bit_params.pth
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+tile_number is not enough, starts to rewrite
+single cycle tile_count 2
+single cycle tile_count 3
+single cycle tile_count 9
+single cycle tile_count 10
+single cycle tile_count 38
+single cycle tile_count 66
+single cycle tile_count 86
+single cycle tile_count 87
+single cycle tile_count 16
+single cycle tile_count 20
+[0, 8]
+[7, 9]
+[87, 20]
+[0, 0, 0, 0, 0, 0, 0, 0, 1, 1]
+Total crossbar number: 416
+start to mix among tiles
+[['0', '0', '1', '1', '1', '1', '2', '2', '2', '2'], ['2', '3', '3', '3', '6', '4', '4', '4', '4', '4'], ['5', '5', '5', '6', '3', '6', '7', '7', '7', '7'], ['8', 'no', '9', '9', '10', '10', '10', '10', '10', '10'], ['11', '11', '11', '11', '12', '12', '12', '12', '12', '12'], ['13', '13', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no'], ['no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no'], ['no', 'no', '8', 'no', 'no', 'no', 'no', 'no', 'no', 'no'], ['no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no'], ['no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no']]
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+[10, 10]
+hh 0
+hi
+hh 0
+hi
+hh 1
+hh 1
+hh 1
+hh 1
+hh 2
+hh 2
+hh 2
+hh 2
+hh 2
+hh 3
+hh 3
+hh 3
+hh 6
+hh 4
+hh 4
+hh 4
+hh 4
+hh 4
+hh 5
+hh 5
+hh 5
+hh 6
+hh 3
+hh 6
+hh 7
+hh 7
+hh 7
+hh 7
+hh 8
+hh no
+hh 9
+hh 9
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 11
+hh 11
+hh 11
+hh 11
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 13
+hh 13
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh 8
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+['SRAM', 'NVM']
+xbar_size的修改
+xbar_row: [64, 64] 256
+xiuhai
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+0.5
+64 1
+xbar_size的修改
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+817.86994756
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+这个层需要rewrite-latency
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+========================Latency Results=================================
+ 
+Layer 0  type: conv
+Occupancy: 1.0
+total latency: 744829.9065753614
+layer latency: 558709.9065753625
+Buffer latency of layer 0 : 374380 ( 50.26 %)
+     read buffer latency of layer 0 : 200000 ( 26.85 %)
+     write buffer latency of layer 0 : 174380 ( 23.41 %)
+Computing latency of layer 0 : 32624.66958335991 ( 4.38 %)
+     DAC latency of layer 0 : 6912.0 ( 0.93 %)
+     ADC latency of layer 0 : 18432.0 ( 2.47 %)
+     xbar latency of layer 0 : 7280.669583359979 ( 0.98 %)
+Digital part latency of layer 0 : 12702.03699199996 ( 1.71 %)
+     iReg latency of layer 0 : 5120.0 ( 0.69 %)
+     oReg latency of layer 0 : 512.0 ( 0.07 %)
+     input demux latency of layer 0 : 1287.1526399999914 ( 0.17 %)
+     output mux latency of layer 0 : 150.88435200000035 ( 0.02 %)
+     shiftreg latency of layer 0 : 4608.0 ( 0.62 %)
+     adder latency of layer 0 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 0 : 1024.0 ( 0.14 %)
+Pooling module latency of layer 0 : 0 ( 0.00 %)
+Intra tile communication latency of layer 0 : 208.0 ( 0.03 %)
+Inter tile communication latency of layer 0 : 324915.2000000015 ( 43.62 %)
+     One layer merge latency of layer 0 : 214323.20000000086 ( 28.77 %)
+     Inter tile transfer latency of layer 0 : 110592.0 ( 14.85 %)
+----------------------------------------------
+Layer 1  type: pooling
+Occupancy: 0.30468370083624313
+total latency: 152524.8
+layer latency: 2483.1999999999534
+Buffer latency of layer 1 : 115200 ( 75.53 %)
+     read buffer latency of layer 1 : 57600 ( 37.76 %)
+     write buffer latency of layer 1 : 57600 ( 37.76 %)
+Computing latency of layer 1 : 0 ( 0.00 %)
+     DAC latency of layer 1 : 0 ( 0.00 %)
+     ADC latency of layer 1 : 0 ( 0.00 %)
+     xbar latency of layer 1 : 0 ( 0.00 %)
+Digital part latency of layer 1 : 0 ( 0.00 %)
+     iReg latency of layer 1 : 0 ( 0.00 %)
+     oReg latency of layer 1 : 0 ( 0.00 %)
+     input demux latency of layer 1 : 0 ( 0.00 %)
+     output mux latency of layer 1 : 0 ( 0.00 %)
+     shiftreg latency of layer 1 : 0 ( 0.00 %)
+     adder latency of layer 1 : 0 ( 0.00 %)
+     Jointmodule latency of layer 1 : 0 ( 0.00 %)
+Pooling module latency of layer 1 : 6400 ( 4.20 %)
+Intra tile communication latency of layer 1 : 0 ( 0.00 %)
+Inter tile communication latency of layer 1 : 37324.8 ( 24.47 %)
+     One layer merge latency of layer 1 : 11520 ( 7.55 %)
+     Inter tile transfer latency of layer 1 : 25804.80000000003 ( 16.92 %)
+----------------------------------------------
+Layer 2  type: conv
+Occupancy: 0.8696048485087643
+total latency: 603153.1065753602
+layer latency: 89663.43727312097
+Buffer latency of layer 2 : 287360 ( 47.64 %)
+     read buffer latency of layer 2 : 157440 ( 26.10 %)
+     write buffer latency of layer 2 : 129920 ( 21.54 %)
+Computing latency of layer 2 : 32624.669583359977 ( 5.41 %)
+     DAC latency of layer 2 : 6912.0 ( 1.15 %)
+     ADC latency of layer 2 : 18432.0 ( 3.06 %)
+     xbar latency of layer 2 : 7280.669583360009 ( 1.21 %)
+Digital part latency of layer 2 : 11678.03699199999 ( 1.94 %)
+     iReg latency of layer 2 : 5120.0 ( 0.85 %)
+     oReg latency of layer 2 : 256.0 ( 0.04 %)
+     input demux latency of layer 2 : 1287.15264 ( 0.21 %)
+     output mux latency of layer 2 : 150.8843519999999 ( 0.03 %)
+     shiftreg latency of layer 2 : 4608.0 ( 0.76 %)
+     adder latency of layer 2 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 2 : 256.0 ( 0.04 %)
+Pooling module latency of layer 2 : 0 ( 0.00 %)
+Intra tile communication latency of layer 2 : 156.0 ( 0.03 %)
+Inter tile communication latency of layer 2 : 271334.4000000002 ( 44.99 %)
+     One layer merge latency of layer 2 : 204979.1999999998 ( 33.98 %)
+     Inter tile transfer latency of layer 2 : 66355.20000000007 ( 11.00 %)
+----------------------------------------------
+Layer 3  type: pooling
+Occupancy: 0.257626746824295
+total latency: 113011.20000000001
+layer latency: 7363.199999999953
+Buffer latency of layer 3 : 86400 ( 76.45 %)
+     read buffer latency of layer 3 : 43200 ( 38.23 %)
+     write buffer latency of layer 3 : 43200 ( 38.23 %)
+Computing latency of layer 3 : 0 ( 0.00 %)
+     DAC latency of layer 3 : 0 ( 0.00 %)
+     ADC latency of layer 3 : 0 ( 0.00 %)
+     xbar latency of layer 3 : 0 ( 0.00 %)
+Digital part latency of layer 3 : 0 ( 0.00 %)
+     iReg latency of layer 3 : 0 ( 0.00 %)
+     oReg latency of layer 3 : 0 ( 0.00 %)
+     input demux latency of layer 3 : 0 ( 0.00 %)
+     output mux latency of layer 3 : 0 ( 0.00 %)
+     shiftreg latency of layer 3 : 0 ( 0.00 %)
+     adder latency of layer 3 : 0 ( 0.00 %)
+     Jointmodule latency of layer 3 : 0 ( 0.00 %)
+Pooling module latency of layer 3 : 4800 ( 4.25 %)
+Intra tile communication latency of layer 3 : 0 ( 0.00 %)
+Inter tile communication latency of layer 3 : 26611.200000000008 ( 23.55 %)
+     One layer merge latency of layer 3 : 8640 ( 7.65 %)
+     Inter tile transfer latency of layer 3 : 17971.200000000004 ( 15.90 %)
+----------------------------------------------
+Layer 4  type: conv
+Occupancy: 0.48569665565577
+total latency: 221559.67664384
+layer latency: 65284.878741439665
+Buffer latency of layer 4 : 95040 ( 42.90 %)
+     read buffer latency of layer 4 : 51840 ( 23.40 %)
+     write buffer latency of layer 4 : 43200 ( 19.50 %)
+Computing latency of layer 4 : 8156.167395840002 ( 3.68 %)
+     DAC latency of layer 4 : 1728.0 ( 0.78 %)
+     ADC latency of layer 4 : 4608.0 ( 2.08 %)
+     xbar latency of layer 4 : 1820.1673958399997 ( 0.82 %)
+Digital part latency of layer 4 : 2919.509248000001 ( 1.32 %)
+     iReg latency of layer 4 : 1280.0 ( 0.58 %)
+     oReg latency of layer 4 : 64.0 ( 0.03 %)
+     input demux latency of layer 4 : 321.78816 ( 0.15 %)
+     output mux latency of layer 4 : 37.721088 ( 0.02 %)
+     shiftreg latency of layer 4 : 1152.0 ( 0.52 %)
+     adder latency of layer 4 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 4 : 64.0 ( 0.03 %)
+Pooling module latency of layer 4 : 0 ( 0.00 %)
+Intra tile communication latency of layer 4 : 52.0 ( 0.02 %)
+Inter tile communication latency of layer 4 : 115392.0 ( 52.08 %)
+     One layer merge latency of layer 4 : 90508.80000000003 ( 40.85 %)
+     Inter tile transfer latency of layer 4 : 24883.200000000008 ( 11.23 %)
+----------------------------------------------
+Layer 5  type: conv
+Occupancy: 0.6905607319467358
+total latency: 231761.27664384004
+layer latency: 72298.47874144069
+Buffer latency of layer 5 : 95040 ( 41.01 %)
+     read buffer latency of layer 5 : 51840 ( 22.37 %)
+     write buffer latency of layer 5 : 43200 ( 18.64 %)
+Computing latency of layer 5 : 8156.167395840002 ( 3.52 %)
+     DAC latency of layer 5 : 1728.0 ( 0.75 %)
+     ADC latency of layer 5 : 4608.0 ( 1.99 %)
+     xbar latency of layer 5 : 1820.1673958399997 ( 0.79 %)
+Digital part latency of layer 5 : 2919.509248000001 ( 1.26 %)
+     iReg latency of layer 5 : 1280.0 ( 0.55 %)
+     oReg latency of layer 5 : 64.0 ( 0.03 %)
+     input demux latency of layer 5 : 321.78816 ( 0.14 %)
+     output mux latency of layer 5 : 37.721088 ( 0.02 %)
+     shiftreg latency of layer 5 : 1152.0 ( 0.50 %)
+     adder latency of layer 5 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 5 : 64.0 ( 0.03 %)
+Pooling module latency of layer 5 : 0 ( 0.00 %)
+Intra tile communication latency of layer 5 : 52.0 ( 0.02 %)
+Inter tile communication latency of layer 5 : 125593.60000000003 ( 54.19 %)
+     One layer merge latency of layer 5 : 105318.39999999997 ( 45.44 %)
+     Inter tile transfer latency of layer 5 : 20275.200000000004 ( 8.75 %)
+----------------------------------------------
+Layer 6  type: conv
+Occupancy: 1.0
+total latency: 248414.07664383997
+layer latency: 86963.2787414391
+Buffer latency of layer 6 : 95040 ( 38.26 %)
+     read buffer latency of layer 6 : 51840 ( 20.87 %)
+     write buffer latency of layer 6 : 43200 ( 17.39 %)
+Computing latency of layer 6 : 8156.167395840002 ( 3.28 %)
+     DAC latency of layer 6 : 1728.0 ( 0.70 %)
+     ADC latency of layer 6 : 4608.0 ( 1.85 %)
+     xbar latency of layer 6 : 1820.1673958399997 ( 0.73 %)
+Digital part latency of layer 6 : 2919.509248000001 ( 1.18 %)
+     iReg latency of layer 6 : 1280.0 ( 0.52 %)
+     oReg latency of layer 6 : 64.0 ( 0.03 %)
+     input demux latency of layer 6 : 321.78816 ( 0.13 %)
+     output mux latency of layer 6 : 37.721088 ( 0.02 %)
+     shiftreg latency of layer 6 : 1152.0 ( 0.46 %)
+     adder latency of layer 6 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 6 : 64.0 ( 0.03 %)
+Pooling module latency of layer 6 : 0 ( 0.00 %)
+Intra tile communication latency of layer 6 : 52.0 ( 0.02 %)
+Inter tile communication latency of layer 6 : 142246.39999999997 ( 57.26 %)
+     One layer merge latency of layer 6 : 120128.0 ( 48.36 %)
+     Inter tile transfer latency of layer 6 : 22118.400000000005 ( 8.90 %)
+----------------------------------------------
+Layer 7  type: pooling
+Occupancy: 0.29276200865731344
+total latency: 38131.2
+layer latency: 9932.800000000047
+Buffer latency of layer 7 : 28800 ( 75.53 %)
+     read buffer latency of layer 7 : 14400 ( 37.76 %)
+     write buffer latency of layer 7 : 14400 ( 37.76 %)
+Computing latency of layer 7 : 0 ( 0.00 %)
+     DAC latency of layer 7 : 0 ( 0.00 %)
+     ADC latency of layer 7 : 0 ( 0.00 %)
+     xbar latency of layer 7 : 0 ( 0.00 %)
+Digital part latency of layer 7 : 0 ( 0.00 %)
+     iReg latency of layer 7 : 0 ( 0.00 %)
+     oReg latency of layer 7 : 0 ( 0.00 %)
+     input demux latency of layer 7 : 0 ( 0.00 %)
+     output mux latency of layer 7 : 0 ( 0.00 %)
+     shiftreg latency of layer 7 : 0 ( 0.00 %)
+     adder latency of layer 7 : 0 ( 0.00 %)
+     Jointmodule latency of layer 7 : 0 ( 0.00 %)
+Pooling module latency of layer 7 : 1600 ( 4.20 %)
+Intra tile communication latency of layer 7 : 0 ( 0.00 %)
+Inter tile communication latency of layer 7 : 9331.2 ( 24.47 %)
+     One layer merge latency of layer 7 : 2880 ( 7.55 %)
+     Inter tile transfer latency of layer 7 : 6451.2 ( 16.92 %)
+----------------------------------------------
+Layer 8  type: fc
+Occupancy: 1.0
+total latency: 13228.279790240002
+layer latency: 10348.27979023999
+Buffer latency of layer 8 : 6880 ( 52.01 %)
+     read buffer latency of layer 8 : 3600 ( 27.21 %)
+     write buffer latency of layer 8 : 3280 ( 24.80 %)
+Computing latency of layer 8 : 509.76046224000004 ( 3.85 %)
+     DAC latency of layer 8 : 108.0 ( 0.82 %)
+     ADC latency of layer 8 : 288.0 ( 2.18 %)
+     xbar latency of layer 8 : 113.76046224000001 ( 0.86 %)
+Digital part latency of layer 8 : 182.46932800000002 ( 1.38 %)
+     iReg latency of layer 8 : 80.0 ( 0.60 %)
+     oReg latency of layer 8 : 4.0 ( 0.03 %)
+     input demux latency of layer 8 : 20.11176 ( 0.15 %)
+     output mux latency of layer 8 : 2.357568 ( 0.02 %)
+     shiftreg latency of layer 8 : 72.0 ( 0.54 %)
+     adder latency of layer 8 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 8 : 4.0 ( 0.03 %)
+Pooling module latency of layer 8 : 0 ( 0.00 %)
+Intra tile communication latency of layer 8 : 3.25 ( 0.02 %)
+Inter tile communication latency of layer 8 : 5652.8 ( 42.73 %)
+     One layer merge latency of layer 8 : 4731.2 ( 35.77 %)
+     Inter tile transfer latency of layer 8 : 921.6 ( 6.97 %)
+----------------------------------------------
+Layer 9  type: fc
+Occupancy: 1.0
+total latency: 2168.2418482450003
+layer latency: 2048.2418482450303
+Buffer latency of layer 9 : 1660 ( 76.56 %)
+     read buffer latency of layer 9 : 840 ( 38.74 %)
+     write buffer latency of layer 9 : 820 ( 37.82 %)
+Computing latency of layer 9 : 254.88023112000002 ( 11.76 %)
+     DAC latency of layer 9 : 54.0 ( 2.49 %)
+     ADC latency of layer 9 : 144.0 ( 6.64 %)
+     xbar latency of layer 9 : 56.880231120000005 ( 2.62 %)
+Digital part latency of layer 9 : 93.23466400000001 ( 4.30 %)
+     iReg latency of layer 9 : 40.0 ( 1.84 %)
+     oReg latency of layer 9 : 2.0 ( 0.09 %)
+     input demux latency of layer 9 : 10.05588 ( 0.46 %)
+     output mux latency of layer 9 : 1.178784 ( 0.05 %)
+     shiftreg latency of layer 9 : 36.0 ( 1.66 %)
+     adder latency of layer 9 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 9 : 4.0 ( 0.18 %)
+Pooling module latency of layer 9 : 0 ( 0.00 %)
+Intra tile communication latency of layer 9 : 0.126953125 ( 0.01 %)
+Inter tile communication latency of layer 9 : 160.0 ( 7.38 %)
+     One layer merge latency of layer 9 : 160.0 ( 7.38 %)
+     Inter tile transfer latency of layer 9 : 0.0 ( 0.00 %)
+----------------------------------------------
+Entire latency: 905095.701711288 ns
+========================Area Results=================================
+Hardware area: 462004398.47544026 um^2
+		crossbar area: 332788695.03999996 um^2
+		DAC area: 9094.144000000002 um^2
+		ADC area: 90393600.0 um^2
+		Buffer area: 21710460.5 um^2
+		Pooling area: 9835135.7134 um^2
+		Other digital part area: 7267413.0780402385 um^2
+			|---adder area: 0.0 um^2
+			|---output-shift-reg area: 77793.28 um^2
+			|---input-reg area: 37432.57812071006 um^2
+			|---output-reg area: 37432.57812071006 um^2
+			|---input_demux area: 74067.968 um^2
+			|---output_mux area: 74067.968 um^2
+			|---joint_module area: 6966618.705798815 um^2
+Layer 0 :
+     Hardware area: 8635596.2331858 um^2
+Layer 1 :
+     Hardware area: 4317798.1165929 um^2
+Layer 2 :
+     Hardware area: 25906788.6995574 um^2
+Layer 3 :
+     Hardware area: 4317798.1165929 um^2
+Layer 4 :
+     Hardware area: 120898347.2646012 um^2
+Layer 5 :
+     Hardware area: 120898347.2646012 um^2
+Layer 6 :
+     Hardware area: 86355962.331858 um^2
+Layer 7 :
+     Hardware area: 4317798.1165929 um^2
+Layer 8 :
+     Hardware area: 69084769.8654864 um^2
+Layer 9 :
+     Hardware area: 17271192.4663716 um^2
+我看下多少read 2.43e-06
+PEread 1.215e-06
+infer中的 27
+tile中的 27
+Traceback (most recent call last):
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/main.py", line 175, in <module>
+    main()
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/main.py", line 128, in main
+    __power = Model_inference_power(NetStruct=structure_file, SimConfig_path=args.hardware_description,
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Power_Model/Model_inference_power.py", line 58, in __init__
+    self.calculate_model_power()
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Power_Model/Model_inference_power.py", line 93, in calculate_model_power
+    self.graph.tile.calculate_tile_write_power_fast(max_column=max_column,max_row=max_row,max_group=max_group,max_PE=max_PE)
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Hardware_Model/Tile.py", line 433, in calculate_tile_write_power_fast
+    self.calculate_PE_write_power_fast(max_column=max_column,max_row=max_row,max_group=max_group)
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Hardware_Model/PE.py", line 556, in calculate_PE_write_power_fast
+    self.calculate_xbar_write_power()
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Hardware_Model/Crossbar.py", line 252, in calculate_xbar_write_power
+    self.calculate_device_write_power()
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Hardware_Model/Device.py", line 80, in calculate_device_write_power
+    assert self.device_type == "NVM", "only the NVM device write power needs to be calculated"
+AssertionError: only the NVM device write power needs to be calculated
+Hardware description file location: /share/linqiushi-local/linqiushi/MNSIM-3.0/SimConfig.ini
+Software model file location: cifar10_alexnet_99bit_params.pth
+Whether perform hardware simulation: True
+Whether perform accuracy simulation: True
+Whether consider SAFs: True
+Whether consider variations: False
+Quantization range: dynamic range (depends on the data distribution)
+RRAM_SRAM mix mode: mix among tile
+run on device cuda:0
+load weights from cifar10_alexnet_99bit_params.pth
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+tile_number is not enough, starts to rewrite
+single cycle tile_count 2
+single cycle tile_count 3
+single cycle tile_count 9
+single cycle tile_count 10
+single cycle tile_count 38
+single cycle tile_count 66
+single cycle tile_count 86
+single cycle tile_count 87
+single cycle tile_count 16
+single cycle tile_count 20
+[0, 8]
+[7, 9]
+[87, 20]
+[0, 0, 0, 0, 0, 0, 0, 0, 1, 1]
+Total crossbar number: 416
+start to mix among tiles
+[['0', '0', '1', '1', '1', '1', '2', '2', '2', '2'], ['2', '3', '3', '3', '6', '4', '4', '4', '4', '4'], ['5', '5', '5', '6', '3', '6', '7', '7', '7', '7'], ['8', 'no', '9', '9', '10', '10', '10', '10', '10', '10'], ['11', '11', '11', '11', '12', '12', '12', '12', '12', '12'], ['13', '13', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no'], ['no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no'], ['no', 'no', '8', 'no', 'no', 'no', 'no', 'no', 'no', 'no'], ['no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no'], ['no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no']]
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+[10, 10]
+hh 0
+hi
+hh 0
+hi
+hh 1
+hh 1
+hh 1
+hh 1
+hh 2
+hh 2
+hh 2
+hh 2
+hh 2
+hh 3
+hh 3
+hh 3
+hh 6
+hh 4
+hh 4
+hh 4
+hh 4
+hh 4
+hh 5
+hh 5
+hh 5
+hh 6
+hh 3
+hh 6
+hh 7
+hh 7
+hh 7
+hh 7
+hh 8
+hh no
+hh 9
+hh 9
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 11
+hh 11
+hh 11
+hh 11
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 13
+hh 13
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh 8
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+['SRAM', 'NVM']
+xbar_size的修改
+xbar_row: [64, 64] 256
+xiuhai
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+0.5
+64 1
+xbar_size的修改
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+817.86994756
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+[10, 10]
+hh 0
+hh 0
+hh 1
+hh 1
+hh 1
+hh 1
+hh 2
+hi
+hh 2
+hi
+hh 2
+hi
+hh 2
+hi
+hh 2
+hi
+hh 3
+hh 3
+hh 3
+hh 6
+hh 4
+hh 4
+hh 4
+hh 4
+hh 4
+hh 5
+hh 5
+hh 5
+hh 6
+hh 3
+hh 6
+hh 7
+hh 7
+hh 7
+hh 7
+hh 8
+hh no
+hh 9
+hh 9
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 11
+hh 11
+hh 11
+hh 11
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 13
+hh 13
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh 8
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+xbar_size的修改
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_size的修改
+xbar_row: [64, 64] 256
+xiuhai
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+0.5
+64 1
+xbar_size的修改
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_size的修改
+xbar_row: [128, 128] 256
+xiuhai
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+1.0
+128 1
+xbar_size的修改
+xbar_row: [64, 64] 256
+xiuhai
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+0.5
+64 1
+2614.66729024
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+[10, 10]
+hh 0
+hh 0
+hh 1
+hh 1
+hh 1
+hh 1
+hh 2
+hh 2
+hh 2
+hh 2
+hh 2
+hh 3
+hh 3
+hh 3
+hh 6
+hh 4
+hi
+hh 4
+hi
+hh 4
+hi
+hh 4
+hi
+hh 4
+hi
+hh 5
+hh 5
+hh 5
+hh 6
+hh 3
+hh 6
+hh 7
+hh 7
+hh 7
+hh 7
+hh 8
+hh no
+hh 9
+hh 9
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 11
+hh 11
+hh 11
+hh 11
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 13
+hh 13
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh 8
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+xbar_size的修改
+xbar_row: [64, 64] 256
+xiuhai
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+0.5
+64 1
+xbar_size的修改
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_size的修改
+xbar_row: [64, 64] 256
+xiuhai
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+0.5
+64 1
+xbar_size的修改
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_size的修改
+xbar_row: [128, 128] 256
+xiuhai
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+1.0
+128 1
+3255.47979024
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+[10, 10]
+hh 0
+hh 0
+hh 1
+hh 1
+hh 1
+hh 1
+hh 2
+hh 2
+hh 2
+hh 2
+hh 2
+hh 3
+hh 3
+hh 3
+hh 6
+hh 4
+hh 4
+hh 4
+hh 4
+hh 4
+hh 5
+hi
+hh 5
+hi
+hh 5
+hi
+hh 6
+hh 3
+hh 6
+hh 7
+hh 7
+hh 7
+hh 7
+hh 8
+hh no
+hh 9
+hh 9
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 11
+hh 11
+hh 11
+hh 11
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 13
+hh 13
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh 8
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+xbar_size的修改
+xbar_row: [64, 64] 256
+xiuhai
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+0.5
+64 1
+xbar_size的修改
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_size的修改
+xbar_row: [128, 128] 256
+xiuhai
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+1.0
+128 1
+3255.47979024
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+[10, 10]
+hh 0
+hh 0
+hh 1
+hh 1
+hh 1
+hh 1
+hh 2
+hh 2
+hh 2
+hh 2
+hh 2
+hh 3
+hh 3
+hh 3
+hh 6
+hi
+hh 4
+hh 4
+hh 4
+hh 4
+hh 4
+hh 5
+hh 5
+hh 5
+hh 6
+hi
+hh 3
+hh 6
+hi
+hh 7
+hh 7
+hh 7
+hh 7
+hh 8
+hh no
+hh 9
+hh 9
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 11
+hh 11
+hh 11
+hh 11
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 13
+hh 13
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh 8
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+xbar_size的修改
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_size的修改
+xbar_row: [32, 32] 256
+xiuhai
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+0.25
+32 1
+xbar_size的修改
+xbar_row: [64, 64] 256
+xiuhai
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+0.5
+64 1
+3255.47979024
+这个层需要rewrite-latency
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+========================Latency Results=================================
+ 
+Layer 0  type: conv
+Occupancy: 1.0
+total latency: 744829.9065753614
+layer latency: 558709.9065753625
+Buffer latency of layer 0 : 374380 ( 50.26 %)
+     read buffer latency of layer 0 : 200000 ( 26.85 %)
+     write buffer latency of layer 0 : 174380 ( 23.41 %)
+Computing latency of layer 0 : 32624.66958335991 ( 4.38 %)
+     DAC latency of layer 0 : 6912.0 ( 0.93 %)
+     ADC latency of layer 0 : 18432.0 ( 2.47 %)
+     xbar latency of layer 0 : 7280.669583359979 ( 0.98 %)
+Digital part latency of layer 0 : 12702.03699199996 ( 1.71 %)
+     iReg latency of layer 0 : 5120.0 ( 0.69 %)
+     oReg latency of layer 0 : 512.0 ( 0.07 %)
+     input demux latency of layer 0 : 1287.1526399999914 ( 0.17 %)
+     output mux latency of layer 0 : 150.88435200000035 ( 0.02 %)
+     shiftreg latency of layer 0 : 4608.0 ( 0.62 %)
+     adder latency of layer 0 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 0 : 1024.0 ( 0.14 %)
+Pooling module latency of layer 0 : 0 ( 0.00 %)
+Intra tile communication latency of layer 0 : 208.0 ( 0.03 %)
+Inter tile communication latency of layer 0 : 324915.2000000015 ( 43.62 %)
+     One layer merge latency of layer 0 : 214323.20000000086 ( 28.77 %)
+     Inter tile transfer latency of layer 0 : 110592.0 ( 14.85 %)
+----------------------------------------------
+Layer 1  type: pooling
+Occupancy: 0.30468370083624313
+total latency: 152524.8
+layer latency: 2483.1999999999534
+Buffer latency of layer 1 : 115200 ( 75.53 %)
+     read buffer latency of layer 1 : 57600 ( 37.76 %)
+     write buffer latency of layer 1 : 57600 ( 37.76 %)
+Computing latency of layer 1 : 0 ( 0.00 %)
+     DAC latency of layer 1 : 0 ( 0.00 %)
+     ADC latency of layer 1 : 0 ( 0.00 %)
+     xbar latency of layer 1 : 0 ( 0.00 %)
+Digital part latency of layer 1 : 0 ( 0.00 %)
+     iReg latency of layer 1 : 0 ( 0.00 %)
+     oReg latency of layer 1 : 0 ( 0.00 %)
+     input demux latency of layer 1 : 0 ( 0.00 %)
+     output mux latency of layer 1 : 0 ( 0.00 %)
+     shiftreg latency of layer 1 : 0 ( 0.00 %)
+     adder latency of layer 1 : 0 ( 0.00 %)
+     Jointmodule latency of layer 1 : 0 ( 0.00 %)
+Pooling module latency of layer 1 : 6400 ( 4.20 %)
+Intra tile communication latency of layer 1 : 0 ( 0.00 %)
+Inter tile communication latency of layer 1 : 37324.8 ( 24.47 %)
+     One layer merge latency of layer 1 : 11520 ( 7.55 %)
+     Inter tile transfer latency of layer 1 : 25804.80000000003 ( 16.92 %)
+----------------------------------------------
+Layer 2  type: conv
+Occupancy: 0.8676595200323654
+total latency: 603153.0771129602
+layer latency: 89663.42990751984
+Buffer latency of layer 2 : 287360 ( 47.64 %)
+     read buffer latency of layer 2 : 157440 ( 26.10 %)
+     write buffer latency of layer 2 : 129920 ( 21.54 %)
+Computing latency of layer 2 : 32624.64012096003 ( 5.41 %)
+     DAC latency of layer 2 : 6912.0 ( 1.15 %)
+     ADC latency of layer 2 : 18432.0 ( 3.06 %)
+     xbar latency of layer 2 : 7280.640120960003 ( 1.21 %)
+Digital part latency of layer 2 : 11678.03699199999 ( 1.94 %)
+     iReg latency of layer 2 : 5120.0 ( 0.85 %)
+     oReg latency of layer 2 : 256.0 ( 0.04 %)
+     input demux latency of layer 2 : 1287.15264 ( 0.21 %)
+     output mux latency of layer 2 : 150.8843519999999 ( 0.03 %)
+     shiftreg latency of layer 2 : 4608.0 ( 0.76 %)
+     adder latency of layer 2 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 2 : 256.0 ( 0.04 %)
+Pooling module latency of layer 2 : 0 ( 0.00 %)
+Intra tile communication latency of layer 2 : 156.0 ( 0.03 %)
+Inter tile communication latency of layer 2 : 271334.4000000002 ( 44.99 %)
+     One layer merge latency of layer 2 : 204979.1999999998 ( 33.98 %)
+     Inter tile transfer latency of layer 2 : 66355.20000000007 ( 11.00 %)
+----------------------------------------------
+Layer 3  type: pooling
+Occupancy: 0.2576267504551724
+total latency: 113011.20000000001
+layer latency: 7363.199999999953
+Buffer latency of layer 3 : 86400 ( 76.45 %)
+     read buffer latency of layer 3 : 43200 ( 38.23 %)
+     write buffer latency of layer 3 : 43200 ( 38.23 %)
+Computing latency of layer 3 : 0 ( 0.00 %)
+     DAC latency of layer 3 : 0 ( 0.00 %)
+     ADC latency of layer 3 : 0 ( 0.00 %)
+     xbar latency of layer 3 : 0 ( 0.00 %)
+Digital part latency of layer 3 : 0 ( 0.00 %)
+     iReg latency of layer 3 : 0 ( 0.00 %)
+     oReg latency of layer 3 : 0 ( 0.00 %)
+     input demux latency of layer 3 : 0 ( 0.00 %)
+     output mux latency of layer 3 : 0 ( 0.00 %)
+     shiftreg latency of layer 3 : 0 ( 0.00 %)
+     adder latency of layer 3 : 0 ( 0.00 %)
+     Jointmodule latency of layer 3 : 0 ( 0.00 %)
+Pooling module latency of layer 3 : 4800 ( 4.25 %)
+Intra tile communication latency of layer 3 : 0 ( 0.00 %)
+Inter tile communication latency of layer 3 : 26611.200000000008 ( 23.55 %)
+     One layer merge latency of layer 3 : 8640 ( 7.65 %)
+     Inter tile transfer latency of layer 3 : 17971.200000000004 ( 15.90 %)
+----------------------------------------------
+Layer 4  type: conv
+Occupancy: 0.4828181127844196
+total latency: 221559.66971456
+layer latency: 65284.876142960275
+Buffer latency of layer 4 : 95040 ( 42.90 %)
+     read buffer latency of layer 4 : 51840 ( 23.40 %)
+     write buffer latency of layer 4 : 43200 ( 19.50 %)
+Computing latency of layer 4 : 8156.160466560002 ( 3.68 %)
+     DAC latency of layer 4 : 1728.0 ( 0.78 %)
+     ADC latency of layer 4 : 4608.0 ( 2.08 %)
+     xbar latency of layer 4 : 1820.1604665599998 ( 0.82 %)
+Digital part latency of layer 4 : 2919.509248000001 ( 1.32 %)
+     iReg latency of layer 4 : 1280.0 ( 0.58 %)
+     oReg latency of layer 4 : 64.0 ( 0.03 %)
+     input demux latency of layer 4 : 321.78816 ( 0.15 %)
+     output mux latency of layer 4 : 37.721088 ( 0.02 %)
+     shiftreg latency of layer 4 : 1152.0 ( 0.52 %)
+     adder latency of layer 4 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 4 : 64.0 ( 0.03 %)
+Pooling module latency of layer 4 : 0 ( 0.00 %)
+Intra tile communication latency of layer 4 : 52.0 ( 0.02 %)
+Inter tile communication latency of layer 4 : 115392.0 ( 52.08 %)
+     One layer merge latency of layer 4 : 90508.80000000003 ( 40.85 %)
+     Inter tile transfer latency of layer 4 : 24883.200000000008 ( 11.23 %)
+----------------------------------------------
+Layer 5  type: conv
+Occupancy: 0.6866929041388674
+total latency: 231761.26971456004
+layer latency: 72298.47614296002
+Buffer latency of layer 5 : 95040 ( 41.01 %)
+     read buffer latency of layer 5 : 51840 ( 22.37 %)
+     write buffer latency of layer 5 : 43200 ( 18.64 %)
+Computing latency of layer 5 : 8156.160466560002 ( 3.52 %)
+     DAC latency of layer 5 : 1728.0 ( 0.75 %)
+     ADC latency of layer 5 : 4608.0 ( 1.99 %)
+     xbar latency of layer 5 : 1820.1604665599998 ( 0.79 %)
+Digital part latency of layer 5 : 2919.509248000001 ( 1.26 %)
+     iReg latency of layer 5 : 1280.0 ( 0.55 %)
+     oReg latency of layer 5 : 64.0 ( 0.03 %)
+     input demux latency of layer 5 : 321.78816 ( 0.14 %)
+     output mux latency of layer 5 : 37.721088 ( 0.02 %)
+     shiftreg latency of layer 5 : 1152.0 ( 0.50 %)
+     adder latency of layer 5 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 5 : 64.0 ( 0.03 %)
+Pooling module latency of layer 5 : 0 ( 0.00 %)
+Intra tile communication latency of layer 5 : 52.0 ( 0.02 %)
+Inter tile communication latency of layer 5 : 125593.60000000003 ( 54.19 %)
+     One layer merge latency of layer 5 : 105318.39999999997 ( 45.44 %)
+     Inter tile transfer latency of layer 5 : 20275.200000000004 ( 8.75 %)
+----------------------------------------------
+Layer 6  type: conv
+Occupancy: 1.0
+total latency: 248414.06927823997
+layer latency: 85923.27616698993
+Buffer latency of layer 6 : 95040 ( 38.26 %)
+     read buffer latency of layer 6 : 51840 ( 20.87 %)
+     write buffer latency of layer 6 : 43200 ( 17.39 %)
+Computing latency of layer 6 : 8156.160030240003 ( 3.28 %)
+     DAC latency of layer 6 : 1728.0 ( 0.70 %)
+     ADC latency of layer 6 : 4608.0 ( 1.85 %)
+     xbar latency of layer 6 : 1820.16003024 ( 0.73 %)
+Digital part latency of layer 6 : 2919.509248000001 ( 1.18 %)
+     iReg latency of layer 6 : 1280.0 ( 0.52 %)
+     oReg latency of layer 6 : 64.0 ( 0.03 %)
+     input demux latency of layer 6 : 321.78816 ( 0.13 %)
+     output mux latency of layer 6 : 37.721088 ( 0.02 %)
+     shiftreg latency of layer 6 : 1152.0 ( 0.46 %)
+     adder latency of layer 6 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 6 : 64.0 ( 0.03 %)
+Pooling module latency of layer 6 : 0 ( 0.00 %)
+Intra tile communication latency of layer 6 : 52.0 ( 0.02 %)
+Inter tile communication latency of layer 6 : 142246.39999999997 ( 57.26 %)
+     One layer merge latency of layer 6 : 120128.0 ( 48.36 %)
+     Inter tile transfer latency of layer 6 : 22118.400000000005 ( 8.90 %)
+----------------------------------------------
+Layer 7  type: pooling
+Occupancy: 0.2927620185881509
+total latency: 38131.2
+layer latency: 9932.800000000047
+Buffer latency of layer 7 : 28800 ( 75.53 %)
+     read buffer latency of layer 7 : 14400 ( 37.76 %)
+     write buffer latency of layer 7 : 14400 ( 37.76 %)
+Computing latency of layer 7 : 0 ( 0.00 %)
+     DAC latency of layer 7 : 0 ( 0.00 %)
+     ADC latency of layer 7 : 0 ( 0.00 %)
+     xbar latency of layer 7 : 0 ( 0.00 %)
+Digital part latency of layer 7 : 0 ( 0.00 %)
+     iReg latency of layer 7 : 0 ( 0.00 %)
+     oReg latency of layer 7 : 0 ( 0.00 %)
+     input demux latency of layer 7 : 0 ( 0.00 %)
+     output mux latency of layer 7 : 0 ( 0.00 %)
+     shiftreg latency of layer 7 : 0 ( 0.00 %)
+     adder latency of layer 7 : 0 ( 0.00 %)
+     Jointmodule latency of layer 7 : 0 ( 0.00 %)
+Pooling module latency of layer 7 : 1600 ( 4.20 %)
+Intra tile communication latency of layer 7 : 0 ( 0.00 %)
+Inter tile communication latency of layer 7 : 9331.2 ( 24.47 %)
+     One layer merge latency of layer 7 : 2880 ( 7.55 %)
+     Inter tile transfer latency of layer 7 : 6451.2 ( 16.92 %)
+----------------------------------------------
+Layer 8  type: fc
+Occupancy: 1.0
+total latency: 13228.279790240002
+layer latency: 10348.27979023999
+Buffer latency of layer 8 : 6880 ( 52.01 %)
+     read buffer latency of layer 8 : 3600 ( 27.21 %)
+     write buffer latency of layer 8 : 3280 ( 24.80 %)
+Computing latency of layer 8 : 509.76046224000004 ( 3.85 %)
+     DAC latency of layer 8 : 108.0 ( 0.82 %)
+     ADC latency of layer 8 : 288.0 ( 2.18 %)
+     xbar latency of layer 8 : 113.76046224000001 ( 0.86 %)
+Digital part latency of layer 8 : 182.46932800000002 ( 1.38 %)
+     iReg latency of layer 8 : 80.0 ( 0.60 %)
+     oReg latency of layer 8 : 4.0 ( 0.03 %)
+     input demux latency of layer 8 : 20.11176 ( 0.15 %)
+     output mux latency of layer 8 : 2.357568 ( 0.02 %)
+     shiftreg latency of layer 8 : 72.0 ( 0.54 %)
+     adder latency of layer 8 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 8 : 4.0 ( 0.03 %)
+Pooling module latency of layer 8 : 0 ( 0.00 %)
+Intra tile communication latency of layer 8 : 3.25 ( 0.02 %)
+Inter tile communication latency of layer 8 : 5652.8 ( 42.73 %)
+     One layer merge latency of layer 8 : 4731.2 ( 35.77 %)
+     Inter tile transfer latency of layer 8 : 921.6 ( 6.97 %)
+----------------------------------------------
+Layer 9  type: fc
+Occupancy: 1.0
+total latency: 2168.2418482450003
+layer latency: 2048.2418482450303
+Buffer latency of layer 9 : 1660 ( 76.56 %)
+     read buffer latency of layer 9 : 840 ( 38.74 %)
+     write buffer latency of layer 9 : 820 ( 37.82 %)
+Computing latency of layer 9 : 254.88023112000002 ( 11.76 %)
+     DAC latency of layer 9 : 54.0 ( 2.49 %)
+     ADC latency of layer 9 : 144.0 ( 6.64 %)
+     xbar latency of layer 9 : 56.880231120000005 ( 2.62 %)
+Digital part latency of layer 9 : 93.23466400000001 ( 4.30 %)
+     iReg latency of layer 9 : 40.0 ( 1.84 %)
+     oReg latency of layer 9 : 2.0 ( 0.09 %)
+     input demux latency of layer 9 : 10.05588 ( 0.46 %)
+     output mux latency of layer 9 : 1.178784 ( 0.05 %)
+     shiftreg latency of layer 9 : 36.0 ( 1.66 %)
+     adder latency of layer 9 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 9 : 4.0 ( 0.18 %)
+Pooling module latency of layer 9 : 0 ( 0.00 %)
+Intra tile communication latency of layer 9 : 0.126953125 ( 0.01 %)
+Inter tile communication latency of layer 9 : 160.0 ( 7.38 %)
+     One layer merge latency of layer 9 : 160.0 ( 7.38 %)
+     Inter tile transfer latency of layer 9 : 0.0 ( 0.00 %)
+----------------------------------------------
+Entire latency: 904055.6865742776 ns
+========================Area Results=================================
+Hardware area: 462004398.47544026 um^2
+		crossbar area: 332788695.03999996 um^2
+		DAC area: 9094.144000000002 um^2
+		ADC area: 90393600.0 um^2
+		Buffer area: 21710460.5 um^2
+		Pooling area: 9835135.7134 um^2
+		Other digital part area: 7267413.0780402385 um^2
+			|---adder area: 0.0 um^2
+			|---output-shift-reg area: 77793.28 um^2
+			|---input-reg area: 37432.57812071006 um^2
+			|---output-reg area: 37432.57812071006 um^2
+			|---input_demux area: 74067.968 um^2
+			|---output_mux area: 74067.968 um^2
+			|---joint_module area: 6966618.705798815 um^2
+Layer 0 :
+     Hardware area: 8635596.2331858 um^2
+Layer 1 :
+     Hardware area: 4317798.1165929 um^2
+Layer 2 :
+     Hardware area: 25906788.6995574 um^2
+Layer 3 :
+     Hardware area: 4317798.1165929 um^2
+Layer 4 :
+     Hardware area: 120898347.2646012 um^2
+Layer 5 :
+     Hardware area: 120898347.2646012 um^2
+Layer 6 :
+     Hardware area: 86355962.331858 um^2
+Layer 7 :
+     Hardware area: 4317798.1165929 um^2
+Layer 8 :
+     Hardware area: 69084769.8654864 um^2
+Layer 9 :
+     Hardware area: 17271192.4663716 um^2
+我看下多少read 2.43e-06
+PEread 1.215e-06
+infer中的 27
+tile中的 27
+Traceback (most recent call last):
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/main.py", line 175, in <module>
+    main()
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/main.py", line 128, in main
+    __power = Model_inference_power(NetStruct=structure_file, SimConfig_path=args.hardware_description,
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Power_Model/Model_inference_power.py", line 58, in __init__
+    self.calculate_model_power()
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Power_Model/Model_inference_power.py", line 93, in calculate_model_power
+    self.graph.tile.calculate_tile_write_power_fast(max_column=max_column,max_row=max_row,max_group=max_group,max_PE=max_PE)
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Hardware_Model/Tile.py", line 433, in calculate_tile_write_power_fast
+    self.calculate_PE_write_power_fast(max_column=max_column,max_row=max_row,max_group=max_group)
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Hardware_Model/PE.py", line 556, in calculate_PE_write_power_fast
+    self.calculate_xbar_write_power()
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Hardware_Model/Crossbar.py", line 252, in calculate_xbar_write_power
+    self.calculate_device_write_power()
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Hardware_Model/Device.py", line 80, in calculate_device_write_power
+    assert self.device_type == "NVM", "only the NVM device write power needs to be calculated"
+AssertionError: only the NVM device write power needs to be calculated
+Hardware description file location: /share/linqiushi-local/linqiushi/MNSIM-3.0/SimConfig.ini
+Software model file location: cifar10_alexnet_99bit_params.pth
+Whether perform hardware simulation: True
+Whether perform accuracy simulation: True
+Whether consider SAFs: True
+Whether consider variations: False
+Quantization range: dynamic range (depends on the data distribution)
+RRAM_SRAM mix mode: mix among tile
+run on device cuda:0
+load weights from cifar10_alexnet_99bit_params.pth
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+tile_number is not enough, starts to rewrite
+single cycle tile_count 2
+single cycle tile_count 3
+single cycle tile_count 9
+single cycle tile_count 10
+single cycle tile_count 38
+single cycle tile_count 66
+single cycle tile_count 86
+single cycle tile_count 87
+single cycle tile_count 16
+single cycle tile_count 20
+[0, 8]
+[7, 9]
+[87, 20]
+[0, 0, 0, 0, 0, 0, 0, 0, 1, 1]
+Total crossbar number: 416
+start to mix among tiles
+[['0', '0', '1', '1', '1', '1', '2', '2', '2', '2'], ['2', '3', '3', '3', '6', '4', '4', '4', '4', '4'], ['5', '5', '5', '6', '3', '6', '7', '7', '7', '7'], ['8', 'no', '9', '9', '10', '10', '10', '10', '10', '10'], ['11', '11', '11', '11', '12', '12', '12', '12', '12', '12'], ['13', '13', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no'], ['no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no'], ['no', 'no', '8', 'no', 'no', 'no', 'no', 'no', 'no', 'no'], ['no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no'], ['no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no']]
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+[10, 10]
+hh 0
+hi
+hh 0
+hi
+hh 1
+hh 1
+hh 1
+hh 1
+hh 2
+hh 2
+hh 2
+hh 2
+hh 2
+hh 3
+hh 3
+hh 3
+hh 6
+hh 4
+hh 4
+hh 4
+hh 4
+hh 4
+hh 5
+hh 5
+hh 5
+hh 6
+hh 3
+hh 6
+hh 7
+hh 7
+hh 7
+hh 7
+hh 8
+hh no
+hh 9
+hh 9
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 11
+hh 11
+hh 11
+hh 11
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 13
+hh 13
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh 8
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+['SRAM', 'NVM']
+xbar_size的修改
+xbar_row: [64, 64] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+0.5
+64 1
+xbar_size的修改
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+817.86994756
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+[10, 10]
+hh 0
+hh 0
+hh 1
+hh 1
+hh 1
+hh 1
+hh 2
+hi
+hh 2
+hi
+hh 2
+hi
+hh 2
+hi
+hh 2
+hi
+hh 3
+hh 3
+hh 3
+hh 6
+hh 4
+hh 4
+hh 4
+hh 4
+hh 4
+hh 5
+hh 5
+hh 5
+hh 6
+hh 3
+hh 6
+hh 7
+hh 7
+hh 7
+hh 7
+hh 8
+hh no
+hh 9
+hh 9
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 11
+hh 11
+hh 11
+hh 11
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 13
+hh 13
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh 8
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+xbar_size的修改
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_size的修改
+xbar_row: [64, 64] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+0.5
+64 1
+xbar_size的修改
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_size的修改
+xbar_row: [128, 128] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+1.0
+128 1
+xbar_size的修改
+xbar_row: [64, 64] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+0.5
+64 1
+4667.35481956
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+[10, 10]
+hh 0
+hh 0
+hh 1
+hh 1
+hh 1
+hh 1
+hh 2
+hh 2
+hh 2
+hh 2
+hh 2
+hh 3
+hh 3
+hh 3
+hh 6
+hh 4
+hi
+hh 4
+hi
+hh 4
+hi
+hh 4
+hi
+hh 4
+hi
+hh 5
+hh 5
+hh 5
+hh 6
+hh 3
+hh 6
+hh 7
+hh 7
+hh 7
+hh 7
+hh 8
+hh no
+hh 9
+hh 9
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 11
+hh 11
+hh 11
+hh 11
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 13
+hh 13
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh 8
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+xbar_size的修改
+xbar_row: [64, 64] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+0.5
+64 1
+xbar_size的修改
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_size的修改
+xbar_row: [64, 64] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+0.5
+64 1
+xbar_size的修改
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_size的修改
+xbar_row: [128, 128] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+1.0
+128 1
+5308.16731956
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+[10, 10]
+hh 0
+hh 0
+hh 1
+hh 1
+hh 1
+hh 1
+hh 2
+hh 2
+hh 2
+hh 2
+hh 2
+hh 3
+hh 3
+hh 3
+hh 6
+hh 4
+hh 4
+hh 4
+hh 4
+hh 4
+hh 5
+hi
+hh 5
+hi
+hh 5
+hi
+hh 6
+hh 3
+hh 6
+hh 7
+hh 7
+hh 7
+hh 7
+hh 8
+hh no
+hh 9
+hh 9
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 11
+hh 11
+hh 11
+hh 11
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 13
+hh 13
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh 8
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+xbar_size的修改
+xbar_row: [64, 64] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+0.5
+64 1
+xbar_size的修改
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_size的修改
+xbar_row: [128, 128] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+1.0
+128 1
+5308.16731956
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+[10, 10]
+hh 0
+hh 0
+hh 1
+hh 1
+hh 1
+hh 1
+hh 2
+hh 2
+hh 2
+hh 2
+hh 2
+hh 3
+hh 3
+hh 3
+hh 6
+hi
+hh 4
+hh 4
+hh 4
+hh 4
+hh 4
+hh 5
+hh 5
+hh 5
+hh 6
+hi
+hh 3
+hh 6
+hi
+hh 7
+hh 7
+hh 7
+hh 7
+hh 8
+hh no
+hh 9
+hh 9
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 11
+hh 11
+hh 11
+hh 11
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 13
+hh 13
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh 8
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+xbar_size的修改
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_size的修改
+xbar_row: [32, 32] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+0.25
+32 1
+xbar_size的修改
+xbar_row: [64, 64] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+0.5
+64 1
+8045.08462508
+这个层需要rewrite-latency
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+xbar_row: [256, 256] 256
+2.0
+256 1
+========================Latency Results=================================
+ 
+Layer 0  type: conv
+Occupancy: 1.0
+total latency: 744829.9065753614
+layer latency: 558709.9065753625
+Buffer latency of layer 0 : 374380 ( 50.26 %)
+     read buffer latency of layer 0 : 200000 ( 26.85 %)
+     write buffer latency of layer 0 : 174380 ( 23.41 %)
+Computing latency of layer 0 : 32624.66958335991 ( 4.38 %)
+     DAC latency of layer 0 : 6912.0 ( 0.93 %)
+     ADC latency of layer 0 : 18432.0 ( 2.47 %)
+     xbar latency of layer 0 : 7280.669583359979 ( 0.98 %)
+Digital part latency of layer 0 : 12702.03699199996 ( 1.71 %)
+     iReg latency of layer 0 : 5120.0 ( 0.69 %)
+     oReg latency of layer 0 : 512.0 ( 0.07 %)
+     input demux latency of layer 0 : 1287.1526399999914 ( 0.17 %)
+     output mux latency of layer 0 : 150.88435200000035 ( 0.02 %)
+     shiftreg latency of layer 0 : 4608.0 ( 0.62 %)
+     adder latency of layer 0 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 0 : 1024.0 ( 0.14 %)
+Pooling module latency of layer 0 : 0 ( 0.00 %)
+Intra tile communication latency of layer 0 : 208.0 ( 0.03 %)
+Inter tile communication latency of layer 0 : 324915.2000000015 ( 43.62 %)
+     One layer merge latency of layer 0 : 214323.20000000086 ( 28.77 %)
+     Inter tile transfer latency of layer 0 : 110592.0 ( 14.85 %)
+----------------------------------------------
+Layer 1  type: pooling
+Occupancy: 0.30468370083624313
+total latency: 152524.8
+layer latency: 2483.1999999999534
+Buffer latency of layer 1 : 115200 ( 75.53 %)
+     read buffer latency of layer 1 : 57600 ( 37.76 %)
+     write buffer latency of layer 1 : 57600 ( 37.76 %)
+Computing latency of layer 1 : 0 ( 0.00 %)
+     DAC latency of layer 1 : 0 ( 0.00 %)
+     ADC latency of layer 1 : 0 ( 0.00 %)
+     xbar latency of layer 1 : 0 ( 0.00 %)
+Digital part latency of layer 1 : 0 ( 0.00 %)
+     iReg latency of layer 1 : 0 ( 0.00 %)
+     oReg latency of layer 1 : 0 ( 0.00 %)
+     input demux latency of layer 1 : 0 ( 0.00 %)
+     output mux latency of layer 1 : 0 ( 0.00 %)
+     shiftreg latency of layer 1 : 0 ( 0.00 %)
+     adder latency of layer 1 : 0 ( 0.00 %)
+     Jointmodule latency of layer 1 : 0 ( 0.00 %)
+Pooling module latency of layer 1 : 6400 ( 4.20 %)
+Intra tile communication latency of layer 1 : 0 ( 0.00 %)
+Inter tile communication latency of layer 1 : 37324.8 ( 24.47 %)
+     One layer merge latency of layer 1 : 11520 ( 7.55 %)
+     Inter tile transfer latency of layer 1 : 25804.80000000003 ( 16.92 %)
+----------------------------------------------
+Layer 2  type: conv
+Occupancy: 1.0
+total latency: 734525.1084518402
+layer latency: 150282.83914959815
+Buffer latency of layer 2 : 287360 ( 39.12 %)
+     read buffer latency of layer 2 : 157440 ( 21.43 %)
+     write buffer latency of layer 2 : 129920 ( 17.69 %)
+Computing latency of layer 2 : 130498.56048384012 ( 17.77 %)
+     DAC latency of layer 2 : 27648.0 ( 3.76 %)
+     ADC latency of layer 2 : 73728.0 ( 10.04 %)
+     xbar latency of layer 2 : 29122.56048384001 ( 3.96 %)
+Digital part latency of layer 2 : 45176.14796799997 ( 6.15 %)
+     iReg latency of layer 2 : 20480.0 ( 2.79 %)
+     oReg latency of layer 2 : 256.0 ( 0.03 %)
+     input demux latency of layer 2 : 5148.61056 ( 0.70 %)
+     output mux latency of layer 2 : 603.5374079999996 ( 0.08 %)
+     shiftreg latency of layer 2 : 18432.0 ( 2.51 %)
+     adder latency of layer 2 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 2 : 256.0 ( 0.03 %)
+Pooling module latency of layer 2 : 0 ( 0.00 %)
+Intra tile communication latency of layer 2 : 156.0 ( 0.02 %)
+Inter tile communication latency of layer 2 : 271334.4000000002 ( 36.94 %)
+     One layer merge latency of layer 2 : 204979.1999999998 ( 27.91 %)
+     Inter tile transfer latency of layer 2 : 66355.20000000007 ( 9.03 %)
+----------------------------------------------
+Layer 3  type: pooling
+Occupancy: 0.23146584729918554
+total latency: 113011.20000000001
+layer latency: 7363.199999999953
+Buffer latency of layer 3 : 86400 ( 76.45 %)
+     read buffer latency of layer 3 : 43200 ( 38.23 %)
+     write buffer latency of layer 3 : 43200 ( 38.23 %)
+Computing latency of layer 3 : 0 ( 0.00 %)
+     DAC latency of layer 3 : 0 ( 0.00 %)
+     ADC latency of layer 3 : 0 ( 0.00 %)
+     xbar latency of layer 3 : 0 ( 0.00 %)
+Digital part latency of layer 3 : 0 ( 0.00 %)
+     iReg latency of layer 3 : 0 ( 0.00 %)
+     oReg latency of layer 3 : 0 ( 0.00 %)
+     input demux latency of layer 3 : 0 ( 0.00 %)
+     output mux latency of layer 3 : 0 ( 0.00 %)
+     shiftreg latency of layer 3 : 0 ( 0.00 %)
+     adder latency of layer 3 : 0 ( 0.00 %)
+     Jointmodule latency of layer 3 : 0 ( 0.00 %)
+Pooling module latency of layer 3 : 4800 ( 4.25 %)
+Intra tile communication latency of layer 3 : 0 ( 0.00 %)
+Inter tile communication latency of layer 3 : 26611.200000000008 ( 23.55 %)
+     One layer merge latency of layer 3 : 8640 ( 7.65 %)
+     Inter tile transfer latency of layer 3 : 17971.200000000004 ( 15.90 %)
+----------------------------------------------
+Layer 4  type: conv
+Occupancy: 0.46249506837427806
+total latency: 232507.33942912
+layer latency: 69390.25228591985
+Buffer latency of layer 4 : 95040 ( 40.88 %)
+     read buffer latency of layer 4 : 51840 ( 22.30 %)
+     write buffer latency of layer 4 : 43200 ( 18.58 %)
+Computing latency of layer 4 : 16312.320933120003 ( 7.02 %)
+     DAC latency of layer 4 : 3456.0 ( 1.49 %)
+     ADC latency of layer 4 : 9216.0 ( 3.96 %)
+     xbar latency of layer 4 : 3640.3209331199996 ( 1.57 %)
+Digital part latency of layer 4 : 5711.018496000002 ( 2.46 %)
+     iReg latency of layer 4 : 2560.0 ( 1.10 %)
+     oReg latency of layer 4 : 64.0 ( 0.03 %)
+     input demux latency of layer 4 : 643.57632 ( 0.28 %)
+     output mux latency of layer 4 : 75.442176 ( 0.03 %)
+     shiftreg latency of layer 4 : 2304.0 ( 0.99 %)
+     adder latency of layer 4 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 4 : 64.0 ( 0.03 %)
+Pooling module latency of layer 4 : 0 ( 0.00 %)
+Intra tile communication latency of layer 4 : 52.0 ( 0.02 %)
+Inter tile communication latency of layer 4 : 115392.0 ( 49.63 %)
+     One layer merge latency of layer 4 : 90508.80000000003 ( 38.93 %)
+     Inter tile transfer latency of layer 4 : 24883.200000000008 ( 10.70 %)
+----------------------------------------------
+Layer 5  type: conv
+Occupancy: 0.6531986106536987
+total latency: 242708.93942912004
+layer latency: 76403.8522859196
+Buffer latency of layer 5 : 95040 ( 39.16 %)
+     read buffer latency of layer 5 : 51840 ( 21.36 %)
+     write buffer latency of layer 5 : 43200 ( 17.80 %)
+Computing latency of layer 5 : 16312.320933120003 ( 6.72 %)
+     DAC latency of layer 5 : 3456.0 ( 1.42 %)
+     ADC latency of layer 5 : 9216.0 ( 3.80 %)
+     xbar latency of layer 5 : 3640.3209331199996 ( 1.50 %)
+Digital part latency of layer 5 : 5711.018496000002 ( 2.35 %)
+     iReg latency of layer 5 : 2560.0 ( 1.05 %)
+     oReg latency of layer 5 : 64.0 ( 0.03 %)
+     input demux latency of layer 5 : 643.57632 ( 0.27 %)
+     output mux latency of layer 5 : 75.442176 ( 0.03 %)
+     shiftreg latency of layer 5 : 2304.0 ( 0.95 %)
+     adder latency of layer 5 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 5 : 64.0 ( 0.03 %)
+Pooling module latency of layer 5 : 0 ( 0.00 %)
+Intra tile communication latency of layer 5 : 52.0 ( 0.02 %)
+Inter tile communication latency of layer 5 : 125593.60000000003 ( 51.75 %)
+     One layer merge latency of layer 5 : 105318.39999999997 ( 43.39 %)
+     Inter tile transfer latency of layer 5 : 20275.200000000004 ( 8.35 %)
+----------------------------------------------
+Layer 6  type: conv
+Occupancy: 1.0
+total latency: 281257.07711296
+layer latency: 114660.90727528022
+Buffer latency of layer 6 : 95040 ( 33.79 %)
+     read buffer latency of layer 6 : 51840 ( 18.43 %)
+     write buffer latency of layer 6 : 43200 ( 15.36 %)
+Computing latency of layer 6 : 32624.64012096001 ( 11.60 %)
+     DAC latency of layer 6 : 6912.0 ( 2.46 %)
+     ADC latency of layer 6 : 18432.0 ( 6.55 %)
+     xbar latency of layer 6 : 7280.64012096 ( 2.59 %)
+Digital part latency of layer 6 : 11294.036992000005 ( 4.02 %)
+     iReg latency of layer 6 : 5120.0 ( 1.82 %)
+     oReg latency of layer 6 : 64.0 ( 0.02 %)
+     input demux latency of layer 6 : 1287.15264 ( 0.46 %)
+     output mux latency of layer 6 : 150.884352 ( 0.05 %)
+     shiftreg latency of layer 6 : 4608.0 ( 1.64 %)
+     adder latency of layer 6 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 6 : 64.0 ( 0.02 %)
+Pooling module latency of layer 6 : 0 ( 0.00 %)
+Intra tile communication latency of layer 6 : 52.0 ( 0.02 %)
+Inter tile communication latency of layer 6 : 142246.39999999997 ( 50.58 %)
+     One layer merge latency of layer 6 : 120128.0 ( 42.71 %)
+     Inter tile transfer latency of layer 6 : 22118.400000000005 ( 7.86 %)
+----------------------------------------------
+Layer 7  type: pooling
+Occupancy: 0.25429843998961416
+total latency: 38131.2
+layer latency: 9932.800000000047
+Buffer latency of layer 7 : 28800 ( 75.53 %)
+     read buffer latency of layer 7 : 14400 ( 37.76 %)
+     write buffer latency of layer 7 : 14400 ( 37.76 %)
+Computing latency of layer 7 : 0 ( 0.00 %)
+     DAC latency of layer 7 : 0 ( 0.00 %)
+     ADC latency of layer 7 : 0 ( 0.00 %)
+     xbar latency of layer 7 : 0 ( 0.00 %)
+Digital part latency of layer 7 : 0 ( 0.00 %)
+     iReg latency of layer 7 : 0 ( 0.00 %)
+     oReg latency of layer 7 : 0 ( 0.00 %)
+     input demux latency of layer 7 : 0 ( 0.00 %)
+     output mux latency of layer 7 : 0 ( 0.00 %)
+     shiftreg latency of layer 7 : 0 ( 0.00 %)
+     adder latency of layer 7 : 0 ( 0.00 %)
+     Jointmodule latency of layer 7 : 0 ( 0.00 %)
+Pooling module latency of layer 7 : 1600 ( 4.20 %)
+Intra tile communication latency of layer 7 : 0 ( 0.00 %)
+Inter tile communication latency of layer 7 : 9331.2 ( 24.47 %)
+     One layer merge latency of layer 7 : 2880 ( 7.55 %)
+     Inter tile transfer latency of layer 7 : 6451.2 ( 16.92 %)
+----------------------------------------------
+Layer 8  type: fc
+Occupancy: 1.0
+total latency: 13228.279790240002
+layer latency: 10348.27979023999
+Buffer latency of layer 8 : 6880 ( 52.01 %)
+     read buffer latency of layer 8 : 3600 ( 27.21 %)
+     write buffer latency of layer 8 : 3280 ( 24.80 %)
+Computing latency of layer 8 : 509.76046224000004 ( 3.85 %)
+     DAC latency of layer 8 : 108.0 ( 0.82 %)
+     ADC latency of layer 8 : 288.0 ( 2.18 %)
+     xbar latency of layer 8 : 113.76046224000001 ( 0.86 %)
+Digital part latency of layer 8 : 182.46932800000002 ( 1.38 %)
+     iReg latency of layer 8 : 80.0 ( 0.60 %)
+     oReg latency of layer 8 : 4.0 ( 0.03 %)
+     input demux latency of layer 8 : 20.11176 ( 0.15 %)
+     output mux latency of layer 8 : 2.357568 ( 0.02 %)
+     shiftreg latency of layer 8 : 72.0 ( 0.54 %)
+     adder latency of layer 8 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 8 : 4.0 ( 0.03 %)
+Pooling module latency of layer 8 : 0 ( 0.00 %)
+Intra tile communication latency of layer 8 : 3.25 ( 0.02 %)
+Inter tile communication latency of layer 8 : 5652.8 ( 42.73 %)
+     One layer merge latency of layer 8 : 4731.2 ( 35.77 %)
+     Inter tile transfer latency of layer 8 : 921.6 ( 6.97 %)
+----------------------------------------------
+Layer 9  type: fc
+Occupancy: 1.0
+total latency: 2168.2418482450003
+layer latency: 2048.2418482450303
+Buffer latency of layer 9 : 1660 ( 76.56 %)
+     read buffer latency of layer 9 : 840 ( 38.74 %)
+     write buffer latency of layer 9 : 820 ( 37.82 %)
+Computing latency of layer 9 : 254.88023112000002 ( 11.76 %)
+     DAC latency of layer 9 : 54.0 ( 2.49 %)
+     ADC latency of layer 9 : 144.0 ( 6.64 %)
+     xbar latency of layer 9 : 56.880231120000005 ( 2.62 %)
+Digital part latency of layer 9 : 93.23466400000001 ( 4.30 %)
+     iReg latency of layer 9 : 40.0 ( 1.84 %)
+     oReg latency of layer 9 : 2.0 ( 0.09 %)
+     input demux latency of layer 9 : 10.05588 ( 0.46 %)
+     output mux latency of layer 9 : 1.178784 ( 0.05 %)
+     shiftreg latency of layer 9 : 36.0 ( 1.66 %)
+     adder latency of layer 9 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 9 : 4.0 ( 0.18 %)
+Pooling module latency of layer 9 : 0 ( 0.00 %)
+Intra tile communication latency of layer 9 : 0.126953125 ( 0.01 %)
+Inter tile communication latency of layer 9 : 160.0 ( 7.38 %)
+     One layer merge latency of layer 9 : 160.0 ( 7.38 %)
+     Inter tile transfer latency of layer 9 : 0.0 ( 0.00 %)
+----------------------------------------------
+Entire latency: 1001623.4792105653 ns
+========================Area Results=================================
+Hardware area: 462004398.47544026 um^2
+		crossbar area: 332788695.03999996 um^2
+		DAC area: 9094.144000000002 um^2
+		ADC area: 90393600.0 um^2
+		Buffer area: 21710460.5 um^2
+		Pooling area: 9835135.7134 um^2
+		Other digital part area: 7267413.0780402385 um^2
+			|---adder area: 0.0 um^2
+			|---output-shift-reg area: 77793.28 um^2
+			|---input-reg area: 37432.57812071006 um^2
+			|---output-reg area: 37432.57812071006 um^2
+			|---input_demux area: 74067.968 um^2
+			|---output_mux area: 74067.968 um^2
+			|---joint_module area: 6966618.705798815 um^2
+Layer 0 :
+     Hardware area: 8635596.2331858 um^2
+Layer 1 :
+     Hardware area: 4317798.1165929 um^2
+Layer 2 :
+     Hardware area: 25906788.6995574 um^2
+Layer 3 :
+     Hardware area: 4317798.1165929 um^2
+Layer 4 :
+     Hardware area: 120898347.2646012 um^2
+Layer 5 :
+     Hardware area: 120898347.2646012 um^2
+Layer 6 :
+     Hardware area: 86355962.331858 um^2
+Layer 7 :
+     Hardware area: 4317798.1165929 um^2
+Layer 8 :
+     Hardware area: 69084769.8654864 um^2
+Layer 9 :
+     Hardware area: 17271192.4663716 um^2
+我看下多少read 2.43e-06
+PEread 1.215e-06
+infer中的 27
+tile中的 27
+Traceback (most recent call last):
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/main.py", line 175, in <module>
+    main()
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/main.py", line 128, in main
+    __power = Model_inference_power(NetStruct=structure_file, SimConfig_path=args.hardware_description,
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Power_Model/Model_inference_power.py", line 58, in __init__
+    self.calculate_model_power()
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Power_Model/Model_inference_power.py", line 93, in calculate_model_power
+    self.graph.tile.calculate_tile_write_power_fast(max_column=max_column,max_row=max_row,max_group=max_group,max_PE=max_PE)
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Hardware_Model/Tile.py", line 433, in calculate_tile_write_power_fast
+    self.calculate_PE_write_power_fast(max_column=max_column,max_row=max_row,max_group=max_group)
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Hardware_Model/PE.py", line 556, in calculate_PE_write_power_fast
+    self.calculate_xbar_write_power()
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Hardware_Model/Crossbar.py", line 248, in calculate_xbar_write_power
+    self.calculate_device_write_power()
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Hardware_Model/Device.py", line 80, in calculate_device_write_power
+    assert self.device_type == "NVM", "only the NVM device write power needs to be calculated"
+AssertionError: only the NVM device write power needs to be calculated
+Hardware description file location: /share/linqiushi-local/linqiushi/MNSIM-3.0/SimConfig.ini
+Software model file location: cifar10_alexnet_99bit_params.pth
+Whether perform hardware simulation: True
+Whether perform accuracy simulation: True
+Whether consider SAFs: True
+Whether consider variations: False
+Quantization range: dynamic range (depends on the data distribution)
+RRAM_SRAM mix mode: mix among tile
+run on device cuda:0
+load weights from cifar10_alexnet_99bit_params.pth
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+2.0
+256 1
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+2.0
+256 1
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+2.0
+256 1
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+2.0
+256 1
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+2.0
+256 1
+tile_number is not enough, starts to rewrite
+single cycle tile_count 2
+single cycle tile_count 3
+single cycle tile_count 9
+single cycle tile_count 10
+single cycle tile_count 38
+single cycle tile_count 66
+single cycle tile_count 86
+single cycle tile_count 87
+single cycle tile_count 16
+single cycle tile_count 20
+[0, 8]
+[7, 9]
+[87, 20]
+[0, 0, 0, 0, 0, 0, 0, 0, 1, 1]
+Total crossbar number: 416
+start to mix among tiles
+[['0', '0', '1', '1', '1', '1', '2', '2', '2', '2'], ['2', '3', '3', '3', '6', '4', '4', '4', '4', '4'], ['5', '5', '5', '6', '3', '6', '7', '7', '7', '7'], ['8', 'no', '9', '9', '10', '10', '10', '10', '10', '10'], ['11', '11', '11', '11', '12', '12', '12', '12', '12', '12'], ['13', '13', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no'], ['no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no'], ['no', 'no', '8', 'no', 'no', 'no', 'no', 'no', 'no', 'no'], ['no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no'], ['no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no']]
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+2.0
+256 1
+[10, 10]
+hh 0
+hi
+hh 0
+hi
+hh 1
+hh 1
+hh 1
+hh 1
+hh 2
+hh 2
+hh 2
+hh 2
+hh 2
+hh 3
+hh 3
+hh 3
+hh 6
+hh 4
+hh 4
+hh 4
+hh 4
+hh 4
+hh 5
+hh 5
+hh 5
+hh 6
+hh 3
+hh 6
+hh 7
+hh 7
+hh 7
+hh 7
+hh 8
+hh no
+hh 9
+hh 9
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 11
+hh 11
+hh 11
+hh 11
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 13
+hh 13
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh 8
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+['SRAM', 'NVM']
+xbar_size的修改
+xbar_row: [64, 64] 32
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+0.5
+64 1
+xbar_size的修改
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+2.0
+256 1
+817.86994756
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+2.0
+256 1
+[10, 10]
+hh 0
+hh 0
+hh 1
+hh 1
+hh 1
+hh 1
+hh 2
+hi
+hh 2
+hi
+hh 2
+hi
+hh 2
+hi
+hh 2
+hi
+hh 3
+hh 3
+hh 3
+hh 6
+hh 4
+hh 4
+hh 4
+hh 4
+hh 4
+hh 5
+hh 5
+hh 5
+hh 6
+hh 3
+hh 6
+hh 7
+hh 7
+hh 7
+hh 7
+hh 8
+hh no
+hh 9
+hh 9
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 11
+hh 11
+hh 11
+hh 11
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 13
+hh 13
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh 8
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+xbar_size的修改
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+2.0
+256 1
+xbar_size的修改
+xbar_row: [64, 64] 32
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+0.5
+64 1
+xbar_size的修改
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+2.0
+256 1
+xbar_size的修改
+xbar_row: [128, 128] 32
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+1.0
+128 1
+xbar_size的修改
+xbar_row: [64, 64] 32
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+0.5
+64 1
+2272.5523951200003
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+2.0
+256 1
+[10, 10]
+hh 0
+hh 0
+hh 1
+hh 1
+hh 1
+hh 1
+hh 2
+hh 2
+hh 2
+hh 2
+hh 2
+hh 3
+hh 3
+hh 3
+hh 6
+hh 4
+hi
+hh 4
+hi
+hh 4
+hi
+hh 4
+hi
+hh 4
+hi
+hh 5
+hh 5
+hh 5
+hh 6
+hh 3
+hh 6
+hh 7
+hh 7
+hh 7
+hh 7
+hh 8
+hh no
+hh 9
+hh 9
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 11
+hh 11
+hh 11
+hh 11
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 13
+hh 13
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh 8
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+xbar_size的修改
+xbar_row: [64, 64] 32
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+0.5
+64 1
+xbar_size的修改
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+2.0
+256 1
+xbar_size的修改
+xbar_row: [64, 64] 32
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+0.5
+64 1
+xbar_size的修改
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+2.0
+256 1
+xbar_size的修改
+xbar_row: [128, 128] 32
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+1.0
+128 1
+2913.3648951200003
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+2.0
+256 1
+[10, 10]
+hh 0
+hh 0
+hh 1
+hh 1
+hh 1
+hh 1
+hh 2
+hh 2
+hh 2
+hh 2
+hh 2
+hh 3
+hh 3
+hh 3
+hh 6
+hh 4
+hh 4
+hh 4
+hh 4
+hh 4
+hh 5
+hi
+hh 5
+hi
+hh 5
+hi
+hh 6
+hh 3
+hh 6
+hh 7
+hh 7
+hh 7
+hh 7
+hh 8
+hh no
+hh 9
+hh 9
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 11
+hh 11
+hh 11
+hh 11
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 13
+hh 13
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh 8
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+xbar_size的修改
+xbar_row: [64, 64] 32
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+0.5
+64 1
+xbar_size的修改
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+2.0
+256 1
+xbar_size的修改
+xbar_row: [128, 128] 32
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+1.0
+128 1
+2913.3648951200003
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+2.0
+256 1
+[10, 10]
+hh 0
+hh 0
+hh 1
+hh 1
+hh 1
+hh 1
+hh 2
+hh 2
+hh 2
+hh 2
+hh 2
+hh 3
+hh 3
+hh 3
+hh 6
+hi
+hh 4
+hh 4
+hh 4
+hh 4
+hh 4
+hh 5
+hh 5
+hh 5
+hh 6
+hi
+hh 3
+hh 6
+hi
+hh 7
+hh 7
+hh 7
+hh 7
+hh 8
+hh no
+hh 9
+hh 9
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 10
+hh 11
+hh 11
+hh 11
+hh 11
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 12
+hh 13
+hh 13
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh 8
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+hh no
+xbar_size的修改
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+2.0
+256 1
+xbar_size的修改
+xbar_row: [32, 32] 32
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+0.25
+32 1
+xbar_size的修改
+xbar_row: [64, 64] 32
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+0.5
+64 1
+3255.479328135
+这个层需要rewrite-latency
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+2.0
+256 1
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+xbar_row: [256, 256] 32
+2.0
+256 1
+========================Latency Results=================================
+ 
+Layer 0  type: conv
+Occupancy: 1.0
+total latency: 744829.9065753614
+layer latency: 558709.9065753625
+Buffer latency of layer 0 : 374380 ( 50.26 %)
+     read buffer latency of layer 0 : 200000 ( 26.85 %)
+     write buffer latency of layer 0 : 174380 ( 23.41 %)
+Computing latency of layer 0 : 32624.66958335991 ( 4.38 %)
+     DAC latency of layer 0 : 6912.0 ( 0.93 %)
+     ADC latency of layer 0 : 18432.0 ( 2.47 %)
+     xbar latency of layer 0 : 7280.669583359979 ( 0.98 %)
+Digital part latency of layer 0 : 12702.03699199996 ( 1.71 %)
+     iReg latency of layer 0 : 5120.0 ( 0.69 %)
+     oReg latency of layer 0 : 512.0 ( 0.07 %)
+     input demux latency of layer 0 : 1287.1526399999914 ( 0.17 %)
+     output mux latency of layer 0 : 150.88435200000035 ( 0.02 %)
+     shiftreg latency of layer 0 : 4608.0 ( 0.62 %)
+     adder latency of layer 0 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 0 : 1024.0 ( 0.14 %)
+Pooling module latency of layer 0 : 0 ( 0.00 %)
+Intra tile communication latency of layer 0 : 208.0 ( 0.03 %)
+Inter tile communication latency of layer 0 : 324915.2000000015 ( 43.62 %)
+     One layer merge latency of layer 0 : 214323.20000000086 ( 28.77 %)
+     Inter tile transfer latency of layer 0 : 110592.0 ( 14.85 %)
+----------------------------------------------
+Layer 1  type: pooling
+Occupancy: 0.30468370083624313
+total latency: 152524.8
+layer latency: 2483.1999999999534
+Buffer latency of layer 1 : 115200 ( 75.53 %)
+     read buffer latency of layer 1 : 57600 ( 37.76 %)
+     write buffer latency of layer 1 : 57600 ( 37.76 %)
+Computing latency of layer 1 : 0 ( 0.00 %)
+     DAC latency of layer 1 : 0 ( 0.00 %)
+     ADC latency of layer 1 : 0 ( 0.00 %)
+     xbar latency of layer 1 : 0 ( 0.00 %)
+Digital part latency of layer 1 : 0 ( 0.00 %)
+     iReg latency of layer 1 : 0 ( 0.00 %)
+     oReg latency of layer 1 : 0 ( 0.00 %)
+     input demux latency of layer 1 : 0 ( 0.00 %)
+     output mux latency of layer 1 : 0 ( 0.00 %)
+     shiftreg latency of layer 1 : 0 ( 0.00 %)
+     adder latency of layer 1 : 0 ( 0.00 %)
+     Jointmodule latency of layer 1 : 0 ( 0.00 %)
+Pooling module latency of layer 1 : 6400 ( 4.20 %)
+Intra tile communication latency of layer 1 : 0 ( 0.00 %)
+Inter tile communication latency of layer 1 : 37324.8 ( 24.47 %)
+     One layer merge latency of layer 1 : 11520 ( 7.55 %)
+     Inter tile transfer latency of layer 1 : 25804.80000000003 ( 16.92 %)
+----------------------------------------------
+Layer 2  type: conv
+Occupancy: 0.8352568863104725
+total latency: 581257.7385564803
+layer latency: 84189.59526840085
+Buffer latency of layer 2 : 287360 ( 49.44 %)
+     read buffer latency of layer 2 : 157440 ( 27.09 %)
+     write buffer latency of layer 2 : 129920 ( 22.35 %)
+Computing latency of layer 2 : 16312.320060480015 ( 2.81 %)
+     DAC latency of layer 2 : 3456.0 ( 0.59 %)
+     ADC latency of layer 2 : 9216.0 ( 1.59 %)
+     xbar latency of layer 2 : 3640.3200604800013 ( 0.63 %)
+Digital part latency of layer 2 : 6095.018495999994 ( 1.05 %)
+     iReg latency of layer 2 : 2560.0 ( 0.44 %)
+     oReg latency of layer 2 : 256.0 ( 0.04 %)
+     input demux latency of layer 2 : 643.57632 ( 0.11 %)
+     output mux latency of layer 2 : 75.44217599999995 ( 0.01 %)
+     shiftreg latency of layer 2 : 2304.0 ( 0.40 %)
+     adder latency of layer 2 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 2 : 256.0 ( 0.04 %)
+Pooling module latency of layer 2 : 0 ( 0.00 %)
+Intra tile communication latency of layer 2 : 156.0 ( 0.03 %)
+Inter tile communication latency of layer 2 : 271334.4000000002 ( 46.68 %)
+     One layer merge latency of layer 2 : 204979.1999999998 ( 35.26 %)
+     Inter tile transfer latency of layer 2 : 66355.20000000007 ( 11.42 %)
+----------------------------------------------
+Layer 3  type: pooling
+Occupancy: 0.2603536413303112
+total latency: 113011.20000000001
+layer latency: 7363.199999999953
+Buffer latency of layer 3 : 86400 ( 76.45 %)
+     read buffer latency of layer 3 : 43200 ( 38.23 %)
+     write buffer latency of layer 3 : 43200 ( 38.23 %)
+Computing latency of layer 3 : 0 ( 0.00 %)
+     DAC latency of layer 3 : 0 ( 0.00 %)
+     ADC latency of layer 3 : 0 ( 0.00 %)
+     xbar latency of layer 3 : 0 ( 0.00 %)
+Digital part latency of layer 3 : 0 ( 0.00 %)
+     iReg latency of layer 3 : 0 ( 0.00 %)
+     oReg latency of layer 3 : 0 ( 0.00 %)
+     input demux latency of layer 3 : 0 ( 0.00 %)
+     output mux latency of layer 3 : 0 ( 0.00 %)
+     shiftreg latency of layer 3 : 0 ( 0.00 %)
+     adder latency of layer 3 : 0 ( 0.00 %)
+     Jointmodule latency of layer 3 : 0 ( 0.00 %)
+Pooling module latency of layer 3 : 4800 ( 4.25 %)
+Intra tile communication latency of layer 3 : 0 ( 0.00 %)
+Inter tile communication latency of layer 3 : 26611.200000000008 ( 23.55 %)
+     One layer merge latency of layer 3 : 8640 ( 7.65 %)
+     Inter tile transfer latency of layer 3 : 17971.200000000004 ( 15.90 %)
+----------------------------------------------
+Layer 4  type: conv
+Occupancy: 0.47577685231743577
+total latency: 216085.83485728
+layer latency: 63232.18807147979
+Buffer latency of layer 4 : 95040 ( 43.98 %)
+     read buffer latency of layer 4 : 51840 ( 23.99 %)
+     write buffer latency of layer 4 : 43200 ( 19.99 %)
+Computing latency of layer 4 : 4078.080233280001 ( 1.89 %)
+     DAC latency of layer 4 : 864.0 ( 0.40 %)
+     ADC latency of layer 4 : 2304.0 ( 1.07 %)
+     xbar latency of layer 4 : 910.0802332799999 ( 0.42 %)
+Digital part latency of layer 4 : 1523.7546240000006 ( 0.71 %)
+     iReg latency of layer 4 : 640.0 ( 0.30 %)
+     oReg latency of layer 4 : 64.0 ( 0.03 %)
+     input demux latency of layer 4 : 160.89408 ( 0.07 %)
+     output mux latency of layer 4 : 18.860544 ( 0.01 %)
+     shiftreg latency of layer 4 : 576.0 ( 0.27 %)
+     adder latency of layer 4 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 4 : 64.0 ( 0.03 %)
+Pooling module latency of layer 4 : 0 ( 0.00 %)
+Intra tile communication latency of layer 4 : 52.0 ( 0.02 %)
+Inter tile communication latency of layer 4 : 115392.0 ( 53.40 %)
+     One layer merge latency of layer 4 : 90508.80000000003 ( 41.89 %)
+     Inter tile transfer latency of layer 4 : 24883.200000000008 ( 11.52 %)
+----------------------------------------------
+Layer 5  type: conv
+Occupancy: 0.6846281267805017
+total latency: 226287.43485728002
+layer latency: 70245.78807147953
+Buffer latency of layer 5 : 95040 ( 42.00 %)
+     read buffer latency of layer 5 : 51840 ( 22.91 %)
+     write buffer latency of layer 5 : 43200 ( 19.09 %)
+Computing latency of layer 5 : 4078.080233280001 ( 1.80 %)
+     DAC latency of layer 5 : 864.0 ( 0.38 %)
+     ADC latency of layer 5 : 2304.0 ( 1.02 %)
+     xbar latency of layer 5 : 910.0802332799999 ( 0.40 %)
+Digital part latency of layer 5 : 1523.7546240000006 ( 0.67 %)
+     iReg latency of layer 5 : 640.0 ( 0.28 %)
+     oReg latency of layer 5 : 64.0 ( 0.03 %)
+     input demux latency of layer 5 : 160.89408 ( 0.07 %)
+     output mux latency of layer 5 : 18.860544 ( 0.01 %)
+     shiftreg latency of layer 5 : 576.0 ( 0.25 %)
+     adder latency of layer 5 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 5 : 64.0 ( 0.03 %)
+Pooling module latency of layer 5 : 0 ( 0.00 %)
+Intra tile communication latency of layer 5 : 52.0 ( 0.02 %)
+Inter tile communication latency of layer 5 : 125593.60000000003 ( 55.50 %)
+     One layer merge latency of layer 5 : 105318.39999999997 ( 46.54 %)
+     Inter tile transfer latency of layer 5 : 20275.200000000004 ( 8.96 %)
+----------------------------------------------
+Layer 6  type: conv
+Occupancy: 1.0
+total latency: 242940.23463911994
+layer latency: 84212.70251651003
+Buffer latency of layer 6 : 95040 ( 39.12 %)
+     read buffer latency of layer 6 : 51840 ( 21.34 %)
+     write buffer latency of layer 6 : 43200 ( 17.78 %)
+Computing latency of layer 6 : 4078.0800151200015 ( 1.68 %)
+     DAC latency of layer 6 : 864.0 ( 0.36 %)
+     ADC latency of layer 6 : 2304.0 ( 0.95 %)
+     xbar latency of layer 6 : 910.08001512 ( 0.37 %)
+Digital part latency of layer 6 : 1523.7546240000006 ( 0.63 %)
+     iReg latency of layer 6 : 640.0 ( 0.26 %)
+     oReg latency of layer 6 : 64.0 ( 0.03 %)
+     input demux latency of layer 6 : 160.89408 ( 0.07 %)
+     output mux latency of layer 6 : 18.860544 ( 0.01 %)
+     shiftreg latency of layer 6 : 576.0 ( 0.24 %)
+     adder latency of layer 6 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 6 : 64.0 ( 0.03 %)
+Pooling module latency of layer 6 : 0 ( 0.00 %)
+Intra tile communication latency of layer 6 : 52.0 ( 0.02 %)
+Inter tile communication latency of layer 6 : 142246.39999999997 ( 58.55 %)
+     One layer merge latency of layer 6 : 120128.0 ( 49.45 %)
+     Inter tile transfer latency of layer 6 : 22118.400000000005 ( 9.10 %)
+----------------------------------------------
+Layer 7  type: pooling
+Occupancy: 0.3003331004337907
+total latency: 38131.2
+layer latency: 9932.800000000047
+Buffer latency of layer 7 : 28800 ( 75.53 %)
+     read buffer latency of layer 7 : 14400 ( 37.76 %)
+     write buffer latency of layer 7 : 14400 ( 37.76 %)
+Computing latency of layer 7 : 0 ( 0.00 %)
+     DAC latency of layer 7 : 0 ( 0.00 %)
+     ADC latency of layer 7 : 0 ( 0.00 %)
+     xbar latency of layer 7 : 0 ( 0.00 %)
+Digital part latency of layer 7 : 0 ( 0.00 %)
+     iReg latency of layer 7 : 0 ( 0.00 %)
+     oReg latency of layer 7 : 0 ( 0.00 %)
+     input demux latency of layer 7 : 0 ( 0.00 %)
+     output mux latency of layer 7 : 0 ( 0.00 %)
+     shiftreg latency of layer 7 : 0 ( 0.00 %)
+     adder latency of layer 7 : 0 ( 0.00 %)
+     Jointmodule latency of layer 7 : 0 ( 0.00 %)
+Pooling module latency of layer 7 : 1600 ( 4.20 %)
+Intra tile communication latency of layer 7 : 0 ( 0.00 %)
+Inter tile communication latency of layer 7 : 9331.2 ( 24.47 %)
+     One layer merge latency of layer 7 : 2880 ( 7.55 %)
+     Inter tile transfer latency of layer 7 : 6451.2 ( 16.92 %)
+----------------------------------------------
+Layer 8  type: fc
+Occupancy: 1.0
+total latency: 12886.16489512
+layer latency: 10006.16489511996
+Buffer latency of layer 8 : 6880 ( 53.39 %)
+     read buffer latency of layer 8 : 3600 ( 27.94 %)
+     write buffer latency of layer 8 : 3280 ( 25.45 %)
+Computing latency of layer 8 : 254.88023112000002 ( 1.98 %)
+     DAC latency of layer 8 : 54.0 ( 0.42 %)
+     ADC latency of layer 8 : 144.0 ( 1.12 %)
+     xbar latency of layer 8 : 56.880231120000005 ( 0.44 %)
+Digital part latency of layer 8 : 95.23466400000001 ( 0.74 %)
+     iReg latency of layer 8 : 40.0 ( 0.31 %)
+     oReg latency of layer 8 : 4.0 ( 0.03 %)
+     input demux latency of layer 8 : 10.05588 ( 0.08 %)
+     output mux latency of layer 8 : 1.178784 ( 0.01 %)
+     shiftreg latency of layer 8 : 36.0 ( 0.28 %)
+     adder latency of layer 8 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 8 : 4.0 ( 0.03 %)
+Pooling module latency of layer 8 : 0 ( 0.00 %)
+Intra tile communication latency of layer 8 : 3.25 ( 0.03 %)
+Inter tile communication latency of layer 8 : 5652.8 ( 43.87 %)
+     One layer merge latency of layer 8 : 4731.2 ( 36.72 %)
+     Inter tile transfer latency of layer 8 : 921.6 ( 7.15 %)
+----------------------------------------------
+Layer 9  type: fc
+Occupancy: 1.0
+total latency: 1997.1844006850001
+layer latency: 1877.1844006850151
+Buffer latency of layer 9 : 1660 ( 83.12 %)
+     read buffer latency of layer 9 : 840 ( 42.06 %)
+     write buffer latency of layer 9 : 820 ( 41.06 %)
+Computing latency of layer 9 : 127.44011556000001 ( 6.38 %)
+     DAC latency of layer 9 : 27.0 ( 1.35 %)
+     ADC latency of layer 9 : 72.0 ( 3.61 %)
+     xbar latency of layer 9 : 28.440115560000002 ( 1.42 %)
+Digital part latency of layer 9 : 49.617332000000005 ( 2.48 %)
+     iReg latency of layer 9 : 20.0 ( 1.00 %)
+     oReg latency of layer 9 : 2.0 ( 0.10 %)
+     input demux latency of layer 9 : 5.02794 ( 0.25 %)
+     output mux latency of layer 9 : 0.589392 ( 0.03 %)
+     shiftreg latency of layer 9 : 18.0 ( 0.90 %)
+     adder latency of layer 9 : 0.0 ( 0.00 %)
+     Jointmodule latency of layer 9 : 4.0 ( 0.20 %)
+Pooling module latency of layer 9 : 0 ( 0.00 %)
+Intra tile communication latency of layer 9 : 0.126953125 ( 0.01 %)
+Inter tile communication latency of layer 9 : 160.0 ( 8.01 %)
+     One layer merge latency of layer 9 : 160.0 ( 8.01 %)
+     Inter tile transfer latency of layer 9 : 0.0 ( 0.00 %)
+----------------------------------------------
+Entire latency: 892252.7297990377 ns
+========================Area Results=================================
+Hardware area: 1145695149.0297217 um^2
+		crossbar area: 332788695.03999996 um^2
+		DAC area: 72753.15200000002 um^2
+		ADC area: 723148800.0 um^2
+		Buffer area: 21710460.5 um^2
+		Pooling area: 9835135.7134 um^2
+		Other digital part area: 58139304.62432191 um^2
+			|---adder area: 0.0 um^2
+			|---output-shift-reg area: 622346.24 um^2
+			|---input-reg area: 299460.6249656805 um^2
+			|---output-reg area: 299460.6249656805 um^2
+			|---input_demux area: 592543.744 um^2
+			|---output_mux area: 592543.744 um^2
+			|---joint_module area: 55732949.64639052 um^2
+Layer 0 :
+     Hardware area: 21414862.59868639 um^2
+Layer 1 :
+     Hardware area: 10707431.299343195 um^2
+Layer 2 :
+     Hardware area: 64244587.79605917 um^2
+Layer 3 :
+     Hardware area: 10707431.299343195 um^2
+Layer 4 :
+     Hardware area: 299808076.38160944 um^2
+Layer 5 :
+     Hardware area: 299808076.38160944 um^2
+Layer 6 :
+     Hardware area: 214148625.9868639 um^2
+Layer 7 :
+     Hardware area: 10707431.299343195 um^2
+Layer 8 :
+     Hardware area: 171318900.78949112 um^2
+Layer 9 :
+     Hardware area: 42829725.19737278 um^2
+我看下多少read 2.43e-06
+PEread 2.43e-06
+infer中的 27
+tile中的 27
+Traceback (most recent call last):
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/main.py", line 175, in <module>
+    main()
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/main.py", line 128, in main
+    __power = Model_inference_power(NetStruct=structure_file, SimConfig_path=args.hardware_description,
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Power_Model/Model_inference_power.py", line 58, in __init__
+    self.calculate_model_power()
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Power_Model/Model_inference_power.py", line 93, in calculate_model_power
+    self.graph.tile.calculate_tile_write_power_fast(max_column=max_column,max_row=max_row,max_group=max_group,max_PE=max_PE)
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Hardware_Model/Tile.py", line 433, in calculate_tile_write_power_fast
+    self.calculate_PE_write_power_fast(max_column=max_column,max_row=max_row,max_group=max_group)
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Hardware_Model/PE.py", line 556, in calculate_PE_write_power_fast
+    self.calculate_xbar_write_power()
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Hardware_Model/Crossbar.py", line 248, in calculate_xbar_write_power
+    self.calculate_device_write_power()
+  File "/share/linqiushi-local/linqiushi/MNSIM-3.0/MNSIM/Hardware_Model/Device.py", line 80, in calculate_device_write_power
+    assert self.device_type == "NVM", "only the NVM device write power needs to be calculated"
+AssertionError: only the NVM device write power needs to be calculated
