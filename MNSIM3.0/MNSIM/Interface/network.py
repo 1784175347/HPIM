@@ -3,7 +3,7 @@ import collections
 import copy
 import re
 import sys
-
+from IPython import embed
 import numpy as np
 import torch
 import torch.nn as nn
@@ -154,7 +154,7 @@ class NetworkGraph(nn.Module):
         # get network structure information
         x = torch.zeros(self.input_params['input_shape'])
         #linqiushi modified
-        print("weiqu",x.shape)
+        #print("weiqu",x.shape)
         #x= torch.zeros((1,4096))
         #above is for transformer
         self.to(x.device)
@@ -244,9 +244,9 @@ class NetworkGraph(nn.Module):
                     tmp_state_dict[tmp_key + f'.sublayer_list.{i}.weight'] = weights
                 
         # load weights
-        print("在哪一步")
+        #print("在哪一步")
         self.load_state_dict(tmp_state_dict)
-        print("应该过去了呀")
+        #print("应该过去了呀")
         #strict=False is useless, this may be the cause of the bug
     #TODO:fix the loading of weights in different type
     # def load_change_weights_different(self, state_dict,standart_dict):
@@ -363,7 +363,7 @@ def get_net(hardware_config = None, cate = 'lenet', num_classes = 10):
     # add new NN models here (conv/fc is followed by one bn layer automatically):
     #assert cate in ['lenet', 'vgg16', 'vgg8', 'alexnet', 'resnet18']
    
-    assert cate in ['lenet', 'vgg16', 'vgg8', 'alexnet', 'resnet18','EfficientNet','Attention_example','decoder']
+    assert cate in ['lenet', 'vgg16', 'vgg8', 'vgg8_Imagenet', 'alexnet', 'alexnet_Imagenet', 'resnet18', 'resnet18_Imagenet', 'EfficientNet','Attention_example','decoder']
 
     if cate.startswith('lenet'):
         layer_config_list.append({'type': 'conv', 'in_channels': 3, 'out_channels': 6, 'kernel_size': 5})
@@ -418,6 +418,28 @@ def get_net(hardware_config = None, cate = 'lenet', num_classes = 10):
         # layer_config_list.append({'type': 'dropout'})
         # layer_config_list.append({'type': 'relu'})
         # layer_config_list.append({'type': 'fc', 'in_features': 4096, 'out_features': num_classes})
+    elif cate.startswith('vgg8_Imagenet'):
+        layer_config_list.append({'type': 'conv', 'in_channels': 3, 'out_channels': 128, 'kernel_size': 7, 'padding': 0, 'stride': 7})
+        layer_config_list.append({'type': 'relu'})
+        
+        layer_config_list.append({'type': 'conv', 'in_channels': 128, 'out_channels': 128, 'kernel_size': 3, 'padding': 1})
+        layer_config_list.append({'type': 'relu'})
+        layer_config_list.append({'type': 'pooling', 'mode': 'MAX', 'kernel_size': 2, 'stride': 2})
+        layer_config_list.append({'type': 'conv', 'in_channels': 128, 'out_channels': 256, 'kernel_size': 3, 'padding': 1})
+        layer_config_list.append({'type': 'relu'})
+        layer_config_list.append({'type': 'conv', 'in_channels': 256, 'out_channels': 256, 'kernel_size': 3, 'padding': 1})
+        layer_config_list.append({'type': 'relu'})
+        layer_config_list.append({'type': 'pooling', 'mode': 'MAX', 'kernel_size': 2, 'stride': 2})
+        layer_config_list.append({'type': 'conv', 'in_channels': 256, 'out_channels': 512, 'kernel_size': 3, 'padding': 1})
+        layer_config_list.append({'type': 'relu'})
+        layer_config_list.append({'type': 'conv', 'in_channels': 512, 'out_channels': 512, 'kernel_size': 3, 'padding': 1})
+        layer_config_list.append({'type': 'relu'})
+        layer_config_list.append({'type': 'pooling', 'mode': 'MAX', 'kernel_size': 2, 'stride': 2})
+        layer_config_list.append({'type': 'conv', 'in_channels': 512, 'out_channels': 1024, 'kernel_size': 3, 'padding': 0})
+        layer_config_list.append({'type': 'relu'})
+        layer_config_list.append({'type': 'pooling', 'mode': 'MAX', 'kernel_size': 2, 'stride': 2})
+        layer_config_list.append({'type': 'view'})
+        layer_config_list.append({'type': 'fc', 'in_features': 1024, 'out_features': num_classes})
     elif cate.startswith('vgg8'):
         layer_config_list.append({'type': 'conv', 'in_channels': 3, 'out_channels': 128, 'kernel_size': 3, 'padding': 1})
         layer_config_list.append({'type': 'relu'})
@@ -439,6 +461,29 @@ def get_net(hardware_config = None, cate = 'lenet', num_classes = 10):
         layer_config_list.append({'type': 'pooling', 'mode': 'MAX', 'kernel_size': 2, 'stride': 2})
         layer_config_list.append({'type': 'view'})
         layer_config_list.append({'type': 'fc', 'in_features': 1024, 'out_features': num_classes})
+    elif cate.startswith('alexnet_Imagenet'):
+        layer_config_list.append({'type': 'conv', 'in_channels': 3, 'out_channels': 64, 'kernel_size': 11, 'padding': 2, 'stride': 4})
+        layer_config_list.append({'type': 'relu'})
+        layer_config_list.append({'type': 'pooling', 'mode': 'MAX', 'kernel_size': 3, 'stride': 2})
+        layer_config_list.append({'type': 'conv', 'in_channels': 64, 'out_channels': 192, 'kernel_size': 5, 'padding': 2})
+        layer_config_list.append({'type': 'relu'})
+        layer_config_list.append({'type': 'pooling', 'mode': 'MAX', 'kernel_size': 3, 'stride': 2})
+        layer_config_list.append({'type': 'conv', 'in_channels': 192, 'out_channels': 384, 'kernel_size': 3, 'padding': 1})
+        layer_config_list.append({'type': 'relu'})
+        layer_config_list.append({'type': 'conv', 'in_channels': 384, 'out_channels': 256, 'kernel_size': 3, 'padding': 1})
+        layer_config_list.append({'type': 'relu'})
+        layer_config_list.append({'type': 'conv', 'in_channels': 256, 'out_channels': 256, 'kernel_size': 3, 'padding': 1})
+        layer_config_list.append({'type': 'relu'})
+        layer_config_list.append({'type': 'pooling', 'mode': 'MAX', 'kernel_size': 3, 'stride': 2})
+        #layer_config_list.append({'type': 'pooling', 'mode': 'ADA', 'kernel_size': 1, 'stride': 1})
+        layer_config_list.append({'type': 'view'})
+        layer_config_list.append({'type': 'dropout'})
+        layer_config_list.append({'type': 'fc', 'in_features': 9216, 'out_features': 4096})
+        layer_config_list.append({'type': 'relu'})
+        layer_config_list.append({'type': 'dropout'})
+        layer_config_list.append({'type': 'fc', 'in_features': 4096, 'out_features': 4096})
+        layer_config_list.append({'type': 'relu'})
+        layer_config_list.append({'type': 'fc', 'in_features': 4096, 'out_features': num_classes})
     elif cate.startswith('alexnet'):
         layer_config_list.append({'type': 'conv', 'in_channels': 3, 'out_channels': 64, 'kernel_size': 3, 'padding': 1, 'stride': 2})
         layer_config_list.append({'type': 'relu'})
@@ -457,6 +502,66 @@ def get_net(hardware_config = None, cate = 'lenet', num_classes = 10):
         layer_config_list.append({'type': 'fc', 'in_features': 1024, 'out_features': 512})
         layer_config_list.append({'type': 'dropout'})
         layer_config_list.append({'type': 'relu'})
+        layer_config_list.append({'type': 'fc', 'in_features': 512, 'out_features': num_classes})
+    elif cate.startswith('resnet18_Imagenet'):
+        layer_config_list.append({'type': 'conv', 'in_channels': 3, 'out_channels': 64, 'kernel_size': 7, 'padding': 3, 'stride': 2})
+        layer_config_list.append({'type': 'relu'})
+        layer_config_list.append({'type': 'pooling', 'mode': 'MAX', 'kernel_size': 3, 'stride': 2, 'padding': 1})
+        # block 1
+        layer_config_list.append({'type': 'conv', 'in_channels': 64, 'out_channels': 64, 'kernel_size': 3, 'padding': 1, 'stride': 1})
+        layer_config_list.append({'type': 'relu'})
+        layer_config_list.append({'type': 'conv', 'in_channels': 64, 'out_channels': 64, 'kernel_size': 3, 'padding': 1, 'stride': 1})
+        layer_config_list.append({'type': 'element_sum', 'input_index': [-1, -4]})
+        layer_config_list.append({'type': 'relu'})
+        # block 2
+        layer_config_list.append({'type': 'conv', 'in_channels': 64, 'out_channels': 64, 'kernel_size': 3, 'padding': 1, 'stride': 1})
+        layer_config_list.append({'type': 'relu'})
+        layer_config_list.append({'type': 'conv', 'in_channels': 64, 'out_channels': 64, 'kernel_size': 3, 'padding': 1, 'stride': 1})
+        layer_config_list.append({'type': 'element_sum', 'input_index': [-1, -4]})
+            # input_index indicates the inputs of the current layer come from which layer, "-1" means the previous layer
+        layer_config_list.append({'type': 'relu'})
+        # block 3
+        layer_config_list.append({'type': 'conv', 'in_channels': 64, 'out_channels': 128, 'kernel_size': 3, 'padding': 1, 'stride': 2})
+        layer_config_list.append({'type': 'relu'})
+        layer_config_list.append({'type': 'conv', 'in_channels': 128, 'out_channels': 128, 'kernel_size': 3, 'padding': 1, 'stride': 1})
+        layer_config_list.append({'type': 'conv', 'in_channels': 64, 'out_channels': 128, 'kernel_size': 1, 'padding': 0, 'stride': 2, 'input_index': [-4]})
+        layer_config_list.append({'type': 'element_sum', 'input_index': [-1, -2]})
+        layer_config_list.append({'type': 'relu'})
+        # block 4
+        layer_config_list.append({'type': 'conv', 'in_channels': 128, 'out_channels': 128, 'kernel_size': 3, 'padding': 1, 'stride': 1})
+        layer_config_list.append({'type': 'relu'})
+        layer_config_list.append({'type': 'conv', 'in_channels': 128, 'out_channels': 128, 'kernel_size': 3, 'padding': 1, 'stride': 1})
+        layer_config_list.append({'type': 'element_sum', 'input_index': [-1, -4]})
+        layer_config_list.append({'type': 'relu'})
+        # block 5
+        layer_config_list.append({'type': 'conv', 'in_channels': 128, 'out_channels': 256, 'kernel_size': 3, 'padding': 1, 'stride': 2})
+        layer_config_list.append({'type': 'relu'})
+        layer_config_list.append({'type': 'conv', 'in_channels': 256, 'out_channels': 256, 'kernel_size': 3, 'padding': 1, 'stride': 1})
+        layer_config_list.append({'type': 'conv', 'in_channels': 128, 'out_channels': 256, 'kernel_size': 1, 'padding': 0, 'stride': 2, 'input_index': [-4]})
+        layer_config_list.append({'type': 'element_sum', 'input_index': [-1, -2]})
+        layer_config_list.append({'type': 'relu'})
+        # block 6
+        layer_config_list.append({'type': 'conv', 'in_channels': 256, 'out_channels': 256, 'kernel_size': 3, 'padding': 1, 'stride': 1})
+        layer_config_list.append({'type': 'relu'})
+        layer_config_list.append({'type': 'conv', 'in_channels': 256, 'out_channels': 256, 'kernel_size': 3, 'padding': 1, 'stride': 1})
+        layer_config_list.append({'type': 'element_sum', 'input_index': [-1, -4]})
+        layer_config_list.append({'type': 'relu'})
+        # block 7
+        layer_config_list.append({'type': 'conv', 'in_channels': 256, 'out_channels': 512, 'kernel_size': 3, 'padding': 1, 'stride': 2})
+        layer_config_list.append({'type': 'relu'})
+        layer_config_list.append({'type': 'conv', 'in_channels': 512, 'out_channels': 512, 'kernel_size': 3, 'padding': 1, 'stride': 1})
+        layer_config_list.append({'type': 'conv', 'in_channels': 256, 'out_channels': 512, 'kernel_size': 1, 'padding': 0, 'stride': 2, 'input_index': [-4]})
+        layer_config_list.append({'type': 'element_sum', 'input_index': [-1, -2]})
+        layer_config_list.append({'type': 'relu'})
+        # block 8
+        layer_config_list.append({'type': 'conv', 'in_channels': 512, 'out_channels': 512, 'kernel_size': 3, 'padding': 1, 'stride': 1})
+        layer_config_list.append({'type': 'relu'})
+        layer_config_list.append({'type': 'conv', 'in_channels': 512, 'out_channels': 512, 'kernel_size': 3, 'padding': 1, 'stride': 1})
+        layer_config_list.append({'type': 'element_sum', 'input_index': [-1, -4]})
+        layer_config_list.append({'type': 'relu'})
+        # output
+        layer_config_list.append({'type': 'pooling', 'mode': 'ADA', 'kernel_size': 7, 'stride': 1})
+        layer_config_list.append({'type': 'view'})
         layer_config_list.append({'type': 'fc', 'in_features': 512, 'out_features': num_classes})
     elif cate.startswith('resnet18'):
         layer_config_list.append({'type': 'conv', 'in_channels': 3, 'out_channels': 64, 'kernel_size': 3, 'padding': 1, 'stride': 1})
@@ -933,7 +1038,10 @@ def get_net(hardware_config = None, cate = 'lenet', num_classes = 10):
         else:
             input_index_list.append([-1])
                 # by default: the inputs of the current layer come from the outputs of the previous layer
-    input_params = {'activation_scale': 1. / 255., 'activation_bit': 9, 'input_shape': (1, 3, 32, 32)}
+    if cate.endswith('Imagenet'):
+        input_params = {'activation_scale': 1. / 255., 'activation_bit': 9, 'input_shape': (1, 3, 224, 224)}
+    else:
+        input_params = {'activation_scale': 1. / 255., 'activation_bit': 9, 'input_shape': (1, 3, 32, 32)}
         # change the input_shape according to datasets
     #add bn for every conv
     L = len(layer_config_list)

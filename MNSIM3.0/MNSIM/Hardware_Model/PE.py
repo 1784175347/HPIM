@@ -16,6 +16,7 @@ from MNSIM.Hardware_Model.Adder import adder
 from MNSIM.Hardware_Model.ShiftReg import shiftreg
 from MNSIM.Hardware_Model.Reg import reg
 from MNSIM.Hardware_Model.Buffer import buffer
+from IPython import embed
 test_SimConfig_path = os.path.join(work_path,"SimConfig.ini")
 # print(test_SimConfig_path)
 # Default SimConfig file path: MNSIM_Python/SimConfig.ini
@@ -606,7 +607,7 @@ class ProcessElement(crossbar, DAC, ADC):
 		self.calculate_xbar_write_power()
 		self.PE_xbar_write_power=self.PE_multiplex_xbar_num[1]*max_group*self.xbar_write_power/self.input_demux/self.output_mux
 		self.PE_write_power = self.PE_xbar_write_power
-		print("这里的power?",self.xbar_write_power,self.PE_write_power)
+		#print("这里的power?",self.xbar_write_power,self.PE_write_power)
 		
 	def calculate_PE_read_power_fast(self, max_column=0, max_row=0, max_group=0, SimConfig_path=None, default_inbuf_size = 16, mix_mode=1,
                                   	ADC_num_mix=0,DAC_num_mix=0):
@@ -674,7 +675,7 @@ class ProcessElement(crossbar, DAC, ADC):
 		self.PE_inbuf_read_power = self.PE_inbuf_read_rpower + self.PE_inbuf_read_wpower
 		self.PE_read_power = self.PE_xbar_read_power + self.PE_DAC_read_power + self.PE_ADC_read_power + self.PE_digital_read_power + self.PE_inbuf_read_power
 	def calculate_PE_read_power_fast_part(self, max_column=0, max_row=0, max_group=0, SimConfig_path=None, mix_mode=1,
-                                  	ADC_num_mix=0,DAC_num_mix=0):
+                                  	ADC_num_mix=0,DAC_num_mix=0,x=0):
 		# unit: W
 		# coarse but fast estimation
 		# max_column: maximum used column in one crossbar in this tile
@@ -730,6 +731,8 @@ class ProcessElement(crossbar, DAC, ADC):
 			self.PE_adder_read_power = (max_group - 1) * math.ceil(max_column/self.output_mux) * self.PE_adder.adder_power * self.subarray_num
 			self.PE_shiftreg_read_power = max_group * math.ceil(max_column/self.output_mux) * self.PE_shiftreg.shiftreg_power * self.subarray_num
 			self.PE_oReg_read_power = max_group * math.ceil(max_column / self.output_mux) * self.PE_oReg.reg_power * self.subarray_num
+		#if x==1:
+		#	embed()
 		#record more
 		self.PE_digital_read_power = self.input_demux_read_power + self.output_mux_read_power + self.PE_adder_read_power + self.PE_shiftreg_read_power + self.PE_iReg_read_power + self.PE_oReg_read_power
 		self.PE_read_power = self.PE_xbar_read_power + self.PE_DAC_read_power + self.PE_ADC_read_power + self.PE_digital_read_power

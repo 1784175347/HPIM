@@ -1,0 +1,136 @@
+// $Id $
+
+// Copyright (c) 2007-2015, Trustees of The Leland Stanford Junior University
+// All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are met:
+//
+// Redistributions of source code must retain the above copyright notice, this
+// list of conditions and the following disclaimer.
+// Redistributions in binary form must reproduce the above copyright notice,
+// this list of conditions and the following disclaimer in the documentation
+// and/or other materials provided with the distribution.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
+
+
+//
+// Flow control
+//
+
+num_vcs     = 16;
+vc_buf_size = 8;
+
+wait_for_tail_credit = 1;
+
+
+vc_allocator = islip; 
+sw_allocator = islip;
+alloc_iters  = 2;
+
+credit_delay   = 2;
+routing_delay  = 0;
+vc_alloc_delay = 1;
+sw_alloc_delay = 1;
+st_final_delay = 1;
+
+input_speedup     = 1;
+output_speedup    = 1;
+internal_speedup  = 1.0;
+
+//
+// Traffic
+//
+
+sim_type = latency;
+
+warmup_periods = 3;
+
+sample_period  = 1000;  
+
+sim_count          = 1;
+
+
+
+//topoogy
+
+topology = mesh;
+k  = 64;
+n  = 2;
+//
+// Routing
+
+
+routing_function = dor;
+
+routing_process = path;
+
+distribution_pattern = diagonal_S_shaped;
+
+routing_planning_pattern = BFS;
+
+fixed_routing_table = ../booksim2/runfiles/fixed_routing_table.txt;
+
+fixed_injection_table = ./injection.txt;
+
+fixed_dest_table = ../booksim2/runfiles/fixed_dest_table.txt;
+
+setup_injection_table = ./injection.txt;
+
+latency_table = ../booksim2/runfiles/latency_table.txt; 
+
+layerlatency_table = ../booksim2/runfiles/layerlatency_table.txt; 
+
+layer_table = ./layer_table.txt;
+
+packet_size = 1;
+
+use_read_write = 0;
+
+traffic       = fixed;
+
+injection_process = setup;
+
+injection_rate = 0.1;
+
+sim_power = 1;
+
+tech_file = ../booksim2/src/power/techfile.txt;
+
+// CNN
+
+//cnn_layer_num = 5;
+//bitwidth = 16;
+//FPS = 10;
+//channelbitwidth = 128;
+//freq = 2000;
+//
+//netCIMHeight = {4096,4096,4096,4096,4096,4096,4096,4096,4096,4096,4096,4096,4096,4096,4096,4096,4096,4096,4096,4096,4096,4096,4096,4096,4096};
+//netCIMWidth = {16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16};
+//
+//inputChannels = {1,6,16,120,84};
+//outputChannels = {6,16,120,84,10};
+//kernelHeight = {5,5,5,1,1};
+//kernelWidth = {5,5,5,1,1};
+//stride = {1,1,1,1,1};
+//padding = {0,0,0,0,0};
+//hasPooling = {1,1,0,0,0};
+//poolSize = {2,2,1,1,1};
+//poolStride = {2,2,1,1,1};
+//isDense = {0,0,0,1,1};
+//inputSizeHeight = {32,14,5,1,1};
+//inputSizeWidth = {32,14,5,1,1};
+
+
+

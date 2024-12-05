@@ -14,6 +14,7 @@ from MNSIM.Hardware_Model.Buffer import buffer
 from MNSIM.Hardware_Model.Adder import adder
 #linqiushi modified
 from MNSIM.Hardware_Model.Multiplier import multiplier
+from IPython import embed
 #linqiushi above
 def use_LUT(device_type,xbar_size,PE_num,op_type):
     loaded_array_3d = np.load('area_power.npy',allow_pickle=True)
@@ -347,7 +348,8 @@ class Model_area():
         self.global_mul=multiplier(SimConfig_path=self.SimConfig_path,bitwidth=self.graph.global_multiplier_bitwidth)
         #linqiushi above
         self.global_add.calculate_adder_area()
-        tilecount=0
+        tilecount=0       
+        self.every_tile_area=[]
         for layer_id in range(self.total_layer_num):
             temp_device_type=[]
             temp_PE_num=[]
@@ -384,6 +386,7 @@ class Model_area():
                         pass
                 if flag==1:
                     self.arch_area[layer_id]+=tile_area
+                    self.every_tile_area.append([tile_area,i,j,tilecount,layer_id])
         self.arch_total_area = sum(self.arch_area)
        
     def model_area_output(self, module_information = 1, layer_information = 1):
@@ -434,6 +437,11 @@ class Model_area():
                 else:
                     print("     Hardware area:", self.arch_area[i], "um^2")
                 #linqiushi above
+        if hasattr(self,'every_tile_area'):
+            with open('area_tile.txt', 'w') as file:
+                for a in self.every_tile_area:
+                    file.write(f"{a[1]} {a[2]} {int(a[0]/1000)} {a[4]}\n")
+        return self.arch_total_area
     #linqiushi modified
     def area_output_CNNParted(self):
         area_list=[]

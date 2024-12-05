@@ -87,7 +87,7 @@ class device(object):
 			V = (self.device_write_voltage[0] + self.device_write_voltage[-1])/2
 		assert V >= 0, "Voltage < 0"
 		self.device_write_power = V ** 2 / R
-		print("你有出现吗",self.device_write_power)
+		#print("你有出现吗",self.device_write_power)
 		
 
 	def device_output(self):

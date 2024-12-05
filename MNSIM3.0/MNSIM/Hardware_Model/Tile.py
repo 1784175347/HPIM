@@ -12,6 +12,7 @@ from MNSIM.Hardware_Model.ShiftReg import shiftreg
 from MNSIM.Hardware_Model.Reg import reg
 from MNSIM.Hardware_Model.JointModule import JointModule
 from MNSIM.Hardware_Model.Pooling import Pooling
+from IPython import embed
 test_SimConfig_path = os.path.join(os.path.dirname(os.path.dirname(os.getcwd())),"SimConfig.ini")
 # Default SimConfig file path: MNSIM_Python/SimConfig.ini
 
@@ -354,6 +355,7 @@ class tile(ProcessElement):
 			self.tile_buffer_r_read_power = max_PE * self.PE_inbuf_read_rpower
 			self.tile_buffer_w_read_power = max_PE * self.PE_inbuf_read_wpower
 			
+			
 		self.tile_buffer.calculate_buf_read_power()
 		self.tile_buffer.calculate_buf_write_power()
 		self.tile_buffer_r_read_power += self.tile_buffer.buf_rpower * 1e-3
@@ -367,7 +369,7 @@ class tile(ProcessElement):
     #the inside tile mixing version
     #def calculate_tile_read_power_mix(self, max_column=0, max_row=0, max_PE=0, max_group=0, layer_type=None,SimConfig_path=None, default_inbuf_size = 16, default_outbuf_size = 4):
 	def calculate_tile_read_power_fast_part(self, max_column=0, max_row=0, max_PE=0, max_group=0, layer_type=None,
-									   SimConfig_path=None, mix_mode=1,ADC_num_mix=0,DAC_num_mix=0):
+									   SimConfig_path=None, mix_mode=1,ADC_num_mix=0,DAC_num_mix=0,x=0):
 		# max_column: maximum used column in one crossbar in this tile
 		# max_row: maximum used row in one crossbar in this tile
 		# max_PE: maximum used PE in this tile
@@ -398,7 +400,7 @@ class tile(ProcessElement):
 			
 			self.calculate_PE_read_power_fast_part(max_column=max_column, max_row=max_row, max_group=max_group,
 											  SimConfig_path=SimConfig_path, mix_mode=mix_mode,
-             									ADC_num_mix=ADC_num_mix,DAC_num_mix=DAC_num_mix)
+             									ADC_num_mix=ADC_num_mix,DAC_num_mix=DAC_num_mix,x=x)
 			self.tile_xbar_read_power = max_PE * self.PE_xbar_read_power
 			self.tile_ADC_read_power = max_PE * self.PE_ADC_read_power
 			self.tile_DAC_read_power = max_PE * self.PE_DAC_read_power
@@ -415,7 +417,7 @@ class tile(ProcessElement):
 									   self.tile_input_demux_read_power+self.tile_output_mux_read_power+self.tile_jointmodule_read_power
 		self.tile_read_power = self.tile_xbar_read_power+self.tile_ADC_read_power+self.tile_DAC_read_power+\
 							   self.tile_digital_read_power+self.tile_pooling_read_power
-    
+
 	def tile_read_config(self, layer_num = 0, activation_precision = 0, sliding_times = 0,
 						 read_row = None, read_column = None, read_matrix = None, read_vector = None):
 		# read_row and read_column are 2D lists with the size of (#occupied_PE x #occupied groups)

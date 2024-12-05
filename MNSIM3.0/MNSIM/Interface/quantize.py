@@ -150,7 +150,7 @@ class QuantizeLayer(nn.Module):
 
             # generate Module List
             assert 'out_features' in self.layer_config.keys()
-            print("heiheihei",len(in_features_list),complete_bar_num)
+            #print("heiheihei",len(in_features_list),complete_bar_num)
             self.sublayer_list = nn.ModuleList([nn.Linear(i, self.layer_config['out_features'], None) for i in in_features_list])
             self.split_input = self.hardware_config['xbar_size']
         elif self.layer_config['type'] == 'MM':
@@ -192,7 +192,7 @@ class QuantizeLayer(nn.Module):
                 input_list = torch.split(input, self.split_input, dim = 1)
             elif self.layer_config['type']=='MM':
                 input_list = torch.split(input, self.split_input, dim = 2)
-            print("zhegeyouruhe",self.layer_config['type'],input_shape,input[0].shape,self.split_input,len(input_list),len(self.sublayer_list))
+            #print("zhegeyouruhe",self.layer_config['type'],input_shape,input[0].shape,self.split_input,len(input_list),len(self.sublayer_list))
             output = None
             for i in range(len(self.sublayer_list)):
                 if i == 0:

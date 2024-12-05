@@ -66,7 +66,7 @@ sim_count          = 1;
 //topoogy
 
 topology = mesh;
-k  = 64;
+k  = 27;
 n  = 2;
 //
 // Routing
@@ -106,7 +106,7 @@ injection_rate = 0.1;
 
 sim_power = 1;
 
-tech_file = /home/caiangxin/booksim2/src/power/techfile.txt;
+tech_file = ../booksim2/src/power/techfile.txt;
 
 // CNN
 

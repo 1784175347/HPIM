@@ -12,6 +12,7 @@ from MNSIM.Hardware_Model.Tile import tile
 from MNSIM.Hardware_Model.Buffer import buffer
 from MNSIM.Hardware_Model.Adder import adder
 from MNSIM.Hardware_Model.Pooling import Pooling
+from IPython import embed
 def create_nested_zeros(original_list):
     if isinstance(original_list, list):
         return [create_nested_zeros(item) for item in original_list]
@@ -29,6 +30,7 @@ def use_LUT(device_type,xbar_size,PE_num,op_type):
     j=int(math.log2(int(xbar_size/32)))
     assert PE_num>=1
     k=int(math.log2(int(PE_num)))
+    
     if op_type=='area':
         return loaded_array_3d[i][j][k]['tile_area']
     elif op_type=='conv':
@@ -235,7 +237,7 @@ class Model_inference_power():
                 self.graph.tile.calculate_tile_read_power_fast(max_column=max_column,max_row=max_row,max_PE=max_PE,max_group=max_group,layer_type=layer_type,
                                                             SimConfig_path=self.SimConfig_path,default_inbuf_size=self.graph.max_inbuf_size,
                                                             default_outbuf_size=self.graph.max_outbuf_size)
-                print("infer中的",max_row)
+                #print("infer中的",max_row)
                 self.graph.tile.calculate_tile_write_power_fast(max_column=max_column,max_row=max_row,max_group=max_group,max_PE=max_PE)
                 #else:
                     #assert 0, f'mix_mode must in {1,2,3}'
@@ -320,7 +322,7 @@ class Model_inference_power():
                 self.graph.tile_layer.calculate_tile_read_power_fast(max_column=max_column,max_row=max_row,max_PE=max_PE,max_group=max_group,layer_type=layer_type,
                                                             SimConfig_path=self.SimConfig_path,default_inbuf_size=self.graph.max_inbuf_size,
                                                             default_outbuf_size=self.graph.max_outbuf_size,ADC_num_mix=math.ceil(size/8),DAC_num_mix=math.ceil(size/8))
-                print("infer中的",max_row)
+                #print("infer中的",max_row)
                 #self.graph.tile.calculate_tile_write_power_fast(max_column=max_column,max_row=max_row,max_group=max_group,max_PE=max_PE)
                 #else:
                     #assert 0, f'mix_mode must in {1,2,3}'
@@ -571,7 +573,7 @@ class Model_inference_power():
                     self.arch_buf_power[layer_id] += self.graph.tile_list_mix[i][j].tile_buffer_read_power 
                     self.arch_buf_r_power[layer_id] += self.graph.tile_list_mix[i][j].tile_buffer_r_read_power
                     self.arch_buf_w_power[layer_id] += self.graph.tile_list_mix[i][j].tile_buffer_w_read_power 
-                    self.arch_pooling_power[layer_id] += self.graph.tile_list_mix[i][j].tile_pooling_read_power 
+                    self.arch_pooling_power[layer_id] += self.graph.tile_list_mix[i][j].tile_pooling_read_power
         self.arch_total_write_power=sum(self.arch_write_power)
         self.arch_total_power = sum(self.arch_power)
         self.arch_total_xbar_power = sum(self.arch_xbar_power)

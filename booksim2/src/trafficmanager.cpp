@@ -1221,6 +1221,7 @@ void TrafficManager::_Step( )
     if(flits_in_flight && (_deadlock_timer++ >= _deadlock_warn_timeout)){
         _deadlock_timer = 0;
         cout << "WARNING: Possible network deadlock.\n";
+        std::exit(EXIT_FAILURE);
     }
 
     vector<map<int, Flit *> > flits(_subnets);
@@ -1875,7 +1876,7 @@ bool TrafficManager::_SingleSim( )
 }
 
 bool TrafficManager::Run() {
-    _LoadFixedInjectionTable("/home/caiangxin/booksim2/runfiles/fixed_injection_table.txt");  // Load the fixed injection table
+    _LoadFixedInjectionTable("../booksim2/runfiles/fixed_injection_table.txt");  // Load the fixed injection table
 
     for (int sim = 0; sim < _total_sims; ++sim) {
         _time = 0;

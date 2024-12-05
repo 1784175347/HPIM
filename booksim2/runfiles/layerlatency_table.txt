@@ -1,62 +1,62 @@
-MergeLatency for Layer 0 : 18
+MergeLatency for Layer 0 : 14
 TransLatency between Layer 0 to 1 : 10
 MergeLatency for Layer 1 : 0
-TransLatency between Layer 1 to 2 : 38
+TransLatency between Layer 1 to 2 : 30
 MergeLatency for Layer 2 : 0
 TransLatency between Layer 2 to 3 : 38
-MergeLatency for Layer 3 : 22
-TransLatency between Layer 3 to 4 : 18
+MergeLatency for Layer 3 : 0
+TransLatency between Layer 3 to 4 : 46
 MergeLatency for Layer 4 : 0
 TransLatency between Layer 4 to 5 : 0
-MergeLatency for Layer 5 : 14
-TransLatency between Layer 5 to 6 : 58
-MergeLatency for Layer 6 : 0
-TransLatency between Layer 6 to 7 : 54
+MergeLatency for Layer 5 : 0
+TransLatency between Layer 5 to 6 : 34
+MergeLatency for Layer 6 : 14
+TransLatency between Layer 6 to 7 : 62
 MergeLatency for Layer 7 : 0
 TransLatency between Layer 7 to 8 : 0
 MergeLatency for Layer 8 : 0
-TransLatency between Layer 8 to 9 : 38
+TransLatency between Layer 8 to 9 : 66
 MergeLatency for Layer 9 : 0
-TransLatency between Layer 9 to 10 : 34
+TransLatency between Layer 9 to 10 : 70
 MergeLatency for Layer 10 : 0
-TransLatency between Layer 10 to 11 : 46
+TransLatency between Layer 10 to 11 : 90
 MergeLatency for Layer 11 : 0
 TransLatency between Layer 11 to 12 : 0
 MergeLatency for Layer 12 : 38
-TransLatency between Layer 12 to 13 : 58
-MergeLatency for Layer 13 : 0
-TransLatency between Layer 13 to 14 : 82
+TransLatency between Layer 12 to 13 : 74
+MergeLatency for Layer 13 : 74
+TransLatency between Layer 13 to 14 : 86
 MergeLatency for Layer 14 : 0
 TransLatency between Layer 14 to 15 : 0
 MergeLatency for Layer 15 : 0
-TransLatency between Layer 15 to 16 : 70
-MergeLatency for Layer 16 : 0
-TransLatency between Layer 16 to 17 : 70
+TransLatency between Layer 15 to 16 : 102
+MergeLatency for Layer 16 : 74
+TransLatency between Layer 16 to 17 : 78
 MergeLatency for Layer 17 : 0
-TransLatency between Layer 17 to 18 : 58
+TransLatency between Layer 17 to 18 : 142
 MergeLatency for Layer 18 : 0
 TransLatency between Layer 18 to 19 : 0
 MergeLatency for Layer 19 : 0
-TransLatency between Layer 19 to 20 : 38
+TransLatency between Layer 19 to 20 : 90
 MergeLatency for Layer 20 : 0
-TransLatency between Layer 20 to 21 : 106
+TransLatency between Layer 20 to 21 : 122
 MergeLatency for Layer 21 : 0
 TransLatency between Layer 21 to 22 : 0
 MergeLatency for Layer 22 : 0
-TransLatency between Layer 22 to 23 : 58
+TransLatency between Layer 22 to 23 : 86
 MergeLatency for Layer 23 : 0
-TransLatency between Layer 23 to 24 : 98
+TransLatency between Layer 23 to 24 : 66
 MergeLatency for Layer 24 : 0
-TransLatency between Layer 24 to 25 : 38
+TransLatency between Layer 24 to 25 : 66
 MergeLatency for Layer 25 : 0
 TransLatency between Layer 25 to 26 : 0
 MergeLatency for Layer 26 : 0
-TransLatency between Layer 26 to 27 : 102
+TransLatency between Layer 26 to 27 : 58
 MergeLatency for Layer 27 : 0
-TransLatency between Layer 27 to 28 : 18
+TransLatency between Layer 27 to 28 : 46
 MergeLatency for Layer 28 : 0
 TransLatency between Layer 28 to 29 : 0
 MergeLatency for Layer 29 : 0
-TransLatency between Layer 29 to 30 : 22
+TransLatency between Layer 29 to 30 : 34
 MergeLatency for Layer 30 : 0
 TransLatency between Layer 30 to 31 : 0

@@ -102,7 +102,7 @@ class TrainTestInterface(object):
             print(f'load weights from {weights_file}')
             # load weights and split weights according to HW parameters
             self.net.load_change_weights(torch.load(weights_file, map_location=self.device))
-            print("到这里了吗")
+            #print("到这里了吗")
     def origin_evaluate(self, method = 'SINGLE_FIX_TEST', adc_action = 'SCALE'):
         if self.test_loader == None:
             self.test_loader = import_module(self.dataset_module).get_dataloader()[1]
@@ -151,9 +151,9 @@ class TrainTestInterface(object):
                 
         return test_correct / test_total
     def get_structure(self):
-        print("shini?")
+        #print("shini?")
         net_bit_weights = self.net.get_weights()
-        print("haishini?")
+        #print("haishini?")
         net_structure_info = self.net.get_structure()
         # print(net_structure_info)
         assert len(net_bit_weights) == len(net_structure_info)

@@ -54,13 +54,13 @@ print(torch.cuda.get_device_properties(1).total_memory)
 print(torch.cuda.memory_allocated(1))
 print(f'run on device {device}')
 # weights
-if args.weight is not None:
-    print(f'load weights, {args.weight}')
-    net.load_change_weights(torch.load(args.weight, map_location=device))
-    # net.load_state_dict(torch.load(args.weight))
+#if args.weight is not None:
+#    print(f'load weights, {args.weight}')
+#    net.load_change_weights(torch.load(args.weight, map_location=device))
+#    # net.load_state_dict(torch.load(args.weight))
 if args.mode == 'train':
     #train_module.train_net(net, train_loader, test_loader, device, args.prefix)
-    if args.prefix=='decoder':
+    if args.prefix=='decoder' or 1==1:
         train_module.fake_train_net(net, train_loader, test_loader, device, args.prefix)
     else:
         train_module.train_net(net, train_loader, test_loader, device, args.prefix)

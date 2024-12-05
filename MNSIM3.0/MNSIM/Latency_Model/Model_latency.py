@@ -15,7 +15,8 @@ from MNSIM.Latency_Model.Tile_latency import tile_latency_analysis
 from MNSIM.Latency_Model.Pooling_latency import pooling_latency_analysis
 from MNSIM.NoC.interconnect_estimation import interconnect_estimation
 from MNSIM.Hardware_Model.Buffer import buffer
-from IPython import embed
+from MNSIM.Latency_Model.forcedirect import *
+import json
 
 def merge_interval(interval):
     if len(interval) == 0:
@@ -65,12 +66,14 @@ def inoutsize_conversion(kernelsize, padding, stride, outputsize):
 
 
 class Model_latency():
-    def __init__(self, NetStruct, SimConfig_path, multiple=None, TCG_mapping=None, mix_mode=1, mix_tile=None, cnn_step=0):
+    def __init__(self, NetStruct, SimConfig_path, multiple=None, TCG_mapping=None, mix_mode=1, mix_tile=None, cnn_step=0, area_MNSIM=0):
         modelL_config = cp.ConfigParser()
         modelL_config.read(SimConfig_path, encoding='UTF-8')
         NoC_Compute = int(modelL_config.get('Algorithm Configuration', 'NoC_enable'))
+        self.area = area_MNSIM
         self.inter_tile_bandwidth = float(modelL_config.get('Tile level', 'Inter_Tile_Bandwidth'))
         self.NetStruct = NetStruct
+        self.topology = mix_tile.topology
         if multiple is None:
             multiple = [1] * len(self.NetStruct)
         if TCG_mapping is None:
@@ -80,35 +83,73 @@ class Model_latency():
             self.graph.mapping_net()
         elif mix_mode==2:
             print("zheli")
-        print(self.graph.mapping_result)
-        self.graph.calculate_transfer_distance()
+        #print(self.graph.mapping_result)
+        if (mix_tile.topology == 0):
+            self.graph.calculate_transfer_distance()
+        elif (mix_tile.topology == 1):
+            self.graph.calculate_transfer_distance_cmesh(c=mix_tile.c)
         self.CNN_step = int(modelL_config.get('Mixmode2/4 Configuration', 'CNN_step'))
         if (self.CNN_step == 1 and cnn_step==0):
-            cnn_latency_strp = Model_latency(NetStruct=NetStruct, SimConfig_path=SimConfig_path, TCG_mapping=TCG_mapping,mix_mode=mix_mode,mix_tile=mix_tile,cnn_step=1)
-            cnn_latency_strp.calculate_model_latency(mode=1,mix_mode=mix_mode)
-            cnn_latency_strp.model_latency_output_cnn_step()
-            embed()
+            cnn_latency_step = Model_latency(NetStruct=NetStruct, SimConfig_path=SimConfig_path, TCG_mapping=TCG_mapping,mix_mode=mix_mode,mix_tile=mix_tile,cnn_step=1,area_MNSIM=self.area)
+            cnn_latency_step.calculate_model_latency(mode=1,mix_mode=mix_mode)
+            layer_start_time, layer_end_time = cnn_latency_step.model_latency_output_cnn_step()
 
         if mix_mode==2 or mix_mode==4:
-            self.graph.mapping_output(mix_tile)
+            if (self.CNN_step == 1 and cnn_step==0):
+                self.graph.mapping_output_cnn_step(mix_tile, layer_start_time, layer_end_time)
+            else:
+                self.graph.mapping_output(mix_tile)
+            
         self.begin_time = []
         self.finish_time = []
         self.layer_tile_latency = []
 
-        mixmodel = cp.ConfigParser()
-        mixmodel.read('./mix_tileinfo.ini', encoding='UTF-8')
-        self.tile_num = list(map(int, mixmodel.get('tile', 'tile_num').split(',')))
+        #mixmodel = cp.ConfigParser()
+        #mixmodel.read('./mix_tileinfo.ini', encoding='UTF-8')
+        #self.tile_num = list(map(int, mixmodel.get('tile', 'tile_num').split(',')))
+        self.tile_num = mix_tile.tile_num
         if (cnn_step==0):
             self.Booksim_Flag = int(modelL_config.get('Mixmode2/4 Configuration', 'Booksim_Flag'))
+            self.Booksim_en = int(modelL_config.get('Mixmode2/4 Configuration', 'Booksim_en')) 
+            self.Line_latency = int(modelL_config.get('Mixmode2/4 Configuration', 'Line_latency')) 
+            self.Floorplan_en = int(modelL_config.get('Mixmode2/4 Configuration', 'Floorplan_en')) 
         else:
             self.Booksim_Flag = 0
+            self.Booksim_en = 0
+            self.Line_latency = 0
+            self.Floorplan_en = 0
         self.Pipe_flag = int(modelL_config.get('Mixmode2/4 Configuration', 'Pipe_flag'))
         self.freq = int(modelL_config.get('Digital module', 'Digital_Frequency'))
         self.Merge_Latency = []
         self.Trans_Latency = []
+        self.Merge_Latency_Line = []
+        self.Trans_Latency_Line = []
+        
         if (self.Booksim_Flag == 1):
-            self.booksim()
+            if (self.Booksim_en==1):
+                if (mix_tile.topology == 0):
+                    if (self.CNN_step == 1 and cnn_step==0):
+                        self.booksim_cnn_step()
+                    else:
+                        self.booksim()
+                elif (mix_tile.topology == 1):
+                    self.booksim_cmesh(mix_tile.c)
+            else:
+                self.booksim_read()
+        if (self.Floorplan_en == 1):
+            self.Floorplan()
 
+        if(self.Line_latency == 1):
+            self.linelatency_read()
+            if (self.Booksim_Flag == 1):
+                self.Merge_Latency = [a + b for a, b in zip(self.Merge_Latency, self.Merge_Latency_Line)]
+                self.Trans_Latency = [a + b for a, b in zip(self.Trans_Latency, self.Trans_Latency_Line)]
+            else:
+                self.Merge_Latency = self.Merge_Latency_Line
+                self.Trans_Latency = self.Trans_Latency_Line
+        else:
+            print("Floorplan area total:", self.area, "um^2")
+        
         if NoC_Compute == 1:
             self.Noc_latency = interconnect_estimation()
         else:
@@ -117,7 +158,6 @@ class Model_latency():
         self.compute_interval = []
         self.occupancy = []
         self.multiple = multiple
-
         self.layer_num=TCG_mapping.layer_num
         self.buffer_latency = []
         self.buffer_r_latency = []
@@ -943,71 +983,32 @@ class Model_latency():
         print("Entire latency:", max(max(self.finish_time)), "ns")
 
     def model_latency_output_cnn_step(self, module_information=1, layer_information=1):
-        print(' ')
+        layer_start_time = []
+        layer_end_time = []
+        layer_start_time.append(0)
         if (layer_information):
             for i in range(len(self.begin_time)):
-                print("Layer", i, " type:", self.NetStruct[i][0][0]['type'])
-                # print("start time: ", self.begin_time[i])
-                # print("finish time:", self.finish_time[i])
-                # print("Time interval of working:", self.compute_interval[i])
-                print("Occupancy:", self.occupancy[i])
-                #     # print(self.xbar_latency[i])
-                total_latency = self.total_buffer_latency[i] + self.total_computing_latency[i] + \
-                                self.total_digital_latency[i] + self.total_intra_tile_latency[i] + \
-                                self.total_inter_tile_latency[i]
+                #total_latency = self.total_buffer_latency[i] + self.total_computing_latency[i] + \
+                #                self.total_digital_latency[i] + self.total_intra_tile_latency[i] + \
+                #                self.total_inter_tile_latency[i]
                 if (module_information):
                     ##### for test #####
                     input_l=self.NetStruct[i][0][0]['Inputindex']
                     final_idx=list(map(int, input_l))
-                    print("total latency:", total_latency)
+                    #print("total latency:", total_latency)
                     if i == 0:
-                        print("layer latency:", max(self.finish_time[i]))
+                        layer_latency = max(self.finish_time[i])
                     else:
-                        print("layer latency:", max(self.finish_time[i])-max(self.finish_time[i+final_idx[0]]))
-
-                    print("Buffer latency of layer", i, ":", self.total_buffer_latency[i], '(',
-                          "%.2f" % (100 * self.total_buffer_latency[i] / total_latency), '%)')
-                    print("     read buffer latency of layer", i, ":", self.total_buffer_r_latency[i], '(',
-                          "%.2f" % (100 * self.total_buffer_r_latency[i] / total_latency), '%)')
-                    print("     write buffer latency of layer", i, ":", self.total_buffer_w_latency[i], '(',
-                          "%.2f" % (100 * self.total_buffer_w_latency[i] / total_latency), '%)')
-                    print("Computing latency of layer", i, ":", self.total_computing_latency[i], '(',
-                          "%.2f" % (100 * self.total_computing_latency[i] / total_latency), '%)')
-                    print("     DAC latency of layer", i, ":", self.total_DAC_latency[i], '(',
-                          "%.2f" % (100 * self.total_DAC_latency[i] / total_latency), '%)')
-                    print("     ADC latency of layer", i, ":", self.total_ADC_latency[i], '(',
-                          "%.2f" % (100 * self.total_ADC_latency[i] / total_latency), '%)')
-                    print("     xbar latency of layer", i, ":", self.total_xbar_latency[i], '(',
-                          "%.2f" % (100 * self.total_xbar_latency[i] / total_latency), '%)')
-                    print("Digital part latency of layer", i, ":", self.total_digital_latency[i], '(',
-                          "%.2f" % (100 * self.total_digital_latency[i] / total_latency), '%)')
-                    print("     iReg latency of layer", i, ":", self.total_iReg_latency[i], '(',
-                          "%.2f" % (100 * self.total_iReg_latency[i] / total_latency), '%)')
-                    print("     oReg latency of layer", i, ":", self.total_oReg_latency[i], '(',
-                          "%.2f" % (100 * self.total_oReg_latency[i] / total_latency), '%)')
-                    print("     input demux latency of layer", i, ":", self.total_input_demux_latency[i], '(',
-                          "%.2f" % (100 * self.total_input_demux_latency[i] / total_latency), '%)')
-                    print("     output mux latency of layer", i, ":", self.total_output_mux_latency[i], '(',
-                          "%.2f" % (100 * self.total_output_mux_latency[i] / total_latency), '%)')
-                    print("     shiftreg latency of layer", i, ":", self.total_shiftreg_latency[i], '(',
-                          "%.2f" % (100 * self.total_shiftreg_latency[i] / total_latency), '%)')
-                    print("     adder latency of layer", i, ":", self.total_adder_latency[i], '(',
-                          "%.2f" % (100 * self.total_adder_latency[i] / total_latency), '%)')
-                    print("     Jointmodule latency of layer", i, ":", self.total_jointmodule_latency[i], '(',
-                          "%.2f" % (100 * self.total_jointmodule_latency[i] / total_latency), '%)')
-                    print("Pooling module latency of layer", i, ":", self.total_pooling_latency[i], '(',
-                          "%.2f" % (100 * self.total_pooling_latency[i] / total_latency), '%)')
-                    print("Intra tile communication latency of layer", i, ":", self.total_intra_tile_latency[i], '(',
-                          "%.2f" % (100 * self.total_intra_tile_latency[i] / total_latency), '%)')
-                    print("Inter tile communication latency of layer", i, ":", self.total_inter_tile_latency[i], '(',
-                          "%.2f" % (100 * self.total_inter_tile_latency[i] / total_latency), '%)')
-                    print("     One layer merge latency of layer", i, ":", self.total_tile_merge_latency[i], '(',
-                          "%.2f" % (100 * self.total_tile_merge_latency[i] / total_latency), '%)')
-                    print("     Inter tile transfer latency of layer", i, ":", self.total_tile_transfer_latency[i], '(',
-                          "%.2f" % (100 * self.total_tile_transfer_latency[i] / total_latency), '%)')
-                print('----------------------------------------------')
-        # print("Latency simulation finished!")
-        print("Entire latency:", max(max(self.finish_time)), "ns")
+                        layer_latency = max(self.finish_time[i])-max(self.finish_time[i+final_idx[0]])
+                    layer_latency = layer_start_time[-1] + layer_latency
+                    layer_start_time.append(layer_latency)
+                    layer_end_time.append(layer_latency)
+        layer_start_time.pop()
+        max_time = max(layer_end_time)
+        scale_factor = 8000 / max_time
+        layer_end_time = [int(x * scale_factor) for x in layer_end_time]
+        layer_start_time = [int(x * scale_factor) for x in layer_start_time]
+        return layer_start_time, layer_end_time
 
     def layer_latency_initial(self):
         self.begin_time.append([])
@@ -2190,6 +2191,408 @@ class Model_latency():
                     if "TransLatency between Layer" in line:
                         latency = line.split(':')[1].strip()
                         self.Trans_Latency.append(float(latency))
+
+    def booksim_cnn_step(self):
+        filename = '../booksim2/runfiles/nnmeshconfig_cnn_step'
+        try:
+            with open(filename, 'r') as file:
+                content = file.readlines()
+        except FileNotFoundError:
+            print(f"The file {filename} was not found.")
+            exit()
+        new_content = []
+        k_value = self.tile_num[0]
+        for line in content:
+            if 'k  =' in line:
+                new_line = f'k  = {k_value};\n'
+                new_content.append(new_line)
+            else:
+                new_content.append(line)
+        try:
+            with open(filename, 'w') as file:
+                file.writelines(new_content)
+            print(f'The value of k has been updated to {k_value}')
+        except IOError as e:
+            print(f"An error occurred while writing to the file: {e}")
+        program_path = '../booksim2/src/booksim'
+        args = ['../booksim2/runfiles/nnmeshconfig_cnn_step']
+
+        try:
+            process = subprocess.Popen([program_path] + args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+            stdout, stderr = process.communicate()
+            if stdout:
+                print("程序输出：")
+                print(stdout)
+            if stderr:
+                print("程序错误输出：")
+                print(stderr)
+            if process.returncode != 0:
+                print(f"程序退出状态码：{process.returncode}")
+            else:
+                print("程序成功执行完成。")
+        except FileNotFoundError:
+            print(f"未找到程序: {program_path}")
+        except Exception as e:
+            print(f"执行程序时发生错误: {e}")
+        print("继续执行Python代码...")
+        for line in stdout.splitlines():
+            line = line.strip()
+            if "Total Area" in line:
+                area = line.split(':')[1].strip()
+                NoC_area = float(area)
+                print(f"Final Total Area: {NoC_area} um^2\n")
+            if "Total Power" in line:
+                power = line.split(':')[1].strip()
+                NoC_power = float(power)/1000
+                print(f"Final Total Power: {NoC_power} W\n")
+
+        with open('../booksim2/runfiles/layerlatency_table.txt') as file:
+                for line in file:
+                    line = line.strip()
+                    if "MergeLatency for Layer" in line:
+                        latency = line.split(':')[1].strip()
+                        self.Merge_Latency.append(float(latency))
+                    if "TransLatency between Layer" in line:
+                        latency = line.split(':')[1].strip()
+                        self.Trans_Latency.append(float(latency))
+
+    def booksim_cmesh(self,c):
+        filename = '../booksim2/runfiles/nncmeshconfig'
+        try:
+            with open(filename, 'r') as file:
+                content = file.readlines()
+        except FileNotFoundError:
+            print(f"The file {filename} was not found.")
+            exit()
+        new_content = []
+        k_value = int(self.tile_num[0]/c)
+        for line in content:
+            if 'k  =' in line:
+                new_line = f'k  = {k_value};\n'
+                new_content.append(new_line)
+            else:
+                new_content.append(line)
+        try:
+            with open(filename, 'w') as file:
+                file.writelines(new_content)
+            print(f'The value of k has been updated to {k_value}')
+        except IOError as e:
+            print(f"An error occurred while writing to the file: {e}")
+        program_path = '../booksim2/src/booksim'
+        args = ['../booksim2/runfiles/nncmeshconfig']
+
+        try:
+            process = subprocess.Popen([program_path] + args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+            stdout, stderr = process.communicate()
+            if stdout:
+                print("程序输出：")
+                print(stdout)
+            if stderr:
+                print("程序错误输出：")
+                print(stderr)
+            if process.returncode != 0:
+                print(f"程序退出状态码：{process.returncode}")
+            else:
+                print("程序成功执行完成。")
+        except FileNotFoundError:
+            print(f"未找到程序: {program_path}")
+        except Exception as e:
+            print(f"执行程序时发生错误: {e}")
+        print("继续执行Python代码...")
+        for line in stdout.splitlines():
+            line = line.strip()
+            if "Total Area" in line:
+                area = line.split(':')[1].strip()
+                NoC_area = float(area)
+                print(f"Final Total Area: {NoC_area} um^2\n")
+            if "Total Power" in line:
+                power = line.split(':')[1].strip()
+                NoC_power = float(power)/1000
+                print(f"Final Total Power: {NoC_power} W\n")
+
+        with open('../booksim2/runfiles/layerlatency_table.txt') as file:
+                for line in file:
+                    line = line.strip()
+                    if "MergeLatency for Layer" in line:
+                        latency = line.split(':')[1].strip()
+                        self.Merge_Latency.append(float(latency))
+                    if "TransLatency between Layer" in line:
+                        latency = line.split(':')[1].strip()
+                        self.Trans_Latency.append(float(latency))
+
+    def booksim_read(self):
+        with open('../booksim2/runfiles/layerlatency_table.txt') as file:
+                for line in file:
+                    line = line.strip()
+                    if "MergeLatency for Layer" in line:
+                        latency = line.split(':')[1].strip()
+                        self.Merge_Latency.append(float(latency))
+                    if "TransLatency between Layer" in line:
+                        latency = line.split(':')[1].strip()
+                        self.Trans_Latency.append(float(latency))
+    
+    def linelatency_read(self):
+        with open('floorplan.txt', 'r') as file:
+            layer_num = int(file.readline().strip())
+            area_total = float(file.readline().strip())*1000000
+            rate = float(file.readline().strip())
+            for i in range(layer_num):
+                latency = float(file.readline().strip())
+                self.Merge_Latency_Line.append(latency)
+            for i in range(layer_num):
+                latency = float(file.readline().strip())
+                self.Trans_Latency_Line.append(latency)
+        if (self.Floorplan_en==1):
+            print("Floorplan area total:", area_total, "um^2")
+        else:
+            print("Floorplan area total:", self.area/rate, "um^2")
+    def Floorplan(self):
+        with open('area_tile.txt', 'r') as file:
+            data = [tuple(map(int, line.split())) for line in file if line.strip()]
+        area = np.zeros(self.tile_num[0]**2)
+        tag = np.zeros(self.tile_num[0]**2)
+        for row in data:
+            area[row[0]*self.tile_num[0]+row[1]] = row[2]
+            tag[row[0]*self.tile_num[0]+row[1]] = row[3]
+        if (self.topology == 0):
+            topology = 'mesh'
+        elif (self.topology == 1):
+            topology = 'cmesh'
+            area_io = np.ones(int((self.tile_num[0]/2)**2))
+            tag_io = np.full(int((self.tile_num[0]/2)**2),30)
+            area = np.concatenate((area, area_io))
+            tag = np.concatenate((tag, tag_io))
+        Area_enclosing_rectangle, final_hpwl, final_path_lengths = floorplan(grid_size=self.tile_num[0],topology=topology,area=area,tag=tag,layer_num=31)
+        Area_enclosing_rectangle = Area_enclosing_rectangle/1000
+        final_hpwl = final_hpwl/math.sqrt(1000)
+        for key, value in final_path_lengths.items():
+            value = value/math.sqrt(1000)
+            value = 7.5*value+35
+            value = value/2000
+            final_path_lengths[key] = value
+        rate=self.area/Area_enclosing_rectangle/1000000
+        layer = []
+        Merge_Latency_Line = []
+        Trans_Latency_Line = []
+        with open('layer_table.txt', 'r') as file:
+            for line in file:
+                line = line.strip()
+                numbers = list(map(int, line.split()))
+                layer.append(numbers)
+        layer_num = layer[0][0]
+        if (self.topology == 0):
+            for i in range(layer_num):
+                merge_time_max = 0
+                tranfer_time_max = 0
+                layer_tile = layer[i+1][0] 
+                if (layer_tile>1):
+                    merge_node = layer[i+1][layer_tile+1] 
+                    for j in range(layer_tile):
+                        node_now = layer[i+1][j+1] 
+                        if node_now==merge_node:
+                            continue
+                        latency = 0
+                        x0=node_now%self.tile_num[0]
+                        x1=merge_node%self.tile_num[0]
+                        y0=int(node_now/self.tile_num[0])
+                        y1=int(merge_node/self.tile_num[0])
+                        s0=node_now
+                        s1=merge_node
+                        if x0>x1:
+                            for m in range(x0-x1):
+                                latency = latency + final_path_lengths[s1+m,s1+m+1]
+                        elif x1>x0:
+                            for m in range(x1-x0):
+                                latency = latency + final_path_lengths[s0+m,s0+m+1]
+                        if y0>y1:
+                            for m in range(y0-y1):
+                                latency = latency + final_path_lengths[s0-(m+1)*self.tile_num[0],s0-m*self.tile_num[0]]
+                        elif y1>y0:
+                            for m in range(y1-y0):
+                                latency = latency + final_path_lengths[s1-(m+1)*self.tile_num[0],s1-m*self.tile_num[0]]
+                        if latency > merge_time_max:
+                            merge_time_max = latency
+                elif (layer_tile>0):
+                    merge_node = layer[i+1][1] 
+                else:
+                    Merge_Latency_Line.append(0)
+                    Trans_Latency_Line.append(0)
+                    continue
+                Merge_Latency_Line.append(merge_time_max)
+
+                if(i!=layer_num-1):
+                    layer_tile_next = layer[i+2][0]
+                    if layer_tile_next>0:
+                        for j in range(layer_tile_next):
+                            node_now = layer[i+2][j+1]
+                            latency = 0
+                            x0=node_now%self.tile_num[0]
+                            x1=merge_node%self.tile_num[0]
+                            y0=int(node_now/self.tile_num[0])
+                            y1=int(merge_node/self.tile_num[0])
+                            s0=node_now
+                            s1=merge_node
+                            if x0>x1:
+                                for m in range(x0-x1):
+                                    latency = latency + final_path_lengths[s1+m,s1+m+1]
+                            elif x1>x0:
+                                for m in range(x1-x0):
+                                    latency = latency + final_path_lengths[s0+m,s0+m+1]
+                            if y0>y1:
+                                for m in range(y0-y1):
+                                    latency = latency + final_path_lengths[s0-(m+1)*self.tile_num[0],s0-m*self.tile_num[0]]
+                            elif y1>y0:
+                                for m in range(y1-y0):
+                                    latency = latency + final_path_lengths[s1-(m+1)*self.tile_num[0],s1-m*self.tile_num[0]]
+                            if latency > tranfer_time_max:
+                                tranfer_time_max = latency 
+                    elif (i<layer_num-2):
+                        layer_tile_next = layer[i+3][0]
+                        for j in range(layer_tile_next):
+                            node_now = layer[i+3][j+1]
+                            latency = 0
+                            x0=node_now%self.tile_num[0]
+                            x1=merge_node%self.tile_num[0]
+                            y0=int(node_now/self.tile_num[0])
+                            y1=int(merge_node/self.tile_num[0])
+                            s0=node_now
+                            s1=merge_node
+                            if x0>x1:
+                                for m in range(x0-x1):
+                                    latency = latency + final_path_lengths[s1+m,s1+m+1]
+                            elif x1>x0:
+                                for m in range(x1-x0):
+                                    latency = latency + final_path_lengths[s0+m,s0+m+1]
+                            if y0>y1:
+                                for m in range(y0-y1):
+                                    latency = latency + final_path_lengths[s0-(m+1)*self.tile_num[0],s0-m*self.tile_num[0]]
+                            elif y1>y0:
+                                for m in range(y1-y0):
+                                    latency = latency + final_path_lengths[s1-(m+1)*self.tile_num[0],s1-m*self.tile_num[0]]
+                            if latency > tranfer_time_max:
+                                tranfer_time_max = latency
+                    else:
+                        Trans_Latency_Line.append(0)
+                        continue
+                Trans_Latency_Line.append(tranfer_time_max)
+        elif (self.topology == 1):
+            for i in range(layer_num):
+                merge_time_max = 0
+                tranfer_time_max = 0
+                layer_tile = layer[i+1][0] 
+                if (layer_tile>1):
+                    merge_node = layer[i+1][layer_tile+1] 
+                    for j in range(layer_tile):
+                        node_now = layer[i+1][j+1] 
+                        if node_now==merge_node:
+                            continue
+                        latency = 0
+                        cmesh_io_lenth = int(self.tile_num[0]/2)
+                        cmesh_io_base = int(self.tile_num[0]**2)
+                        node_now_io = int((node_now%self.tile_num[0])/2)+int(int(node_now/self.tile_num[0])/2)*cmesh_io_lenth
+                        merge_node_io = int((merge_node%self.tile_num[0])/2)+int(int(merge_node/self.tile_num[0])/2)*cmesh_io_lenth
+                        x0=node_now_io%cmesh_io_lenth
+                        x1=merge_node_io%cmesh_io_lenth
+                        y0=int(node_now_io/cmesh_io_lenth)
+                        y1=int(merge_node_io/cmesh_io_lenth)
+                        s0=node_now_io
+                        s1=merge_node_io
+                        latency = latency + final_path_lengths[node_now_io+cmesh_io_base,node_now] + final_path_lengths[merge_node_io+cmesh_io_base,merge_node]
+                        if x0>x1:
+                            for m in range(x0-x1):
+                                latency = latency + final_path_lengths[s1+m+cmesh_io_base,s1+m+1+cmesh_io_base]
+                        elif x1>x0:
+                            for m in range(x1-x0):
+                                latency = latency + final_path_lengths[s0+m+cmesh_io_base,s0+m+1+cmesh_io_base]
+                        if y0>y1:
+                            for m in range(y0-y1):
+                                latency = latency + final_path_lengths[s0-(m+1)*cmesh_io_lenth+cmesh_io_base,s0-m*cmesh_io_lenth+cmesh_io_base]
+                        elif y1>y0:
+                            for m in range(y1-y0):
+                                latency = latency + final_path_lengths[s1-(m+1)*cmesh_io_lenth+cmesh_io_base,s1-m*cmesh_io_lenth+cmesh_io_base]
+                        if latency > merge_time_max:
+                            merge_time_max = latency
+                elif (layer_tile>0):
+                    merge_node = layer[i+1][1] 
+                else:
+                    Merge_Latency_Line.append(0)
+                    Trans_Latency_Line.append(0)
+                    continue
+                Merge_Latency_Line.append(merge_time_max)
+
+                if(i!=layer_num-1):
+                    layer_tile_next = layer[i+2][0]
+                    if layer_tile_next>0:
+                        for j in range(layer_tile_next):
+                            node_now = layer[i+2][j+1]
+                            latency = 0
+                            cmesh_io_lenth = int(self.tile_num[0]/2)
+                            cmesh_io_base = int(self.tile_num[0]**2)
+                            node_now_io = int((node_now%self.tile_num[0])/2)+int(int(node_now/self.tile_num[0])/2)*cmesh_io_lenth
+                            merge_node_io = int((merge_node%self.tile_num[0])/2)+int(int(merge_node/self.tile_num[0])/2)*cmesh_io_lenth
+                            x0=node_now_io%cmesh_io_lenth
+                            x1=merge_node_io%cmesh_io_lenth
+                            y0=int(node_now_io/cmesh_io_lenth)
+                            y1=int(merge_node_io/cmesh_io_lenth)
+                            s0=node_now_io
+                            s1=merge_node_io
+                            latency = latency + final_path_lengths[node_now_io+cmesh_io_base,node_now] + final_path_lengths[merge_node_io+cmesh_io_base,merge_node]
+                            if x0>x1:
+                                for m in range(x0-x1):
+                                    latency = latency + final_path_lengths[s1+m+cmesh_io_base,s1+m+1+cmesh_io_base]
+                            elif x1>x0:
+                                for m in range(x1-x0):
+                                    latency = latency + final_path_lengths[s0+m+cmesh_io_base,s0+m+1+cmesh_io_base]
+                            if y0>y1:
+                                for m in range(y0-y1):
+                                    latency = latency + final_path_lengths[s0-(m+1)*cmesh_io_lenth+cmesh_io_base,s0-m*cmesh_io_lenth+cmesh_io_base]
+                            elif y1>y0:
+                                for m in range(y1-y0):
+                                    latency = latency + final_path_lengths[s1-(m+1)*cmesh_io_lenth+cmesh_io_base,s1-m*cmesh_io_lenth+cmesh_io_base]
+                            if latency > tranfer_time_max:
+                                tranfer_time_max = latency 
+                    elif (i<layer_num-2):
+                        layer_tile_next = layer[i+3][0]
+                        for j in range(layer_tile_next):
+                            node_now = layer[i+3][j+1]
+                            latency = 0
+                            cmesh_io_lenth = int(self.tile_num[0]/2)
+                            cmesh_io_base = int(self.tile_num[0]**2)
+                            node_now_io = int((node_now%self.tile_num[0])/2)+int(int(node_now/self.tile_num[0])/2)*cmesh_io_lenth
+                            merge_node_io = int((merge_node%self.tile_num[0])/2)+int(int(merge_node/self.tile_num[0])/2)*cmesh_io_lenth
+                            x0=node_now_io%cmesh_io_lenth
+                            x1=merge_node_io%cmesh_io_lenth
+                            y0=int(node_now_io/cmesh_io_lenth)
+                            y1=int(merge_node_io/cmesh_io_lenth)
+                            s0=node_now_io
+                            s1=merge_node_io
+                            latency = latency + final_path_lengths[node_now_io+cmesh_io_base,node_now] + final_path_lengths[merge_node_io+cmesh_io_base,merge_node]
+                            if x0>x1:
+                                for m in range(x0-x1):
+                                    latency = latency + final_path_lengths[s1+m+cmesh_io_base,s1+m+1+cmesh_io_base]
+                            elif x1>x0:
+                                for m in range(x1-x0):
+                                    latency = latency + final_path_lengths[s0+m+cmesh_io_base,s0+m+1+cmesh_io_base]
+                            if y0>y1:
+                                for m in range(y0-y1):
+                                    latency = latency + final_path_lengths[s0-(m+1)*cmesh_io_lenth+cmesh_io_base,s0-m*cmesh_io_lenth+cmesh_io_base]
+                            elif y1>y0:
+                                for m in range(y1-y0):
+                                    latency = latency + final_path_lengths[s1-(m+1)*cmesh_io_lenth+cmesh_io_base,s1-m*cmesh_io_lenth+cmesh_io_base]
+                            if latency > tranfer_time_max:
+                                tranfer_time_max = latency
+                    else:
+                        Trans_Latency_Line.append(0)
+                        continue
+                Trans_Latency_Line.append(tranfer_time_max)
+        with open('floorplan.txt', 'w') as file:
+            file.write(str(layer_num) + '\n')
+            file.write(str(Area_enclosing_rectangle) + '\n')
+            file.write(str(rate) + '\n')
+            file.write('\n'.join(map(str, Merge_Latency_Line)) + '\n')
+            file.write('\n'.join(map(str, Trans_Latency_Line)) + '\n')
+        
+
 
 if __name__ == '__main__':
     test_SimConfig_path = os.path.join(os.path.dirname(os.path.dirname(os.getcwd())), "SimConfig.ini")

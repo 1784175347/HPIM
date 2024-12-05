@@ -12,6 +12,7 @@ from MNSIM.Hardware_Model.Buffer import buffer
 from MNSIM.Hardware_Model.Adder import adder
 #linqiushi modified
 from MNSIM.Hardware_Model.Multiplier import multiplier
+from IPython import embed
 #linqiushi above
 home_path = os.getcwd()
 SimConfig_path=os.path.join(home_path, "SimConfig.ini")
@@ -38,8 +39,12 @@ def make_LUT():
                 temp_tile.calculate_tile_area_part(SimConfig_path=SimConfig_path,
                                                 ADC_num_mix=int(l_xbar_size[j]/8),DAC_num_mix=int(l_xbar_size[j]/8))
                 for m in l_layer_type:
+                    if(i==0 and j==4 and k==0 and m=='conv'):
+                        x=1
+                    else:
+                        x=0
                     temp_tile.calculate_tile_read_power_fast_part(max_column=l_xbar_size[j],max_row=l_xbar_size[j],max_PE=l_PE_num[k]**2,max_group=1,layer_type=m,
-                                                        SimConfig_path=SimConfig_path,mix_mode=2,ADC_num_mix=l_xbar_size[j]/8,DAC_num_mix=l_xbar_size[j]/8)
+                                                        SimConfig_path=SimConfig_path,mix_mode=2,ADC_num_mix=l_xbar_size[j]/8,DAC_num_mix=l_xbar_size[j]/8,x=x)
                     three_dimensional_array[i][j][k]['tile_power_'+m]=temp_tile.tile_read_power
                 count+=1
                 print('这是',i,j,k,count)

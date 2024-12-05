@@ -20,9 +20,11 @@ from MNSIM.Area_Model.Model_Area import Model_area
 from MNSIM.Power_Model.Model_inference_power import Model_inference_power
 from MNSIM.Energy_Model.Model_energy import Model_energy
 from MNSIM.mixing.mixtile import mixtile
-
+from IPython import embed
 
 def main():
+    os.environ['CUDA_VISIBLE_DEVICES'] = '3'
+    start_time = time.time()
     home_path = os.getcwd()
     # print(home_path)
     SimConfig_path = os.path.join(home_path, "SimConfig.ini")
@@ -37,6 +39,8 @@ def main():
         help="Hardware description file location & name, default:/MNSIM_Python/SimConfig.ini")
     parser.add_argument("-Weights", "--weights", default=weights_file_path,
         help="NN model weights file location & name, default:/MNSIM_Python/cifar10_vgg8_params.pth")
+    parser.add_argument("-Dataset", "--dataset", default='cifar10',
+        help="Dataset description (name), default: cifar10")
     parser.add_argument("-NN", "--NN", default='resnet18',
         help="NN model description (name), default: vgg8")
     parser.add_argument("-DisHW", "--disable_hardware_modeling", action='store_true', default=False,
@@ -60,7 +64,7 @@ def main():
     parser.add_argument("-DisLayOut", "--disable_layer_output", action='store_true', default=False,
         help="Disable layer-wise simulation results output, default: false")
     #linqiushi modified
-    parser.add_argument("-mix_mode","--mix_mode", default=2, help="1:no mix, 2:mix among tile, 3:mix among tile(easy)")
+    parser.add_argument("-mix_mode","--mix_mode", default=2, type=int, help="1:no mix, 2:mix among tile, 3:mix among tile(easy)")
     parser.add_argument("-mix_tile", "--mix_tileinfo", default=mix_tile_path, help="the exact tile info used in the mixing")
     #linqiushi above
     args = parser.parse_args()
@@ -87,13 +91,13 @@ def main():
     else:
         assert 0, f'mix mode should in {1,2,3,4}'
     #linqiushi above
-   
-    mapping_start_time = time.time()
     
+    mapping_start_time = time.time()
+
     #linqiiushi modified
     #add parser:mix_mode mix_ratio
     #cifar10/cifar100/Imagenet
-    __TestInterface = TrainTestInterface(network_module=args.NN, dataset_module='MNSIM.Interface.cifar10',  
+    __TestInterface = TrainTestInterface(network_module=args.NN, dataset_module=f"MNSIM.Interface.{args.dataset}",  
         SimConfig_path=args.hardware_description, weights_file=args.weights, device=args.device)
    
     structure_file = __TestInterface.get_structure()
@@ -117,26 +121,29 @@ def main():
     mapping_end_time = time.time()
     if not (args.disable_hardware_modeling):
         hardware_modeling_start_time = time.time()
-        __latency = Model_latency(NetStruct=structure_file, SimConfig_path=args.hardware_description, TCG_mapping=TCG_mapping,mix_mode=args.mix_mode,mix_tile=mix_tile)
+        __area = Model_area(NetStruct=structure_file, SimConfig_path=args.hardware_description, TCG_mapping=TCG_mapping,mix_mode=args.mix_mode)
+        
+        print("========================Area Results=================================")
+        area_MNSIM=__area.model_area_output(not (args.disable_module_output), not (args.disable_layer_output))
+        __latency = Model_latency(NetStruct=structure_file, SimConfig_path=args.hardware_description, TCG_mapping=TCG_mapping,mix_mode=args.mix_mode,mix_tile=mix_tile,area_MNSIM=area_MNSIM)
         if not (args.disable_inner_pipeline):
             if TCG_mapping.rewrite_mode==2:
                 __latency.calculate_model_latency_LLM(mode=1,mix_mode=args.mix_mode)
             else:
                 __latency.calculate_model_latency(mode=1,mix_mode=args.mix_mode)
-            # __latency.calculate_model_latency_nopipe()
+                #__latency.calculate_model_latency_nopipe()
             
         else:
             __latency.calculate_model_latency_nopipe()
         hardware_modeling_end_time = time.time()
+        
+        
         print("========================Latency Results=================================")
         if TCG_mapping.rewrite_mode==2:
             __latency.model_latency_output_LLM(not (args.disable_module_output), not (args.disable_layer_output),TCG_mapping.rewrite_layer_list)
         else:
             __latency.model_latency_output(not (args.disable_module_output), not (args.disable_layer_output))
-        __area = Model_area(NetStruct=structure_file, SimConfig_path=args.hardware_description, TCG_mapping=TCG_mapping,mix_mode=args.mix_mode)
         
-        print("========================Area Results=================================")
-        __area.model_area_output(not (args.disable_module_output), not (args.disable_layer_output))
         __power = Model_inference_power(NetStruct=structure_file, SimConfig_path=args.hardware_description,
                                         TCG_mapping=TCG_mapping,mix_mode=args.mix_mode)
         print("========================Power Results=================================")
@@ -168,9 +175,9 @@ def main():
     '''
     mapping_time = mapping_end_time - mapping_start_time
     
-    
-    print("Mapping time:", mapping_time)
     '''
+    print("Mapping time:", mapping_time)
+    
     if not (args.disable_hardware_modeling):
         hardware_modeling_time = hardware_modeling_end_time - hardware_modeling_start_time
         print("Hardware modeling time:", hardware_modeling_time)
@@ -184,7 +191,9 @@ def main():
     print("Total simulation time:", mapping_time+hardware_modeling_time+accuracy_modeling_time)
     '''
     # print(structure_file)
-
+    end_time = time.time()  # 记录结束时间
+    elapsed_time = end_time - start_time  # 计算运行时间
+    print(f"程序运行时间：{elapsed_time}秒")
 
 if __name__ == '__main__':
     # Data_clean()

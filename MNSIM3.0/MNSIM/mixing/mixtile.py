@@ -13,6 +13,7 @@ from MNSIM.Latency_Model.Pooling_latency import pooling_latency_analysis
 from MNSIM.NoC.interconnect_estimation import interconnect_estimation
 from MNSIM.Hardware_Model.Buffer import buffer
 from MNSIM.Hardware_Model.Tile import tile
+from IPython import embed
 
 def generate_normal_matrix(row, column):
     matrix = np.zeros([row, column])
@@ -177,13 +178,135 @@ def generate_zigzag_matrix(row, column):
         start += 1
     return matrix,pos
 
+def generate_normal_matrix_cmesh(row, column, c=2):
+    matrix_min,pos_min=generate_normal_matrix(c,c)
+    matrix = np.zeros([row, column])
+    pos=np.zeros([row*column,2])
+    start = 0
+    for i in range(int(row/c)):
+        for j in range(int(column/c)):
+            for m in range(c):
+                for n in range(c):
+                    matrix[i*c+m][j*c+n] = start*c**2+int(matrix_min[m][n])
+                    pos[start*c**2+int(matrix_min[m][n])][0]=i*c+m
+                    pos[start*c**2+int(matrix_min[m][n])][1]=j*c+n
+            start += 1
+    return matrix,pos
+
+def generate_snake_matrix_cmesh(row, column, c=2):
+    matrix_min,pos_min=generate_snake_matrix(c,c)
+    matrix = np.zeros([row, column])
+    pos=np.zeros([row*column,2])
+    start = 0
+    for i in range(int(row/c)):
+        for j in range(int(column/c)):
+            for m in range(c):
+                for n in range(c):
+                    if i % 2:
+                        matrix[i*c+m][(int(column/c) - j - 1)*c+n] = start*c**2+int(matrix_min[m][n])
+                        pos[start*c**2+int(matrix_min[m][n])][0]=i*c+m
+                        pos[start*c**2+int(matrix_min[m][n])][1]=(int(column/c) - j - 1)*c+n
+                    else:
+                        matrix[i*c+m][j*c+n] = start*c**2+int(matrix_min[m][n])
+                        pos[start*c**2+int(matrix_min[m][n])][0]=i*c+m
+                        pos[start*c**2+int(matrix_min[m][n])][1]=j*c+n
+            start += 1
+    return matrix,pos
+
+def generate_zigzag_matrix_cmesh(row, column, c=2):
+    matrix_min,pos_min=generate_zigzag_matrix(c,c)
+    matrix = np.zeros([row, column])
+    pos=np.zeros([row*column,2])
+    state = 0
+    stride = 1
+    step = 0
+    i = 0
+    j = 0
+    start = 0
+    for x in range(int(row/c) * int(column/c)):
+        if x == 0:
+            for m in range(c):
+                for n in range(c):
+                    matrix[i*c+m][j*c+n] = start*c**2+int(matrix_min[m][n])
+                    pos[start*c**2+int(matrix_min[m][n])][0]=i*c+m
+                    pos[start*c**2+int(matrix_min[m][n])][1]=j*c+n
+        else:
+            if state == 0:
+                if j < int(column/c) - 1:
+                    j += 1
+                    for m in range(c):
+                        for n in range(c):
+                            matrix[i*c+m][j*c+n] = start*c**2+int(matrix_min[m][n])
+                            pos[start*c**2+int(matrix_min[m][n])][0]=i*c+m
+                            pos[start*c**2+int(matrix_min[m][n])][1]=j*c+n
+                else:
+                    i += 1
+                    for m in range(c):
+                        for n in range(c):
+                            matrix[i*c+m][j*c+n] = start*c**2+int(matrix_min[m][n])
+                            pos[start*c**2+int(matrix_min[m][n])][0]=i*c+m
+                            pos[start*c**2+int(matrix_min[m][n])][1]=j*c+n
+                state = 1
+            elif state == 1:
+                i += 1
+                j -= 1
+                for m in range(c):
+                    for n in range(c):
+                        matrix[i*c+m][j*c+n] = start*c**2+int(matrix_min[m][n])
+                        pos[start*c**2+int(matrix_min[m][n])][0]=i*c+m
+                        pos[start*c**2+int(matrix_min[m][n])][1]=j*c+n
+                step += 1
+                if i == int(row/c) - 1:
+                    state = 2
+                    stride -= 1
+                    step = 0
+                elif step == stride:
+                    state = 2
+                    stride += 1
+                    step = 0
+            elif state == 2:
+                if i < int(row/c) - 1:
+                    i += 1
+                    for m in range(c):
+                        for n in range(c):
+                            matrix[i*c+m][j*c+n] = start*c**2+int(matrix_min[m][n])
+                            pos[start*c**2+int(matrix_min[m][n])][0]=i*c+m
+                            pos[start*c**2+int(matrix_min[m][n])][1]=j*c+n
+                else:
+                    j += 1
+                    for m in range(c):
+                        for n in range(c):
+                            matrix[i*c+m][j*c+n] = start*c**2+int(matrix_min[m][n])
+                            pos[start*c**2+int(matrix_min[m][n])][0]=i*c+m
+                            pos[start*c**2+int(matrix_min[m][n])][1]=j*c+n
+                state = 3
+            elif state == 3:
+                j += 1
+                i -= 1
+                for m in range(c):
+                    for n in range(c):
+                        matrix[i*c+m][j*c+n] = start*c**2+int(matrix_min[m][n])
+                        pos[start*c**2+int(matrix_min[m][n])][0]=i*c+m
+                        pos[start*c**2+int(matrix_min[m][n])][1]=j*c+n
+                step += 1
+                if j == int(column/c) - 1:
+                    state = 0
+                    stride -= 1
+                    step = 0
+                elif step == stride:
+                    state = 0
+                    stride += 1
+                    step = 0
+        start += 1
+    return matrix,pos
 
 class mixtile():
     def __init__(self,mix_tile_path):
         tile_config = cp.ConfigParser()
         tile_config.read(mix_tile_path, encoding='UTF-8')
         self.tile_num=list(map(int,tile_config.get('tile','tile_num').split(',')))
-        self.tile_connection=int(tile_config.get('tile','tile_connection'))
+        self.topology=int(tile_config.get('tile','topology'))
+        self.c=int(tile_config.get('tile','c'))
         self.device_type = [tile_config.get('tile', f'device_type{i}').split(',') for i in range(self.tile_num[0])]
         self.PE_num=[tile_config.get('tile', f'PE_num{i}').split(',') for i in range(self.tile_num[0])]
         for i in range(len(self.PE_num)):
@@ -271,11 +394,19 @@ class mixtile():
         
         return TCG_mapping
     def mapping_matrix_gen(self):
-        if self.tile_connection == 0:
-            [self.mapping_order,self.pos_mapping_order] = generate_normal_matrix(self.tile_num[0], self.tile_num[1])
-        elif self.tile_connection == 1:
-            [self.mapping_order,self.pos_mapping_order] = generate_snake_matrix(self.tile_num[0], self.tile_num[1])
-        elif self.tile_connection == 2:
-            [self.mapping_order,self.pos_mapping_order] = generate_hui_matrix(self.tile_num[0], self.tile_num[1])
-        elif self.tile_connection == 3:
-            [self.mapping_order,self.pos_mapping_order] = generate_zigzag_matrix(self.tile_num[0], self.tile_num[1])
+        if self.topology == 0:
+            if self.tile_connection == 0:
+                [self.mapping_order,self.pos_mapping_order] = generate_normal_matrix(self.tile_num[0], self.tile_num[1])
+            elif self.tile_connection == 1:
+                [self.mapping_order,self.pos_mapping_order] = generate_snake_matrix(self.tile_num[0], self.tile_num[1])
+            elif self.tile_connection == 2:
+                [self.mapping_order,self.pos_mapping_order] = generate_hui_matrix(self.tile_num[0], self.tile_num[1])
+            elif self.tile_connection == 3:
+                [self.mapping_order,self.pos_mapping_order] = generate_zigzag_matrix(self.tile_num[0], self.tile_num[1])
+        elif self.topology == 1:
+            if self.tile_connection == 0:
+                [self.mapping_order,self.pos_mapping_order] = generate_normal_matrix_cmesh(self.tile_num[0], self.tile_num[1], self.c)
+            elif self.tile_connection == 1:
+                [self.mapping_order,self.pos_mapping_order] = generate_snake_matrix_cmesh(self.tile_num[0], self.tile_num[1], self.c)
+            elif self.tile_connection == 3:
+                [self.mapping_order,self.pos_mapping_order] = generate_zigzag_matrix_cmesh(self.tile_num[0], self.tile_num[1], self.c)

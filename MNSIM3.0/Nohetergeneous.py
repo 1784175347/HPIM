@@ -11,6 +11,8 @@ from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 from scipy.interpolate import griddata
 import random
+import os
+from MNSIM.Interface.interface import *
 
 class Nohetergeneous:
     def __init__(self):
@@ -19,13 +21,151 @@ class Nohetergeneous:
         self.PE_num = [[8 for _ in range(self.tilenum)] for _ in range(self.tilenum)]
         self.xbar_size = [[256 for _ in range(self.tilenum)] for _ in range(self.tilenum)]
         self.mapping = [['no' for _ in range(self.tilenum)] for _ in range(self.tilenum)]
-        self.auto_layer_mapping = 1
+        self.auto_layer_mapping = 0
         self.area = 0
         self.power = 0
         self.latency = 0
         self.T = 0
         self.tile_connection = 0
 
+    def generate_normal_matrix(self, row, column):
+        matrix = np.zeros([row, column])
+        start = 0
+        for i in range(row):
+            for j in range(column):
+                matrix[i][j] = start
+                start += 1
+        return matrix
+
+
+    def generate_snake_matrix(self, row, column):
+        matrix = np.zeros([row, column])
+        start = 0
+        for i in range(row):
+            for j in range(column):
+                if i % 2:
+                    matrix[i][column - j - 1] = start
+                else:
+                    matrix[i][j] = start
+                start += 1
+        return matrix
+
+    def generate_hui_matrix(self, row, column):
+        matrix = np.zeros([row, column])
+        state = 0
+        stride = 1
+        step = 0
+        start = 0
+        dl = 0
+        ru = 0
+        i = 0
+        j = 0
+        for x in range(row * column):
+            if x == 0:
+                matrix[i][j] = start
+            else:
+                if state == 0:
+                    j += 1
+                    matrix[i][j] = start
+                    state = 1
+                elif state == 1:
+                    if dl == 0:
+                        i += 1
+                        matrix[i][j] = start
+                        step += 1
+                        if step == stride:
+                            dl = 1
+                            step = 0
+                    elif dl == 1:
+                        j -= 1
+                        matrix[i][j] = start
+                        step += 1
+                        if step == stride:
+                            dl = 0
+                            step = 0
+                            stride += 1
+                            state = 2
+                elif state == 2:
+                    i += 1
+                    matrix[i][j] = start
+                    state = 3
+                elif state == 3:
+                    if ru == 0:
+                        j += 1
+                        matrix[i][j] = start
+                        step += 1
+                        if step == stride:
+                            ru = 1
+                            step = 0
+                    elif ru == 1:
+                        i -= 1
+                        matrix[i][j] = start
+                        step += 1
+                        if step == stride:
+                            ru = 0
+                            step = 0
+                            stride += 1
+                            state = 0
+            start += 1
+        return matrix
+
+    def generate_zigzag_matrix(self, row, column):
+        matrix = np.zeros([row, column])
+        state = 0
+        stride = 1
+        step = 0
+        i = 0
+        j = 0
+        start = 0
+        for x in range(row * column):
+            if x == 0:
+                matrix[i][j] = start
+            else:
+                if state == 0:
+                    if j < column - 1:
+                        j += 1
+                        matrix[i][j] = start
+                    else:
+                        i += 1
+                        matrix[i][j] = start
+                    state = 1
+                elif state == 1:
+                    i += 1
+                    j -= 1
+                    matrix[i][j] = start
+                    step += 1
+                    if i == row - 1:
+                        state = 2
+                        stride -= 1
+                        step = 0
+                    elif step == stride:
+                        state = 2
+                        stride += 1
+                        step = 0
+                elif state == 2:
+                    if i < row - 1:
+                        i += 1
+                        matrix[i][j] = start
+                    else:
+                        j += 1
+                        matrix[i][j] = start
+                    state = 3
+                elif state == 3:
+                    j += 1
+                    i -= 1
+                    matrix[i][j] = start
+                    step += 1
+                    if j == column - 1:
+                        state = 0
+                        stride -= 1
+                        step = 0
+                    elif step == stride:
+                        state = 0
+                        stride += 1
+                        step = 0
+            start += 1
+        return matrix
+    
     def update_ini_file(self, file_path, tile_connection):
         with open(file_path, 'r') as file:
             lines = file.readlines()
@@ -129,6 +269,9 @@ class Nohetergeneous:
             file.write(f"auto_layer_mapping={self.auto_layer_mapping}\n")
             file.write(f"\n")
             file.write(f"tile_connection={self.tile_connection}\n")
+            file.write(f"topology=0\n")
+            file.write(f"\n")
+            file.write(f"c=2\n")
 
     def HMSIM_SimConfig_self(self):
         with open('test.ini', 'w') as file:
@@ -172,53 +315,116 @@ class Nohetergeneous:
             file.write(f"auto_layer_mapping={self.auto_layer_mapping}\n")
             file.write(f"\n")
             file.write(f"tile_connection={self.tile_connection}\n")
+            file.write(f"topology=0\n")
+            file.write(f"\n")
+            file.write(f"c=2\n")
 
+    def generate_new_layer_config(self, layernum, tile_type, PE_num, xbar_size, structure, tile_connection, topology, c):
+        tilenum_layer = [0 for _ in range(layernum)]
+        
+        for i in range(layernum):
+            layer_dict = structure[i][0][0]
+            layer_type = layer_dict['type']
+            weight_precision = int(layer_dict['Weightbit']) - 1
+            #print(f"layer num={i}\n")
+            #print(f"type={layer_dict['type']}\n")
+            if layer_type == 'conv':
+                mx = math.ceil(weight_precision) * math.ceil(int(layer_dict['Outputchannel']) / xbar_size)
+                my = math.ceil(int(layer_dict['Inputchannel']) / (xbar_size // (int(layer_dict['Kernelsize']) ** 2)))
+                PEnum = mx * my
+                tilenum_layer[i] = math.ceil(PEnum / (PE_num**2))
+            elif layer_type == 'fc':
+                mx = math.ceil(weight_precision) * math.ceil(int(layer_dict['Outfeature']) / xbar_size)
+                my = math.ceil(int(layer_dict['Infeature']) / xbar_size)
+                PEnum = mx * my
+                tilenum_layer[i] = math.ceil(PEnum / (PE_num**2))
+            elif layer_type == 'pooling':
+                mx = 1
+                my = 1
+                PEnum = mx * my
+                tilenum_layer[i] = math.ceil(PEnum / (PE_num**2))
+            elif layer_type == 'element_sum':
+                mx = 0
+                my = 0
+                PEnum = mx * my
+                tilenum_layer[i] = math.ceil(PEnum / (PE_num**2))
+            elif layer_type == 'element_multiply':
+                mx = 0
+                my = 0
+                PEnum = mx * my
+                tilenum_layer[i] = math.ceil(PEnum / (PE_num**2))
+        for i in range(layernum):
+            if i > 0:
+                tilenum_layer[i] = tilenum_layer[i] + tilenum_layer[i-1]
+        tilenum_total = tilenum_layer[layernum-1]
+        tilenum_total = math.ceil(math.sqrt(tilenum_total))
+        if topology == 0:
+            tilenum = tilenum_total
+        elif topology == 1:
+            tilenum = math.ceil(tilenum_total / c) * c
+        tile_type_new = [[tile_type for _ in range(tilenum)] for _ in range(tilenum)]
+        PE_num_new = [[PE_num for _ in range(tilenum)] for _ in range(tilenum)]
+        xbar_size_new = [[xbar_size for _ in range(tilenum)] for _ in range(tilenum)]
+        mapping_new = [['no' for _ in range(tilenum)] for _ in range(tilenum)]
+        if tile_connection == 0:
+            mapping_order = self.generate_normal_matrix(tilenum, tilenum)
+        elif tile_connection == 1:
+            mapping_order = self.generate_snake_matrix(tilenum, tilenum)
+        elif tile_connection == 2:
+            mapping_order = self.generate_hui_matrix(tilenum, tilenum)
+        elif tile_connection == 3:
+            mapping_order = self.generate_zigzag_matrix(tilenum, tilenum)
+        for i in range(tilenum):
+            for j in range(tilenum):
+                for m in range(layernum):
+                    if mapping_order[i][j] < tilenum_layer[m]:
+                        mapping_new[i][j] = m
+                        break
+
+        return tilenum, tile_type_new,  PE_num_new, xbar_size_new, mapping_new
+    
     def run(self):
+        net='resnet18'
+        dataset='Imagenet'
+        home_path = os.getcwd()
+        weight_path = os.path.join(home_path, f"{dataset}_{net}_params.pth") 
+        SimConfig_path = os.path.join(home_path, "SimConfig.ini") 
+        __TestInterface = TrainTestInterface(network_module=net, dataset_module=f'MNSIM.Interface.{dataset}', SimConfig_path=SimConfig_path, weights_file=weight_path, device=0)
+        structure_file = __TestInterface.get_structure()
+        layer_num = len(structure_file)
         
         
-        tilenum = [64]
-        tiletype = ['NVM']
-        PEnum = [1]
-        xbarsize = [1024]
-        tileconnetion = [3]
-        self.tile_connection = 0
-        '''
-        tilenum = [64]
         tiletype = ['SRAM','NVM']
-        PEnum = [1,2,4,8,16,32]
-        xbarsize = [32,64,128,256,512,1024]
+        PEnum = [1,2,4]
+        xbarsize = [128,256,512,1024]
         tileconnetion = [0,1,3] 
         '''
-        
+        tiletype = ['NVM']
+        PEnum = [4]
+        xbarsize = [512]
+        tileconnetion = [0,1,3]
+        '''
 
-        for i in range(len(tilenum)):
-            for j in range(len(tiletype)):
-                for m in range(len(PEnum)):
-                    for n in range(len(xbarsize)):
-                        for k in range(len(tileconnetion)):
-                            self.tilenum = tilenum[i]
-                            self.tile_type = [[tiletype[j] for _ in range(self.tilenum)] for _ in range(self.tilenum)]
-                            self.PE_num = [[PEnum[m] for _ in range(self.tilenum)] for _ in range(self.tilenum)]
-                            self.xbar_size = [[xbarsize[n] for _ in range(self.tilenum)] for _ in range(self.tilenum)]
-                            self.tile_connection = tileconnetion[k]
-                            self.update_ini_file('./SimConfig.ini',self.tile_connection)
-                            self.area, self.power, self.latency = self.HMSIM(self.tilenum, self.tile_type,  self.PE_num, self.xbar_size, self.mapping)
-                            f=self.func(self.area, self.power, self.latency)
-                            self.T = k + n*len(tileconnetion) + m*len(tileconnetion)*len(xbarsize) + j*len(tileconnetion)*len(xbarsize)*len(PEnum) + i*len(tileconnetion)*len(xbarsize)*len(PEnum)*len(tiletype)
-                            #device1 = Device(T=self.T, area=self.area, power=self.power, latency=self.latency, f=f)
-                            #device1.write_to_file("Nohetergeneous.txt.txt")
-                            device = Device(T=self.T, area=self.area, power=self.power, latency=self.latency, f=f)
-                            device.write_to_csv('Nohetergeneous.csv')
-                            print(f"T={self.T}\n")
-                            print(f"area={self.area}um^2\n")
-                            print(f"power={self.power}W\n")
-                            print(f"latency={self.latency}ns\n")
-                            print(f"f={f}\n")
+        for j in range(len(tiletype)):
+            for m in range(len(PEnum)):
+                for n in range(len(xbarsize)):
+                    for k in range(len(tileconnetion)):
+                        self.tilenum,self.tile_type,self.PE_num,self.xbar_size,self.mapping=self.generate_new_layer_config(layer_num,tiletype[j],PEnum[m],xbarsize[n],structure_file,tileconnetion[k],0,2)
+                        self.tile_connection = tileconnetion[k]
+                        self.update_ini_file('./SimConfig.ini',self.tile_connection)
+                        self.area, self.power, self.latency = self.HMSIM(self.tilenum, self.tile_type,  self.PE_num, self.xbar_size, self.mapping)
+                        f=self.func(self.area, self.power, self.latency)
+                        self.T = k + n*len(tileconnetion) + m*len(tileconnetion)*len(xbarsize) + j*len(tileconnetion)*len(xbarsize)*len(PEnum)
+                        #device1 = Device(T=self.T, area=self.area, power=self.power, latency=self.latency, f=f)
+                        #device1.write_to_file("Nohetergeneous.txt.txt")
+                        device = Device(T=self.T, area=self.area, power=self.power, latency=self.latency, f=f)
+                        device.write_to_csv('Nohetergeneous.csv')
+                        print(f"T={self.T}\n")
+                        print(f"area={self.area}um^2\n")
+                        print(f"power={self.power}W\n")
+                        print(f"latency={self.latency}ns\n")
+                        print(f"f={f}\n")
         
-        csv_file = 'Nohetergeneous.csv'
-        excel_file = 'Nohetergeneous.xlsx'
-        df = pd.read_csv(csv_file)
-        df.to_excel(excel_file, index=False)
 
 class Device:
     def __init__(self, T, area, power, latency, f):
@@ -254,6 +460,7 @@ class Device:
             df = pd.DataFrame([data])
             df.to_csv(filename, mode='a', index=False, header=not pd.io.common.file_exists(filename))
 
+os.environ['CUDA_VISIBLE_DEVICES'] = '2,3'
 sa = Nohetergeneous()
 sa.run()
 '''

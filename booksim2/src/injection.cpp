@@ -263,7 +263,7 @@ void LoadSetupInjectionTable(const std::string &filename,int _nodes){
     size_t path_num;
     path_num = setupInjectionTable[i].size();
     for (size_t j=0; j<path_num; j++){
-        injection_rate_sum_setup[i] += std::get<3>(setupInjectionTable[j][1]);
+        injection_rate_sum_setup[i] += std::get<1>(setupInjectionTable[i][j]);
     }
     assert(injection_rate_sum_setup[i] <= 1 && "The injection rate is greater than 1");
   }

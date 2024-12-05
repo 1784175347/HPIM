@@ -230,6 +230,127 @@ def generate_zigzag_matrix(row, column):
         start += 1
     return matrix,pos
 
+def generate_normal_matrix_cmesh(row, column, c=2):
+    matrix_min,pos_min=generate_normal_matrix(c,c)
+    matrix = np.zeros([row, column])
+    pos=np.zeros([row*column,2])
+    start = 0
+    for i in range(int(row/c)):
+        for j in range(int(column/c)):
+            for m in range(c):
+                for n in range(c):
+                    matrix[i*c+m][j*c+n] = start*c**2+int(matrix_min[m][n])
+                    pos[start*c**2+int(matrix_min[m][n])][0]=i*c+m
+                    pos[start*c**2+int(matrix_min[m][n])][1]=j*c+n
+            start += 1
+    return matrix,pos
+
+def generate_snake_matrix_cmesh(row, column, c=2):
+    matrix_min,pos_min=generate_snake_matrix(c,c)
+    matrix = np.zeros([row, column])
+    pos=np.zeros([row*column,2])
+    start = 0
+    for i in range(int(row/c)):
+        for j in range(int(column/c)):
+            for m in range(c):
+                for n in range(c):
+                    if i % 2:
+                        matrix[i*c+m][(int(column/c) - j - 1)*c+n] = start*c**2+int(matrix_min[m][n])
+                        pos[start*c**2+int(matrix_min[m][n])][0]=i*c+m
+                        pos[start*c**2+int(matrix_min[m][n])][1]=(int(column/c) - j - 1)*c+n
+                    else:
+                        matrix[i*c+m][j*c+n] = start*c**2+int(matrix_min[m][n])
+                        pos[start*c**2+int(matrix_min[m][n])][0]=i*c+m
+                        pos[start*c**2+int(matrix_min[m][n])][1]=j*c+n
+            start += 1
+    return matrix,pos
+
+def generate_zigzag_matrix_cmesh(row, column, c=2):
+    matrix_min,pos_min=generate_zigzag_matrix(c,c)
+    matrix = np.zeros([row, column])
+    pos=np.zeros([row*column,2])
+    state = 0
+    stride = 1
+    step = 0
+    i = 0
+    j = 0
+    start = 0
+    for x in range(int(row/c) * int(column/c)):
+        if x == 0:
+            for m in range(c):
+                for n in range(c):
+                    matrix[i*c+m][j*c+n] = start*c**2+int(matrix_min[m][n])
+                    pos[start*c**2+int(matrix_min[m][n])][0]=i*c+m
+                    pos[start*c**2+int(matrix_min[m][n])][1]=j*c+n
+        else:
+            if state == 0:
+                if j < int(column/c) - 1:
+                    j += 1
+                    for m in range(c):
+                        for n in range(c):
+                            matrix[i*c+m][j*c+n] = start*c**2+int(matrix_min[m][n])
+                            pos[start*c**2+int(matrix_min[m][n])][0]=i*c+m
+                            pos[start*c**2+int(matrix_min[m][n])][1]=j*c+n
+                else:
+                    i += 1
+                    for m in range(c):
+                        for n in range(c):
+                            matrix[i*c+m][j*c+n] = start*c**2+int(matrix_min[m][n])
+                            pos[start*c**2+int(matrix_min[m][n])][0]=i*c+m
+                            pos[start*c**2+int(matrix_min[m][n])][1]=j*c+n
+                state = 1
+            elif state == 1:
+                i += 1
+                j -= 1
+                for m in range(c):
+                    for n in range(c):
+                        matrix[i*c+m][j*c+n] = start*c**2+int(matrix_min[m][n])
+                        pos[start*c**2+int(matrix_min[m][n])][0]=i*c+m
+                        pos[start*c**2+int(matrix_min[m][n])][1]=j*c+n
+                step += 1
+                if i == int(row/c) - 1:
+                    state = 2
+                    stride -= 1
+                    step = 0
+                elif step == stride:
+                    state = 2
+                    stride += 1
+                    step = 0
+            elif state == 2:
+                if i < int(row/c) - 1:
+                    i += 1
+                    for m in range(c):
+                        for n in range(c):
+                            matrix[i*c+m][j*c+n] = start*c**2+int(matrix_min[m][n])
+                            pos[start*c**2+int(matrix_min[m][n])][0]=i*c+m
+                            pos[start*c**2+int(matrix_min[m][n])][1]=j*c+n
+                else:
+                    j += 1
+                    for m in range(c):
+                        for n in range(c):
+                            matrix[i*c+m][j*c+n] = start*c**2+int(matrix_min[m][n])
+                            pos[start*c**2+int(matrix_min[m][n])][0]=i*c+m
+                            pos[start*c**2+int(matrix_min[m][n])][1]=j*c+n
+                state = 3
+            elif state == 3:
+                j += 1
+                i -= 1
+                for m in range(c):
+                    for n in range(c):
+                        matrix[i*c+m][j*c+n] = start*c**2+int(matrix_min[m][n])
+                        pos[start*c**2+int(matrix_min[m][n])][0]=i*c+m
+                        pos[start*c**2+int(matrix_min[m][n])][1]=j*c+n
+                step += 1
+                if j == int(column/c) - 1:
+                    state = 0
+                    stride -= 1
+                    step = 0
+                elif step == stride:
+                    state = 0
+                    stride += 1
+                    step = 0
+        start += 1
+    return matrix,pos
 
 class TCG():
     def __init__(self, NetStruct, SimConfig_path, multiple=None,mix_mode=0,mix_tile=None):
@@ -240,9 +361,13 @@ class TCG():
             multiple = [1] * len(NetStruct)
         self.tile = tile(SimConfig_path)
         #linqiushi: need to change tile-->two kinds of tile
+        self.mode4starttime=[]
+        self.mode4endtime=[]
         self.mode4posi=[]
         self.mode4posj=[]
         self.mode4injection=[]
+        self.mode2starttime=[]
+        self.mode2endtime=[]
         self.mode2posi=[]
         self.mode2posj=[]
         self.mode2injection=[]
@@ -256,6 +381,8 @@ class TCG():
         if mix_tile!=None and mix_tile.tile_num[0]!=0 and mix_tile.tile_num[1]!=0:
             self.tile_num[0]=mix_tile.tile_num[0]
             self.tile_num[1]=mix_tile.tile_num[1]
+            self.c = mix_tile.c
+            self.topology = mix_tile.topology
         assert self.tile_num[0] > 0, "Tile number < 0"
         assert self.tile_num[1] > 0, "Tile number < 0"
         self.tile_total_num = self.tile_num[0] * self.tile_num[1]
@@ -316,7 +443,7 @@ class TCG():
         self.tile_connection = int(TCG_config.get('Architecture level', 'Tile_Connection'))
         if mix_mode!=1:
             self.mapping_matrix_gen()
-            print(self.mapping_order)
+            #print(self.mapping_order)
         if mix_mode==2:
             self.tile_num=mix_tile.tile_num
             self.auto_layer_mapping=mix_tile.auto_layer_mapping
@@ -365,7 +492,6 @@ class TCG():
             outputchannel = 0
             data_inbuf = 0
             data_outbuf = 0
-            
                 
             if self.mix_mode==3:
                 
@@ -1351,14 +1477,14 @@ class TCG():
                     #get the tile array
                     all_cap=0
                     while(1):
+                        if mixmode2_tilecount>=mix_tile.tile_num[0]*mix_tile.tile_num[0]:
+                            tmp_tileinfo['tilenum']=temp_tilenum
+                            tmp_tileinfo['PEnum']=temp_PE_num
+                            break
                         #through the tile
                         i=int(self.pos_mapping_order[mixmode2_tilecount][0])
                         j=int(self.pos_mapping_order[mixmode2_tilecount][1])
                         #able to change
-                        if mixmode2_tilecount>=mix_tile.tile_num[0]*mix_tile.tile_num[0]-1:
-                            tmp_tileinfo['tilenum']=temp_tilenum
-                            tmp_tileinfo['PEnum']=temp_PE_num
-                            break
                         if mix_tile.layer_mapping[i][j]=='no':
                             mixmode2_tilecount+=1
                             pass
@@ -1439,14 +1565,14 @@ class TCG():
                     all_cap=0
                     #get the tile array
                     while(1):
+                        if mixmode2_tilecount>=mix_tile.tile_num[0]*mix_tile.tile_num[0]:
+                            tmp_tileinfo['tilenum']=temp_tilenum
+                            tmp_tileinfo['PEnum']=temp_PE_num
+                            break
                         #through the tile
                         i=int(self.pos_mapping_order[mixmode2_tilecount][0])
                         j=int(self.pos_mapping_order[mixmode2_tilecount][1])
                         #able to change
-                        if mixmode2_tilecount>=mix_tile.tile_num[0]*mix_tile.tile_num[0]-1:
-                            tmp_tileinfo['tilenum']=temp_tilenum
-                            tmp_tileinfo['PEnum']=temp_PE_num
-                            break
                         if mix_tile.layer_mapping[i][j]=='no':
                             mixmode2_tilecount+=1
                             pass
@@ -1464,6 +1590,8 @@ class TCG():
                             tmp_tileinfo['tilenum']=temp_tilenum
                             tmp_tileinfo['PEnum']=temp_PE_num
                             break
+                        
+                    
                     tmp_tileinfo['all_cap']=all_cap 
                     tmp_tileinfo['xbar_size']=tile_xbar_size                        
                     tmp_tileinfo['max_group'] = min(weight_precision, self.tile.group_num)
@@ -1471,6 +1599,7 @@ class TCG():
                         # max_group: maximum used groups in one PE of this layer
                     tmp_tileinfo['tile_max_row']=tile_max_row
                     tmp_tileinfo['tile_max_column']=tile_max_column
+                    
                     tmp_tileinfo['max_row']=max(tile_max_row)
                     tmp_tileinfo['max_column']=max(tile_max_column)
                         # tile_max_row: maximum used row in one crossbar of this layer
@@ -2155,14 +2284,22 @@ class TCG():
         assert self.rewrite_time==len(self.rewrite_tile_num_layer)
         print("letmecheck",self.rewrite_layer_list,self.rewrite_tile_num_layer)
     def mapping_matrix_gen(self):
-        if self.tile_connection == 0:
-            [self.mapping_order,self.pos_mapping_order] = generate_normal_matrix(self.mapping_order.shape[0], self.mapping_order.shape[1])
-        elif self.tile_connection == 1:
-            [self.mapping_order,self.pos_mapping_order] = generate_snake_matrix(self.mapping_order.shape[0], self.mapping_order.shape[1])
-        elif self.tile_connection == 2:
-            [self.mapping_order,self.pos_mapping_order] = generate_hui_matrix(self.mapping_order.shape[0], self.mapping_order.shape[1])
-        elif self.tile_connection == 3:
-            [self.mapping_order,self.pos_mapping_order] = generate_zigzag_matrix(self.mapping_order.shape[0], self.mapping_order.shape[1])
+        if self.topology == 0:
+            if self.tile_connection == 0:
+                [self.mapping_order,self.pos_mapping_order] = generate_normal_matrix(self.mapping_order.shape[0],  self.mapping_order.shape[1])
+            elif self.tile_connection == 1:
+                [self.mapping_order,self.pos_mapping_order] = generate_snake_matrix(self.mapping_order.shape[0],  self.mapping_order.shape[1])
+            elif self.tile_connection == 2:
+                [self.mapping_order,self.pos_mapping_order] = generate_hui_matrix(self.mapping_order.shape[0],  self.mapping_order.shape[1])
+            elif self.tile_connection == 3:
+                [self.mapping_order,self.pos_mapping_order] = generate_zigzag_matrix(self.mapping_order.shape[0],  self.mapping_order.shape[1])
+        elif self.topology == 1:
+            if self.tile_connection == 0:
+                [self.mapping_order,self.pos_mapping_order] = generate_normal_matrix_cmesh(self.mapping_order.shape[0],  self.mapping_order.shape[1], self.c)
+            elif self.tile_connection == 1:
+                [self.mapping_order,self.pos_mapping_order] = generate_snake_matrix_cmesh(self.mapping_order.shape[0],  self.mapping_order.shape[1], self.c)
+            elif self.tile_connection == 3:
+                [self.mapping_order,self.pos_mapping_order] = generate_zigzag_matrix_cmesh(self.mapping_order.shape[0],  self.mapping_order.shape[1], self.c)
 
     def mapping_net(self):
         self.mapping_matrix_gen()
@@ -2230,7 +2367,517 @@ class TCG():
                             break
                     count+=1
             print("wokanyixia",self.mapping_result_rewrite)
+
+    def calculate_distance_cmesh(self,src_pos,dst_pos,c):
+        src_x = int(src_pos[0]/c)
+        src_y = int(src_pos[1]/c)
+        dst_x = int(dst_pos[0]/c)
+        dst_y = int(dst_pos[1]/c)
+        distance = 2
+        if (src_x==dst_x and src_y==dst_y):
+            return distance
+        distance = distance + abs(src_x-dst_x) + abs(src_y-dst_y)
+        return distance
+    
+    def calculate_transfer_distance_cmesh(self,c):
+        if self.rewrite_mode==0:
+            for layer_id in range(self.layer_num - 1):
+                # Determine the aggregate node for layer 0~N-1
+                if self.layer_tileinfo[layer_id]['is_branchout'] == 1:
+                    # for the layer which is a output layer of one branch and the next layer is element_sum
+                    if self.layer_tileinfo[layer_id]['type'] in ['conv', 'pooling', 'fc']:
+                        src_pos = np.argwhere(self.mapping_result == layer_id)
                         
+                        if len(src_pos) == 1:
+                            self.inLayer_distance[0][layer_id] = 0
+                            self.aggregate_arg[layer_id] = src_pos[0]
+                            self.transLayer_distance[0][layer_id] = self.calculate_distance_cmesh(src_pos[0],[1/2*self.tile_num[0],0],c)
+                        else:
+                            mindis_total = 1000
+                            for A in range(len(src_pos)):
+                                tmp_transLayer_distance = self.calculate_distance_cmesh(src_pos[A],[1/2*self.tile_num[0],0],c)
+                                maxdis_in = 0
+                                for i in range(len(src_pos)):
+                                    if i != A:
+                                        dis_in = self.calculate_distance_cmesh(src_pos[A],src_pos[i],c)
+                                        if dis_in > maxdis_in:
+                                            maxdis_in = dis_in
+                                if (maxdis_in+tmp_transLayer_distance)<mindis_total:
+                                    self.inLayer_distance[0][layer_id] = maxdis_in
+                                    self.transLayer_distance[0][layer_id] = tmp_transLayer_distance
+                                    self.aggregate_arg[layer_id] = src_pos[A]
+                                    mindis_total = maxdis_in+tmp_transLayer_distance
+                else:
+                    if self.layer_tileinfo[layer_id]['type'] in ['conv', 'pooling', 'fc']:
+                        src_pos = np.argwhere(self.mapping_result == layer_id)
+                        
+                        if len(src_pos) == 1:
+                            self.inLayer_distance[0][layer_id] = 0
+                            self.aggregate_arg[layer_id] = src_pos[0]
+                            maxdis = 0
+                            for idx in self.layer_tileinfo[layer_id]['Outputindex']:
+                                dst_pos = np.argwhere(self.mapping_result == (layer_id + idx))
+                                for i in range(len(dst_pos)):
+                                    dis = self.calculate_distance_cmesh(src_pos[0],dst_pos[i],c)
+                                    if dis > maxdis:
+                                        maxdis = dis
+                            self.transLayer_distance[0][layer_id] = maxdis
+                        else:
+                            mindis_total = 1000
+                            for A in range(len(src_pos)):
+                                maxdis_in = 0
+                                maxdis_out = 0
+                                for i in range(len(src_pos)):
+                                    if i != A:
+                                        dis_in = self.calculate_distance_cmesh(src_pos[A],src_pos[i],c)
+                                        if dis_in > maxdis_in:
+                                            maxdis_in = dis_in
+                                for idx in self.layer_tileinfo[layer_id]['Outputindex']:
+                                    dst_pos = np.argwhere(self.mapping_result == (layer_id + idx))
+                                    for j in range(len(dst_pos)):
+                                        dis_out = self.calculate_distance_cmesh(src_pos[A],dst_pos[j],c)
+                                        if dis_out > maxdis_out:
+                                            maxdis_out = dis_out
+                                tempdis = maxdis_in + maxdis_out
+                                if tempdis < mindis_total:
+                                    self.inLayer_distance[0][layer_id] = maxdis_in
+                                    self.transLayer_distance[0][layer_id] = maxdis_out
+                                    self.aggregate_arg[layer_id] = src_pos[A]
+                                    mindis_total = tempdis
+                    elif self.layer_tileinfo[layer_id]['type'] == 'element_sum' or self.layer_tileinfo[layer_id]['type'] == 'element_multiply':
+                        maxdis_out = 0
+                        for idx in self.layer_tileinfo[layer_id]['Outputindex']:
+                            dst_pos = np.argwhere(self.mapping_result == (layer_id + idx))
+                            for j in range(len(dst_pos)):
+                                dis_out = self.calculate_distance_cmesh(dst_pos[0],[1/2*self.tile_num[0],0],c)
+                                if dis_out > maxdis_out:
+                                    maxdis_out = dis_out
+                        self.inLayer_distance[0][layer_id] = 0
+                        self.transLayer_distance[0][layer_id] = maxdis_out
+            final_pos = np.argwhere(self.mapping_result == self.layer_num - 1)
+            # Determine the aggregate node for layer N (output layer)
+            mindis = 1000
+            for i in range(len(final_pos)):
+                maxdis = 0
+                for j in range(len(final_pos)):
+                    if j != i:
+                        dis = self.calculate_distance_cmesh(final_pos[i],final_pos[j],c)
+                        if dis > maxdis:
+                            maxdis = dis
+                if maxdis < mindis:
+                    mindis = maxdis
+                    self.inLayer_distance[0][self.layer_num - 1] = mindis
+                    self.aggregate_arg[self.layer_num - 1] = final_pos[i]
+                    self.transLayer_distance[0][self.layer_num - 1] = 0
+        # self.total_distance = sum(sum(self.trans_time * (self.inLayer_distance + self.transLayer_distance)))
+        #linqiushi modified
+        #add for the rewrite
+        if self.rewrite_mode==1:
+            for k in range(self.rewrite_time):
+                if self.start_layer[k]!=self.final_layer[k]:
+                    for layer_id in range(self.start_layer[k],self.final_layer[k]):
+                        # Determine the aggregate node for layer 0~N-1
+                        if self.layer_tileinfo[layer_id]['is_branchout'] == 1:
+                            # for the layer which is a output layer of one branch and the next layer is element_sum
+                            if self.layer_tileinfo[layer_id]['type'] in ['conv', 'pooling', 'fc']:
+                                src_pos=[]
+                                #init the src_pos:
+                                for i in range(len(self.mapping_result_rewrite)):
+                                    for j in range(len(self.mapping_result_rewrite[i])):
+                                        if len(self.mapping_result_rewrite[i][j])>k:
+                                            if self.mapping_result_rewrite[i][j][k]==layer_id:
+                                                src_pos.append([i,j])
+                                
+                                if len(src_pos) == 1:
+                                    self.inLayer_distance[0][layer_id] = 0
+                                    self.aggregate_arg[layer_id] = src_pos[0]
+                                    self.transLayer_distance[0][layer_id] = abs(src_pos[0][0]-1/2*self.tile_num[0]) + src_pos[0][1]
+                                else:
+                                    mindis_total = 1000
+                                    for A in range(len(src_pos)):
+                                        tmp_transLayer_distance = abs(src_pos[A][0]-1/2*self.tile_num[0]) + src_pos[A][1]
+                                        maxdis_in = 0
+                                        for i in range(len(src_pos)):
+                                            if i != A:
+                                                dis_in = abs(src_pos[A][0] - src_pos[i][0]) + abs(src_pos[A][1] - src_pos[i][1])
+                                                if dis_in > maxdis_in:
+                                                    maxdis_in = dis_in
+                                        if (maxdis_in+tmp_transLayer_distance)<mindis_total:
+                                            self.inLayer_distance[0][layer_id] = maxdis_in
+                                            self.transLayer_distance[0][layer_id] = tmp_transLayer_distance
+                                            self.aggregate_arg[layer_id] = src_pos[A]
+                                            mindis_total = maxdis_in+tmp_transLayer_distance
+                        else:
+                            if self.layer_tileinfo[layer_id]['type'] in ['conv', 'pooling', 'fc']:
+                                src_pos=[]
+                                #init the src_pos:
+                                for i in range(len(self.mapping_result_rewrite)):
+                                    for j in range(len(self.mapping_result_rewrite[i])):
+                                        if len(self.mapping_result_rewrite[i][j])>k:
+                                            if self.mapping_result_rewrite[i][j][k]==layer_id:
+                                                src_pos.append([i,j])
+                                
+                                if len(src_pos) == 1:
+                                    self.inLayer_distance[0][layer_id] = 0
+                                    self.aggregate_arg[layer_id] = src_pos[0]
+                                    maxdis = 0
+                                    for idx in self.layer_tileinfo[layer_id]['Outputindex']:
+                                        
+                                        dst_pos=[]
+                                        for i in range(len(self.mapping_result_rewrite)):
+                                            for j in range(len(self.mapping_result_rewrite[i])):
+                                                if len(self.mapping_result_rewrite[i][j])>k:
+                                                    if (self.mapping_result_rewrite[i][j][k]==layer_id+idx) & (layer_id+idx)<=self.final_layer[k]:
+                                                        dst_pos.append([i,j])
+                                        assert len(dst_pos)>0 , f'next layer not on the tiles'
+                                        for i in range(len(dst_pos)):
+                                            dis = abs(src_pos[0][0] - dst_pos[i][0]) + abs(src_pos[0][1] - dst_pos[i][1])
+                                            if dis > maxdis:
+                                                maxdis = dis
+                                    self.transLayer_distance[0][layer_id] = maxdis
+                                else:
+                                    mindis_total = 1000
+                                    for A in range(len(src_pos)):
+                                        maxdis_in = 0
+                                        maxdis_out = 0
+                                        for i in range(len(src_pos)):
+                                            if i != A:
+                                                dis_in = abs(src_pos[A][0] - src_pos[i][0]) + abs(src_pos[A][1] - src_pos[i][1])
+                                                if dis_in > maxdis_in:
+                                                    maxdis_in = dis_in
+                                        for idx in self.layer_tileinfo[layer_id]['Outputindex']:
+                                            dst_pos=[]
+                                            for i in range(len(self.mapping_result_rewrite)):
+                                                for j in range(len(self.mapping_result_rewrite[i])):
+                                                    if len(self.mapping_result_rewrite[i][j])>k:
+                                                        if (self.mapping_result_rewrite[i][j][k]==layer_id+idx) & (layer_id+idx)<=self.final_layer[k]:
+                                                            dst_pos.append([i,j])
+                                            assert len(dst_pos)>0 , f'next layer not on the tiles'
+                                            for j in range(len(dst_pos)):
+                                                dis_out = abs(src_pos[A][0] - dst_pos[j][0]) + abs(src_pos[A][1] - dst_pos[j][1])
+                                                if dis_out > maxdis_out:
+                                                    maxdis_out = dis_out
+                                        tempdis = maxdis_in + maxdis_out
+                                        if tempdis < mindis_total:
+                                            self.inLayer_distance[0][layer_id] = maxdis_in
+                                            self.transLayer_distance[0][layer_id] = maxdis_out
+                                            self.aggregate_arg[layer_id] = src_pos[A]
+                                            mindis_total = tempdis
+                            elif self.layer_tileinfo[layer_id]['type'] == 'element_sum' or self.layer_tileinfo[layer_id]['type'] == 'element_multiply':
+                                maxdis_out = 0
+                                for idx in self.layer_tileinfo[layer_id]['Outputindex']:
+                                    dst_pos=[]
+                                    for i in range(len(self.mapping_result_rewrite)):
+                                        for j in range(len(self.mapping_result_rewrite[i])):
+                                            if len(self.mapping_result_rewrite[i][j])>k:
+                                                if (self.mapping_result_rewrite[i][j][k]==layer_id+idx) & (layer_id+idx)<=self.final_layer[k]:
+                                                    dst_pos.append([i,j])
+                                    assert len(dst_pos)>0 , f'next layer not on the tiles'
+                                    for j in range(len(dst_pos)):
+                                        dis_out = abs(dst_pos[0][0]-1/2*self.tile_num[0]) + dst_pos[0][1]
+                                        if dis_out > maxdis_out:
+                                            maxdis_out = dis_out
+                                self.inLayer_distance[0][layer_id] = 0
+                                self.transLayer_distance[0][layer_id] = maxdis_out
+                    #special case for  the final_layer[k]
+                    if k==self.rewrite_time-1:
+                        final_pos=[]
+                        #init the src_pos:
+                        for i in range(len(self.mapping_result_rewrite)):
+                            for j in range(len(self.mapping_result_rewrite[i])):
+                                if len(self.mapping_result_rewrite[i][j])>k:
+                                    if self.mapping_result_rewrite[i][j][k]==self.final_layer[k]:
+                                        final_pos.append([i,j])
+                        
+                        mindis = 1000
+                        for i in range(len(final_pos)):
+                            maxdis = 0
+                            for j in range(len(final_pos)):
+                                if j != i:
+                                    dis = abs(final_pos[i][0] - final_pos[j][0]) + abs(final_pos[i][1] - final_pos[j][1])
+                                    if dis > maxdis:
+                                        maxdis = dis
+                            if maxdis < mindis:
+                                mindis = maxdis
+                                self.inLayer_distance[0][self.final_layer[k]] = mindis
+                                self.aggregate_arg[self.final_layer[k]] = final_pos[i]
+                                self.transLayer_distance[0][self.final_layer[k]] = 0
+                    else:
+                        if self.layer_tileinfo[self.final_layer[k]]['is_branchout'] == 1:
+                            # for the layer which is a output layer of one branch and the next layer is element_sum
+                            if self.layer_tileinfo[self.final_layer[k]]['type'] in ['conv', 'pooling', 'fc']:
+                                src_pos=[]
+                                #init the src_pos:
+                                for i in range(len(self.mapping_result_rewrite)):
+                                    for j in range(len(self.mapping_result_rewrite[i])):
+                                        if len(self.mapping_result_rewrite[i][j])>k:
+                                            if self.mapping_result_rewrite[i][j][k]==self.final_layer[k]:
+                                                src_pos.append([i,j])
+                                
+                                if len(src_pos) == 1:
+                                    self.inLayer_distance[0][self.final_layer[k]] = 0
+                                    self.aggregate_arg[self.final_layer[k]] = src_pos[0]
+                                    self.transLayer_distance[0][self.final_layer[k]] = abs(src_pos[0][0]-1/2*self.tile_num[0]) + src_pos[0][1]
+                                else:
+                                    mindis_total = 1000
+                                    for A in range(len(src_pos)):
+                                        tmp_transLayer_distance = src_pos[A][0] + src_pos[A][1]
+                                        maxdis_in = 0
+                                        for i in range(len(src_pos)):
+                                            if i != A:
+                                                dis_in = abs(src_pos[A][0] - src_pos[i][0]) + abs(src_pos[A][1] - src_pos[i][1])
+                                                if dis_in > maxdis_in:
+                                                    maxdis_in = dis_in
+                                        if (maxdis_in+tmp_transLayer_distance)<mindis_total:
+                                            self.inLayer_distance[0][self.final_layer[k]] = maxdis_in
+                                            self.transLayer_distance[0][self.final_layer[k]] = tmp_transLayer_distance
+                                            self.aggregate_arg[self.final_layer[k]] = src_pos[A]
+                                            mindis_total = maxdis_in+tmp_transLayer_distance
+                        else:
+                            if self.layer_tileinfo[self.final_layer[k]]['type'] in ['conv', 'pooling', 'fc']:
+                                src_pos=[]
+                                #init the src_pos:
+                                for i in range(len(self.mapping_result_rewrite)):
+                                    for j in range(len(self.mapping_result_rewrite[i])):
+                                        if len(self.mapping_result_rewrite[i][j])>k:
+                                            if self.mapping_result_rewrite[i][j][k]==self.final_layer[k]:
+                                                src_pos.append([i,j])
+                                
+                                if len(src_pos) == 1:
+                                    self.inLayer_distance[0][self.final_layer[k]] = 0
+                                    self.aggregate_arg[self.final_layer[k]] = src_pos[0]
+                                    maxdis = 0
+                                    for idx in self.layer_tileinfo[self.final_layer[k]]['Outputindex']:
+                                        
+                                        dst_pos=[]
+                                        for i in range(len(self.mapping_result_rewrite)):
+                                            for j in range(len(self.mapping_result_rewrite[i])):
+                                                if len(self.mapping_result_rewrite[i][j])>k+1:
+                                                    if (self.mapping_result_rewrite[i][j][k+1]==self.final_layer[k]+idx) :
+                                                        dst_pos.append([i,j])
+                                        
+                                        assert len(dst_pos)>0 , f'next layer not on the tiles'
+                                        for i in range(len(dst_pos)):
+                                            dis = abs(src_pos[0][0] - dst_pos[i][0]) + abs(src_pos[0][1] - dst_pos[i][1])
+                                            if dis > maxdis:
+                                                maxdis = dis
+                                    self.transLayer_distance[0][self.final_layer[k]] = maxdis
+                                else:
+                                    mindis_total = 1000
+                                    for A in range(len(src_pos)):
+                                        maxdis_in = 0
+                                        maxdis_out = 0
+                                        for i in range(len(src_pos)):
+                                            if i != A:
+                                                dis_in = abs(src_pos[A][0] - src_pos[i][0]) + abs(src_pos[A][1] - src_pos[i][1])
+                                                if dis_in > maxdis_in:
+                                                    maxdis_in = dis_in
+                                        for idx in self.layer_tileinfo[self.final_layer[k]]['Outputindex']:
+                                            dst_pos=[]
+                                            for i in range(len(self.mapping_result_rewrite)):
+                                                for j in range(len(self.mapping_result_rewrite[i])):
+                                                    if len(self.mapping_result_rewrite[i][j])>k+1:
+                                                        if (self.mapping_result_rewrite[i][j][k+1]==self.final_layer[k]+idx):
+                                                            dst_pos.append([i,j])
+                                            if len(dst_pos)<=0:
+                                                print("end",self.mapping_result_rewrite)
+                                                print("没有在tile上",k,self.final_layer[k],self.final_layer[k]+idx,self.layer_tileinfo[self.final_layer[k]]['Outputindex'],self.layer_tileinfo[self.final_layer[k]]['type'])
+                                                assert 0
+                                            assert len(dst_pos)>0 , f'next layer not on the tiles'
+                                            for j in range(len(dst_pos)):
+                                                dis_out = abs(src_pos[A][0] - dst_pos[j][0]) + abs(src_pos[A][1] - dst_pos[j][1])
+                                                if dis_out > maxdis_out:
+                                                    maxdis_out = dis_out
+                                        tempdis = maxdis_in + maxdis_out
+                                        if tempdis < mindis_total:
+                                            self.inLayer_distance[0][self.final_layer[k]] = maxdis_in
+                                            self.transLayer_distance[0][self.final_layer[k]] = maxdis_out
+                                            self.aggregate_arg[self.final_layer[k]] = src_pos[A]
+                                            mindis_total = tempdis
+                            elif self.layer_tileinfo[self.final_layer[k]]['type'] == 'element_sum' or self.layer_tileinfo[self.final_layer[k]]['type'] == 'element_multiply':
+                                maxdis_out = 0
+                                for idx in self.layer_tileinfo[self.final_layer[k]]['Outputindex']:
+                                    dst_pos=[]
+                                    for i in range(len(self.mapping_result_rewrite)):
+                                        for j in range(len(self.mapping_result_rewrite[i])):
+                                            if len(self.mapping_result_rewrite[i][j])>k+1:
+                                                if (self.mapping_result_rewrite[i][j][k+1]==self.final_layer[k]+idx) :
+                                                    dst_pos.append([i,j])
+                                    assert len(dst_pos)>0 , f'next layer not on the tiles'
+                                    for j in range(len(dst_pos)):
+                                        dis_out = abs(dst_pos[0][0]-1/2*self.tile_num[0]) + dst_pos[0][1]
+                                        if dis_out > maxdis_out:
+                                            maxdis_out = dis_out
+                                self.inLayer_distance[0][self.final_layer[k]] = 0
+                                self.transLayer_distance[0][self.final_layer[k]] = maxdis_out
+            # self.total_distance = sum(sum(self.trans_time * (self.inLayer_distance + self.transLayer_distance)))
+        elif self.rewrite_mode==2:
+            self.inLayer_distance = [[[] for _ in range(self.layer_num)] for _ in range(1)]
+            self.transLayer_distance = [[[] for _ in range(self.layer_num)] for _ in range(1)]
+            self.aggregate_arg = [[[] for _ in range(1)] for _ in range(self.layer_num)]
+
+            for k in range(self.rewrite_time):
+                if len(self.rewrite_layer_list[k])!=1:
+                    for layer_id in self.rewrite_layer_list[k]:
+                        # Determine the aggregate node for layer 0~N-1
+                        if self.layer_tileinfo[layer_id]['is_branchout'] == 1:
+                            # for the layer which is a output layer of one branch and the next layer is element_sum
+                            if self.layer_tileinfo[layer_id]['type'] in ['conv', 'pooling', 'fc','MM']:
+                                src_pos=[]
+                                #init the src_pos:
+                                for i in range(len(self.mapping_result_rewrite)):
+                                    for j in range(len(self.mapping_result_rewrite[i])):
+                                        if len(self.mapping_result_rewrite[i][j])>k:
+                                            if self.mapping_result_rewrite[i][j][k]==layer_id:
+                                                src_pos.append([i,j])
+                                
+                                if len(src_pos) == 1:
+                                    self.inLayer_distance[0][layer_id].append(0)
+                                    self.aggregate_arg[layer_id].append(src_pos[0])
+                                    self.transLayer_distance[0][layer_id].append(abs(src_pos[0][0]-1/2*self.tile_num[0]) + src_pos[0][1])
+                                else:
+                                    mindis_total = 100000
+                                    for A in range(len(src_pos)):
+                                        tmp_transLayer_distance = abs(src_pos[A][0]-1/2*self.tile_num[0]) + src_pos[A][1]
+                                        maxdis_in = 0
+                                        for i in range(len(src_pos)):
+                                            if i != A:
+                                                dis_in = abs(src_pos[A][0] - src_pos[i][0]) + abs(src_pos[A][1] - src_pos[i][1])
+                                                if dis_in > maxdis_in:
+                                                    maxdis_in = dis_in
+                                        if (maxdis_in+tmp_transLayer_distance)<mindis_total:
+                                            final_in=maxdis_in
+                                            final_out=tmp_transLayer_distance
+                                            final_src=A
+                                            mindis_total = maxdis_in+tmp_transLayer_distance
+                                    self.inLayer_distance[0][layer_id].append(final_in)
+                                    self.transLayer_distance[0][layer_id].append(final_out)
+                                    self.aggregate_arg[layer_id].append(src_pos[final_src])
+                        else:
+                            if self.layer_tileinfo[layer_id]['type'] in ['conv', 'pooling', 'fc','MM']:
+                                src_pos=[]
+                                #init the src_pos:
+                                for i in range(len(self.mapping_result_rewrite)):
+                                    for j in range(len(self.mapping_result_rewrite[i])):
+                                        if len(self.mapping_result_rewrite[i][j])>k:
+                                            if self.mapping_result_rewrite[i][j][k]==layer_id:
+                                                src_pos.append([i,j])
+                                
+                                if len(src_pos) == 1:
+                                    self.inLayer_distance[0][layer_id].append(0)
+                                    self.aggregate_arg[layer_id] = src_pos[0]
+                                    maxdis = 0
+                                    for idx in self.layer_tileinfo[layer_id]['Outputindex']:
+                                        
+                                        dst_pos=[]
+                                        for i in range(len(self.mapping_result_rewrite)):
+                                            for j in range(len(self.mapping_result_rewrite[i])):
+                                                if len(self.mapping_result_rewrite[i][j])>k:
+                                                    if (self.mapping_result_rewrite[i][j][k]==layer_id+idx) & ((layer_id+idx) in self.rewrite_layer_list[k]):
+                                                        dst_pos.append([i,j])
+                                        #assert len(dst_pos)>0 , f'next layer not on the tiles'
+                                        if len(dst_pos)>0:
+                                            for i in range(len(dst_pos)):
+                                                dis = abs(src_pos[0][0] - dst_pos[i][0]) + abs(src_pos[0][1] - dst_pos[i][1])
+                                                if dis > maxdis:
+                                                    maxdis = dis
+                                        elif len(dst_pos)==0:
+                                            maxdis=0
+                                    self.transLayer_distance[0][layer_id] = maxdis
+                                else:
+                                    mindis_total = 100000
+                                    for A in range(len(src_pos)):
+                                        maxdis_in = 0
+                                        maxdis_out = 0
+                                        for i in range(len(src_pos)):
+                                            if i != A:
+                                                dis_in = abs(src_pos[A][0] - src_pos[i][0]) + abs(src_pos[A][1] - src_pos[i][1])
+                                                if dis_in > maxdis_in:
+                                                    maxdis_in = dis_in
+                                        for idx in self.layer_tileinfo[layer_id]['Outputindex']:
+                                            dst_pos=[]
+                                            for i in range(len(self.mapping_result_rewrite)):
+                                                for j in range(len(self.mapping_result_rewrite[i])):
+                                                    if len(self.mapping_result_rewrite[i][j])>k:
+                                                        if (self.mapping_result_rewrite[i][j][k]==layer_id+idx) & (layer_id+idx) in self.rewrite_layer_list[k]:
+                                                            dst_pos.append([i,j])
+                                            if len(dst_pos)>0:
+                                                for j in range(len(dst_pos)):
+                                                    dis_out = abs(src_pos[A][0] - dst_pos[j][0]) + abs(src_pos[A][1] - dst_pos[j][1])
+                                                    if dis_out > maxdis_out:
+                                                        maxdis_out = dis_out
+                                            elif len(dst_pos)==0:
+                                                maxdis_out=0
+                                                #TODO: maybe change the maxdis_out
+                                        tempdis = maxdis_in + maxdis_out
+                                        if tempdis < mindis_total:
+                                            final_src=A
+                                            final_in=maxdis_in
+                                            final_out=maxdis_out
+                                            mindis_total = tempdis
+                                    self.inLayer_distance[0][layer_id].append(final_in)
+                                    self.transLayer_distance[0][layer_id].append(final_out)
+                                    self.aggregate_arg[layer_id].append(src_pos[final_src])
+                            elif self.layer_tileinfo[layer_id]['type'] == 'element_sum' or self.layer_tileinfo[layer_id]['type'] == 'element_multiply':
+                                maxdis_out = 0
+                                for idx in self.layer_tileinfo[layer_id]['Outputindex']:
+                                    dst_pos=[]
+                                    for i in range(len(self.mapping_result_rewrite)):
+                                        for j in range(len(self.mapping_result_rewrite[i])):
+                                            if len(self.mapping_result_rewrite[i][j])>k:
+                                                if (self.mapping_result_rewrite[i][j][k]==layer_id+idx) & (layer_id+idx) in self.rewrite_layer_list[k]:
+                                                    dst_pos.append([i,j])
+                                    #assert len(dst_pos)>0 , f'next layer not on the tiles'
+                                    if len(dst_pos)>0:
+                                        for j in range(len(dst_pos)):
+                                            dis_out = abs(dst_pos[0][0]-1/2*self.tile_num[0]) + dst_pos[0][1]
+                                            if dis_out > maxdis_out:
+                                                maxdis_out = dis_out
+                                    elif len(dst_pos)==0:
+                                        maxdis_out=0
+                                self.inLayer_distance[0][layer_id] = 0
+                                self.transLayer_distance[0][layer_id] = maxdis_out
+                    for i in range(self.layer_num):
+                        if i not in self.rewrite_layer_list[k]:
+                            self.inLayer_distance[0][i].append(0)
+                            self.transLayer_distance[0][i].append(0)
+                            self.aggregate_arg[layer_id].append([0,0])
+                elif len(self.rewrite_layer_list[k])==1:
+                    #only one layer on the tile
+                    layer_id =self.rewrite_layer_list[k][0]
+                    assert self.layer_tileinfo[layer_id]['type'] in ['conv', 'pooling', 'fc','MM']
+                    # for i in range(len(self.mapping_result_rewrite)):
+                    #     for j in range(len(self.mapping_result_rewrite[i])):
+                    #         if len(self.mapping_result_rewrite[i][j])>k:
+                    #             if self.mapping_result_rewrite[i][j][k]==layer_id:
+                    #                 src_pos.append([i,j])
+                    # mindis_total=100000
+                    # for A in range(len(src_pos)):
+                    #     maxdis_in = 0
+                    #     for i in range(len(src_pos)):
+                    #         if i != A:
+                    #             dis_in = abs(src_pos[A][0] - src_pos[i][0]) + abs(src_pos[A][1] - src_pos[i][1])
+                    #             if dis_in > maxdis_in:
+                    #                 maxdis_in = dis_in       
+                    #     if (maxdis_in)<mindis_total:
+                    #         final_src=A
+                    #         final_dis=maxdis_in
+                    #         mindis_total=maxdis_in
+                    final_dis=math.floor(len(self.mapping_result_rewrite)/2)+math.floor(len(self.mapping_result_rewrite[0])/2)
+                    final_src=[math.floor(len(self.mapping_result_rewrite)/2),math.floor(len(self.mapping_result_rewrite[0])/2)]
+                    self.inLayer_distance[0][layer_id].append(final_dis)
+                    self.transLayer_distance[0][layer_id].append(0)
+                    self.aggregate_arg[layer_id] = final_src
+                    for i in range(self.layer_num):
+                        if i not in self.rewrite_layer_list[k]:
+                            self.inLayer_distance[0][i].append(0)
+                            self.transLayer_distance[0][i].append(0)
+                            self.aggregate_arg[layer_id].append([0,0])
+            # self.total_distance = sum(sum(self.trans_time * (self.inLayer_distance + self.transLayer_distance)))
+        #for i in range(self.layer_num):
+            #print(self.transLayer_distance[0][i])
+        #assert 0    
+
     def calculate_transfer_distance(self):
         if self.rewrite_mode==0:
             for layer_id in range(self.layer_num - 1):
@@ -2816,10 +3463,129 @@ class TCG():
                         self.mode2injection.append(self.layer_tileinfo[self.layer_num-1]['inLayer_data']*(mix_tile.PE_num[a][b]**2)*(mix_tile.xbar_size[a][b]**2)*self.FPS/intra_tile_bandwidth)
                 for i in range(len(self.mode2injection)):
                     if (self.mode2posi[i] != self.mode2posj[i]):
-                        file.write(str(self.mode2posi[i])+' '+str(self.mode2posj[i])+' '+str(self.mode2injection[i])+'\n')                              
+                        file.write(str(self.mode2posi[i])+' '+str(self.mode2posj[i])+' '+str(self.mode2injection[i])+'\n')          
+                self.mode2posj.clear()
+                self.mode2posi.clear()
+                self.mode2injection.clear()      
+                self.mode4posj.clear()
+                self.mode4posi.clear()
+                self.mode4injection.clear()               
                 
                
-        
+    def mapping_output_cnn_step(self,mix_tile=None,layer_start_time=[], layer_end_time=[]):
+        intra_tile_bandwidth = 1024*(10**9)
+        inter_tile_bandwidth = 20*(10**9)
+        with open('layer_table.txt', 'w', encoding='utf-8') as file:
+            file.write(str(self.layer_num)+'\n')
+            for layer_id in range(self.layer_num):
+                #file.write(str(layer_id)+' ')
+                src_pos = np.argwhere(self.mapping_result == layer_id)
+                file.write(str(len(src_pos))+' ')
+                #print(src_pos)
+                for i in range(len(src_pos)):
+                    file.write(str(int(src_pos[i][0]*self.tile_num[0]+src_pos[i][1]))+' ')
+                #print(self.aggregate_arg[layer_id])
+                file.write(str(int(self.aggregate_arg[layer_id][0]*self.tile_num[0]+self.aggregate_arg[layer_id][1]))+'\n')
+
+        with open('injection.txt','w',encoding='utf-8') as file:
+            if self.mix_mode==4:
+                for layer_id in range(self.layer_num-1):
+                    print(layer_id)
+                    src_pos = np.argwhere(self.mapping_result == layer_id)
+                    if (len(src_pos)==0):
+                        continue
+                    if len(src_pos)>1:
+                        for i in range(len(src_pos)):
+                            self.mode4starttime.append(layer_start_time[layer_id])
+                            self.mode4endtime.append(layer_end_time[layer_id])
+                            self.mode4posi.append(int(src_pos[i][0]*self.tile_num[0]+src_pos[i][1]))
+                            self.mode4posj.append(int(self.aggregate_arg[layer_id][0]*self.tile_num[0]+self.aggregate_arg[layer_id][1]))
+                            self.mode4injection.append(self.layer_tileinfo[layer_id]['inLayer_data']*self.FPS/intra_tile_bandwidth)
+                    dst_pos=np.argwhere(self.mapping_result == layer_id+1)
+                    if len(dst_pos)==0:
+                        dst_pos=np.argwhere(self.mapping_result == layer_id+2)
+                        for i in range(len(dst_pos)):
+                            self.mode4starttime.append(layer_start_time[layer_id])
+                            self.mode4endtime.append(layer_end_time[layer_id])
+                            self.mode4posj.append(int(dst_pos[i][0]*self.tile_num[0]+dst_pos[i][1]))
+                            self.mode4posi.append(int(self.aggregate_arg[layer_id][0]*self.tile_num[0]+self.aggregate_arg[layer_id][1]))
+                            self.mode4injection.append(self.layer_tileinfo[layer_id+2]['transLayer_data_before']*self.FPS/inter_tile_bandwidth)
+                    else:
+                        for i in range(len(dst_pos)):
+                            self.mode4starttime.append(layer_start_time[layer_id])
+                            self.mode4endtime.append(layer_end_time[layer_id])
+                            self.mode4posj.append(int(dst_pos[i][0]*self.tile_num[0]+dst_pos[i][1]))
+                            self.mode4posi.append(int(self.aggregate_arg[layer_id][0]*self.tile_num[0]+self.aggregate_arg[layer_id][1]))
+                            self.mode4injection.append(self.layer_tileinfo[layer_id+1]['transLayer_data_before']*self.FPS/inter_tile_bandwidth)
+                src_pos = np.argwhere(self.mapping_result == self.layer_num-1)
+                if len(src_pos)>1:
+                    for i in range(len(src_pos)):
+                        self.mode4starttime.append(layer_start_time[self.layer_num-1])
+                        self.mode4endtime.append(layer_end_time[self.layer_num-1])
+                        self.mode4posi.append(int(src_pos[i][0]*self.tile_num[0]+src_pos[i][1]))
+                        self.mode4posj.append(int(self.aggregate_arg[self.layer_num-1][0]*self.tile_num[0]+self.aggregate_arg[self.layer_num-1][1]))
+                        self.mode4injection.append(self.layer_tileinfo[self.layer_num-1]['inLayer_data']*self.FPS/intra_tile_bandwidth)
+                for i in range(len(self.mode4injection)):
+                    if (self.mode4posi[i] != self.mode4posj[i]):
+                        file.write(str(self.mode4posi[i])+' '+str(self.mode4posj[i])+' '+str(self.mode4injection[i])+' '+str(self.mode4starttime[i])+' '+str(self.mode4endtime[i])+'\n')
+            elif self.mix_mode==2:
+                for layer_id in range(self.layer_num-1):
+                    print(layer_id)
+                    src_pos = np.argwhere(self.mapping_result == layer_id)
+                    if (len(src_pos)==0):
+                        continue
+                    if len(src_pos)>1:
+                        for i in range(len(src_pos)):
+                            a=int(src_pos[i][0])
+                            b=int(src_pos[i][1])
+                            self.mode2starttime.append(layer_start_time[layer_id])
+                            self.mode2endtime.append(layer_end_time[layer_id])
+                            self.mode2posi.append(int(src_pos[i][0]*self.tile_num[0]+src_pos[i][1]))
+                            self.mode2posj.append(int(self.aggregate_arg[layer_id][0]*self.tile_num[0]+self.aggregate_arg[layer_id][1]))
+                            self.mode2injection.append(self.layer_tileinfo[layer_id]['inLayer_data']*(mix_tile.PE_num[a][b]**2)*(mix_tile.xbar_size[a][b]**2)*self.FPS/intra_tile_bandwidth)
+                    dst_pos=np.argwhere(self.mapping_result == layer_id+1)
+                    if len(dst_pos)==0:
+                        dst_pos=np.argwhere(self.mapping_result == layer_id+2)
+                        for i in range(len(dst_pos)):
+                            a=int(dst_pos[i][0])
+                            b=int(dst_pos[i][1])
+                            self.mode2starttime.append(layer_start_time[layer_id])
+                            self.mode2endtime.append(layer_end_time[layer_id])
+                            self.mode2posj.append(int(dst_pos[i][0]*self.tile_num[0]+dst_pos[i][1]))
+                            self.mode2posi.append(int(self.aggregate_arg[layer_id][0]*self.tile_num[0]+self.aggregate_arg[layer_id][1]))
+                            self.mode2injection.append(self.layer_tileinfo[layer_id+2]['transLayer_data_before']*(mix_tile.PE_num[a][b]**2)*(mix_tile.xbar_size[a][b]**2)*self.FPS/inter_tile_bandwidth)
+                    else:
+                        for i in range(len(dst_pos)):
+                            a=int(dst_pos[i][0])
+                            b=int(dst_pos[i][1])
+                            self.mode2starttime.append(layer_start_time[layer_id])
+                            self.mode2endtime.append(layer_end_time[layer_id])
+                            self.mode2posj.append(int(dst_pos[i][0]*self.tile_num[0]+dst_pos[i][1]))
+                            self.mode2posi.append(int(self.aggregate_arg[layer_id][0]*self.tile_num[0]+self.aggregate_arg[layer_id][1]))
+                            self.mode2injection.append(self.layer_tileinfo[layer_id+1]['transLayer_data_before']*(mix_tile.PE_num[a][b]**2)*(mix_tile.xbar_size[a][b]**2)*self.FPS/inter_tile_bandwidth)
+                src_pos = np.argwhere(self.mapping_result == self.layer_num-1)
+                if len(src_pos)>1:
+                    for i in range(len(src_pos)):
+                        a=int(src_pos[i][0])
+                        b=int(src_pos[i][1])
+                        self.mode2starttime.append(layer_start_time[self.layer_num-1])
+                        self.mode2endtime.append(layer_end_time[self.layer_num-1])
+                        self.mode2posi.append(int(src_pos[i][0]*self.tile_num[0]+src_pos[i][1]))
+                        self.mode2posj.append(int(self.aggregate_arg[self.layer_num-1][0]*self.tile_num[0]+self.aggregate_arg[self.layer_num-1][1]))
+                        self.mode2injection.append(self.layer_tileinfo[self.layer_num-1]['inLayer_data']*(mix_tile.PE_num[a][b]**2)*(mix_tile.xbar_size[a][b]**2)*self.FPS/intra_tile_bandwidth)
+                for i in range(len(self.mode2injection)):
+                    if (self.mode2posi[i] != self.mode2posj[i]):
+                        file.write(str(self.mode2posi[i])+' '+str(self.mode2posj[i])+' '+str(self.mode2injection[i])+' '+str(self.mode2starttime[i])+' '+str(self.mode2endtime[i])+'\n')                              
+                self.mode2posj.clear()
+                self.mode2posi.clear()
+                self.mode2injection.clear() 
+                self.mode2starttime.clear() 
+                self.mode2endtime.clear()   
+                self.mode4posj.clear()
+                self.mode4posi.clear()
+                self.mode4injection.clear() 
+                self.mode4starttime.clear() 
+                self.mode4endtime.clear()  
 
 if __name__ == '__main__':
     test_SimConfig_path = os.path.join(os.path.dirname(os.path.dirname(os.getcwd())), "SimConfig.ini")
