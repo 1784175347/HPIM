@@ -66,7 +66,7 @@ sim_count          = 1;
 //topoogy
 
 topology = mesh;
-k  = 27;
+k  = 11;
 n  = 2;
 //
 // Routing

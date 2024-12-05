@@ -1,4 +1,4 @@
-# HPIM-NoC 
+# HPIM-NoC V1.0
 HPIM异构存算NoC仿真器设计代码
 
 --|设计代码
@@ -33,6 +33,38 @@ HPIM异构存算NoC仿真器设计代码
 
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;MNSIM的主函数
 
+&emsp;&emsp;&emsp;&emsp;--| SA.py
+
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;搜索框架的主函数
+
+&emsp;&emsp;&emsp;&emsp;--| SA_cifar10_resnet18_111.py
+
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Cifar10-Resnet18下(α,β,γ)=(1,1,1)搜索
+
+&emsp;&emsp;&emsp;&emsp;--| SA_cifar10_alexnet_111.py
+
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Cifar10-Alexnet下(α,β,γ)=(1,1,1)搜索
+
+&emsp;&emsp;&emsp;&emsp;--| SA_edp.py
+
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;EDP仿真与搜索
+
+&emsp;&emsp;&emsp;&emsp;--| Simulator_cifar10_resnet18.py
+
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Cifar10-Resnet18下框架仿真器（启用NoC仿真）
+
+&emsp;&emsp;&emsp;&emsp;--| Simulator_cifar10_resnet18_noNoC.py
+
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Cifar10-Resnet18下框架仿真器（禁用NoC仿真）
+
+&emsp;&emsp;&emsp;&emsp;--| Simulator_cifar10_alexnet.py
+
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Cifar10-Alexnet下框架仿真器（启用NoC仿真）
+
+&emsp;&emsp;&emsp;&emsp;--| Simulator_cifar10_alexnet_noNoC.py
+
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Cifar10-Alexnet下框架仿真器（禁用NoC仿真）
+
 &emsp;&emsp;&emsp;&emsp;--| 其余文件
 
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;MNSIM的配置文件与网络权重文件
@@ -43,9 +75,13 @@ HPIM异构存算NoC仿真器设计代码
 
 请按如下步骤操作
 
-+ 1.cd HPIM/MNSIM3.0
++ 1.cd HPIM/booksim/src
 
-+ 2.python main.py
++ 2.make
+
++ 3.cd ../../MNSIM3.0
+
++ 4.python SA.py（注：不同需求请运行不同文件或对文件做参数修改）
 
 可能存在的问题1————booksim2的可执行文件未编译
 
